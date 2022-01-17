@@ -1,4 +1,5 @@
 import NextAuth from "next-auth";
+import crypto from 'crypto';
 
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
@@ -91,10 +92,36 @@ export default NextAuth({
   // when an action is performed.
   // https://next-auth.js.org/configuration/callbacks
   callbacks: {
-    // async signIn({ user, account, profile, email, credentials }) { return true },
+    // async signIn({ user, account, profile, email, credentials }) { return true},
     // async redirect({ url, baseUrl }) { return baseUrl },
-    // async session({ session, token, user }) { return session },
-    // async jwt({ token, user, account, profile, isNewUser }) { return token }
+    // async session({ session, token, user }) { return session},
+    async jwt({ token, account }) { 
+      // Persist the OAuth access_token & refresh_token to the token right after signin
+      if (account) {
+
+        const algorithm = 'aes-256-ctr';
+        const secretKey = process.env.SECRET_KEY;
+        const iv = crypto.randomBytes(16);
+
+        const accessCipher = crypto.createCipheriv(algorithm, secretKey, iv);
+        const accessEncrypted = Buffer.concat([accessCipher.update(account.access_token), accessCipher.final()]);
+
+        const refreshCipher = crypto.createCipheriv(algorithm, secretKey, iv);
+        const refreshEncrypted = Buffer.concat([refreshCipher.update(account.refresh_token), refreshCipher.final()]);
+
+        const accessToken = {
+          iv: iv.toString('hex'),
+          content: accessEncrypted.toString('hex')
+        };
+        const refreshToken = {
+          iv: iv.toString('hex'),
+          content: refreshEncrypted.toString('hex')
+        };
+        token.accessToken = accessToken;
+        token.refreshToken = refreshToken;
+      }
+      return token;
+    }    
   },
 
   // Events are useful for logging
