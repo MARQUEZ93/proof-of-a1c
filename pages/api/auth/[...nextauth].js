@@ -92,13 +92,25 @@ export default NextAuth({
   // when an action is performed.
   // https://next-auth.js.org/configuration/callbacks
   callbacks: {
-    // async signIn({ user, account, profile, email, credentials }) { return true},
+    // async signIn({ user, account, profile, email, credentials }) { 
+    //   // await dbConnect();
+    //   // try {
+    //   //   console.log(user);
+    //   //   const newUser = await User.create({name: user.name});
+    //   //   console.log("success");
+    //   //   console.log(newUser);
+    //   // } catch (error) {
+    //   //   console.log(error);
+    //   //   console.log("failed");
+    //   // }
+    //   return true;
+    // },
     // async redirect({ url, baseUrl }) { return baseUrl },
     // async session({ session, token, user }) { return session},
     async jwt({ token, account }) { 
-      // Persist the OAuth access_token & refresh_token to the token right after signin
+      // Persist the OAuth token(s) to the session
+      // encrypt them from client 
       if (account) {
-
         const algorithm = 'aes-256-ctr';
         const secretKey = process.env.SECRET_KEY;
         const iv = crypto.randomBytes(16);
@@ -136,4 +148,6 @@ export default NextAuth({
 
   // Enable debug messages in the console if you are having problems
   debug: false,
+
+  // adapter: MongoDBAdapter(clientPromise)
 })
