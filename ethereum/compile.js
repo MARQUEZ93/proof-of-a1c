@@ -5,15 +5,31 @@ const fs = require('fs-extra');
 const buildPath = path.resolve(__dirname, 'build');
 fs.removeSync(buildPath);
 
-const campaignPath = path.resolve(__dirname, 'contracts', 'Campaign.sol');
-const source = fs.readFileSync(campaignPath, 'utf8');
-const output = solc.compile(source, 1).contracts;
+const proofOfA1CPath = path.resolve(__dirname, 'contracts', 'ProofOfA1C.sol');
+const source = fs.readFileSync(proofOfA1CPath, 'utf8');
+const input = {
+  language: 'Solidity',
+  sources: {
+    'ProofOfA1C.sol' : {
+      content: source
+    }
+  },
+  settings: {
+    outputSelection: {
+        '*': {
+            '*': [ '*' ]
+        }
+    }
+  }
+};
 
-fs.ensureDirSync(buildPath);
+const output = JSON.parse(solc.compile(JSON.stringify(input))).contracts['ProofOfA1C.sol'];
 
-for (let contract in output) {
+const keys = Object.keys(output);
+
+for (const key of keys) {
   fs.outputJsonSync(
-    path.resolve(buildPath, contract.replace(':', '') + '.json'),
-    output[contract]
+    path.resolve(buildPath, key.replace(':', '') + '.json'),
+    output[key].evm
   );
 }
