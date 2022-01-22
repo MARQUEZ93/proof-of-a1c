@@ -30,6 +30,6 @@ const keys = Object.keys(output);
 for (const key of keys) {
   fs.outputJsonSync(
     path.resolve(buildPath, key.replace(':', '') + '.json'),
-    output[key].evm
+    output[key]
   );
 }

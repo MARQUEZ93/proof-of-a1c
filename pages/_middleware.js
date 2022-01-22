@@ -3,7 +3,8 @@ import { NextResponse } from "next/server"
 
 /** @param {import("next/server").NextRequest} req */
 export async function middleware(req) {
-  if (req.nextUrl.pathname === "/middleware-protected") {
+  if (req.nextUrl.pathname === "/contracts/new") {
+    // TODO hide this page if user already has contract
     const session = await getToken({
       req,
       secret: process.env.SECRET,
@@ -16,4 +17,4 @@ export async function middleware(req) {
     if (!session) return NextResponse.redirect("/api/auth/signin")
     // If user is authenticated, continue.
   }
-}
+};
