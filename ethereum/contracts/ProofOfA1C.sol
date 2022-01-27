@@ -6,7 +6,7 @@ contract ProofOfA1CFactory {
     mapping(address => bool) public diabetics;
 
     function createProofOfA1C() public {
-        require(!diabetics[msg.sender]);
+        // require(!diabetics[msg.sender]);
         ProofOfA1C newProofOfA1C = new ProofOfA1C(msg.sender);
         deployedContracts.push(address(newProofOfA1C));
         diabetics[msg.sender] = true;

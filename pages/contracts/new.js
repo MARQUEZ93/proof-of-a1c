@@ -3,7 +3,8 @@ import { Form, Button, Input, Message } from 'semantic-ui-react';
 import Layout from '../../components/layout';
 import factory from '../../ethereum/factory';
 import web3 from '../../ethereum/web3';
-import { Router } from '../routes';
+import Router  from '../routes';
+import { userService } from '../../services';
 
 class ContractNew extends Component {
 
@@ -21,19 +22,16 @@ class ContractNew extends Component {
     // this.setState({ loading: true, errorMessage: '' });
 
     try {
-      window.ethereum.enable();
       const accounts = await web3.eth.requestAccounts();
-      console.log(accounts);
       const result = await factory.methods
         .createProofOfA1C()
         .send({
           from: accounts[0]
         });
-        console.log(result);
-        // create user here
+        // create user upon successful contract deployment
+        userService.create({address: accounts[0]});
       // Router.pushRoute('/');
     } catch (err) {
-      console.log(err);
       // this.setState({ errorMessage: err.message });
     }
 
@@ -47,7 +45,7 @@ class ContractNew extends Component {
 
         <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
 
-          <Message error header="Oops!" content={this.state.errorMessage} />
+          <Message error header="Something went wrong" content={this.state.errorMessage} />
           <Button loading={this.state.loading} primary>
             Deploy!
           </Button>

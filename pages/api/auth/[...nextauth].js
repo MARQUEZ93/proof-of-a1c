@@ -92,19 +92,7 @@ export default NextAuth({
   // when an action is performed.
   // https://next-auth.js.org/configuration/callbacks
   callbacks: {
-    // async signIn({ user, account, profile, email, credentials }) { 
-    //   // await dbConnect();
-    //   // try {
-    //   //   console.log(user);
-    //   //   const newUser = await User.create({name: user.name});
-    //   //   console.log("success");
-    //   //   console.log(newUser);
-    //   // } catch (error) {
-    //   //   console.log(error);
-    //   //   console.log("failed");
-    //   // }
-    //   return true;
-    // },
+    // async signIn({ user, account, profile, email, credentials }) { return true},
     // async redirect({ url, baseUrl }) { return baseUrl },
     // async session({ session, token, user }) { return session},
     async jwt({ token, account }) { 

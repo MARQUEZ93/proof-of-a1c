@@ -3,13 +3,13 @@ const ganache = require('ganache-cli');
 const Web3 = require('web3');
 const web3 = new Web3(ganache.provider());
 
-const compiledFactory = require('../ethereum/build/CampaignFactory.json');
-const compiledCampaign = require('../ethereum/build/Campaign.json');
+const compiledFactory = require('../ethereum/build/ProofOfA1CFactory.json');
+const compiledProofOfA1C = require('../ethereum/build/ProofOfA1C.json');
 
 let accounts;
 let factory;
-let campaignAddress;
-let campaign;
+let proofOfA1CAddress;
+let proofOfA1C;
 
 beforeEach(async () => {
   accounts = await web3.eth.getAccounts();
@@ -18,7 +18,7 @@ beforeEach(async () => {
     .deploy({ data: compiledFactory.bytecode })
     .send({ from: accounts[0], gas: '1000000' });
 
-  await factory.methods.createCampaign('100').send({
+  await factory.methods.createProofOfA1C('100').send({
     from: accounts[0],
     gas: '1000000'
   });
