@@ -25,4 +25,8 @@ contract ProofOfA1C {
     constructor(address creator) {
         diabetic = creator;
     }
+    function destroySmartContract(address payable _to) public {
+        require(msg.sender == diabetic, "You are not the owner");
+        selfdestruct(_to);
+    }
 }

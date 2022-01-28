@@ -15,14 +15,20 @@ export default async function handler (req, res) {
       try {
         const session = await getSession({ req });
         if (!session) {
-            res.status(400).json({ success: false });
+            res.status(402).json({ success: false });
         }
         const token = await getToken({ req, secret });
-        const user = await User.create({address: req.body.address, refresh_token: token.refreshToken.content});
+        const user = await User.create({ 
+            address: req.body.address, 
+            refresh_token_content: token.refreshToken.content, 
+            refresh_token_iv: token.refreshToken.iv, 
+            access_token_content: token.accessToken.content,
+            access_token_iv: token.accessToken.iv
+        });
+        // TODO hide data:user ???
         res.status(201).json({ success: true, data: user });
       } catch (error) {
-          console.log(error);
-        res.status(400).json({ success: false });
+        res.status(401).json({ success: false });
       }
       break;
     default:
