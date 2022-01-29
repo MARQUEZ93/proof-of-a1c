@@ -102,7 +102,6 @@ export default NextAuth({
         const algorithm = 'aes-256-ctr';
         const secretKey = process.env.SECRET_KEY;
         const iv = crypto.randomBytes(16);
-        console.log(account.access_token);
 
         const accessCipher = crypto.createCipheriv(algorithm, secretKey, iv);
         const accessEncrypted = Buffer.concat([accessCipher.update(account.access_token), accessCipher.final()]);

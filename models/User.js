@@ -8,11 +8,11 @@ const UserSchema = new mongoose.Schema({
   access_token_content: String,
   access_token_iv: String
 });
-// query all weekly A1Cs
+// query all weekly A1Cs after a user is created
 UserSchema.post('save', doc => {
-  const accessToken = utilsService.decryptToken(doc.access_token_content, doc.access_token_iv);
-  console.log(accessToken);
-  dexcomService.getDataRange(accessToken);
+  const decryptedAccessToken = utilsService.decryptToken(doc.access_token_content, doc.access_token_iv);
+  // TODO see if user has a1cs yet
+  dexcomService.getDataRange(doc, decryptedAccessToken);
 });
 
 module.exports = mongoose.models.User || mongoose.model('User', UserSchema);
