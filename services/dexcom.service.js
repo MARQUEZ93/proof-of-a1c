@@ -81,7 +81,6 @@ async function getBloodSugar(decryptedAccessToken, startDate, endDate) {
             data: requestBody
         };
         const result = await axios(options);
-        console.log(result.data);
         return result.data.mean;
     } catch (err) {
         console.log(err.data.errors);

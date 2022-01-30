@@ -8,10 +8,7 @@ const UserSchema = new mongoose.Schema({
   refresh_token_content: String,
   refresh_token_iv: String,
   access_token_content: String,
-  access_token_iv: String,
-  bloodsugars : [
-    { type: mongoose.Schema.Types.ObjectId, ref: 'BloodSugar' }
-  ]
+  access_token_iv: String
 });
 // query all weekly A1Cs after a user is created
 UserSchema.post('save', async function postSave(doc) {
@@ -32,10 +29,13 @@ UserSchema.post('save', async function postSave(doc) {
       startDate.toISOString().slice(0, 19), oneWeekFromStartDate.toISOString().slice(0, 19)
     );
 
+    console.log(bloodSugarResult);
+
     const bloodSugar = await BloodSugar.create({ 
       user: userId, 
-      start: startDate.toISOString(),
-      end: oneWeekFromStartDate.toISOString()
+      start: startDate.toISOString().slice(0, 19),
+      end: oneWeekFromStartDate.toISOString().slice(0, 19),
+      value: bloodSugarResult
     });
     console.log(bloodSugar);
     startDate.add(1, 'week');
