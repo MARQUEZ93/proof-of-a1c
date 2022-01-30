@@ -5,7 +5,8 @@ import FormData from 'form-data';
 const secret = process.env.SECRET;
 
 export const dexcomService = {
-    getDataRange
+    getDataRange,
+    getBloodSugar
 };
 async function getDataRange(doc, decryptedAccessToken) {
     console.log("hit gdR");
@@ -20,6 +21,25 @@ async function getDataRange(doc, decryptedAccessToken) {
         };
         const result = await axios(options);
         return result.data.egvs;
+    } catch (err) {
+        // need to refresh token(s)
+        if (err.response.status === 401){
+            getNewTokens(doc);
+        }
+    }
+};
+async function getBloodSugar(decryptedAccessToken, startTime, endTime) {
+    try {
+        const options = {
+            method: 'post',
+            url: `${process.env.DEXCOM_API}/v2/users/self/statistics`,
+            headers: { 
+                Authorization: `Bearer ${decryptedAccessToken}`
+            }
+        };
+        const result = await axios(options);
+        console.log(result.data);
+        return result.data.mean;
     } catch (err) {
         // need to refresh token(s)
         if (err.response.status === 401){
@@ -63,7 +83,3 @@ async function getNewTokens(doc) {
     }
     //TODO prevent infinite loops that break their API etc
 };
-// after getting new tokens, save them to the user
-// const saveTokens = () => {
-
-// }; 

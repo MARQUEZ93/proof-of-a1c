@@ -1,11 +1,14 @@
 import mongoose from 'mongoose';
-const UserId = Schema.UserId;
+import User from './User';
 
 const BloodSugarSchema = new mongoose.Schema({
-  user: UserId,
+  user: {
+    type:mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
   startRange: String,
   endRange: String,
   value: String
-})
+});
 
-module.exports = mongoose.models.A1C || mongoose.model('BloodSugar', BloodSugarSchema)
+module.exports = mongoose.models.BloodSugar || mongoose.model('BloodSugar', BloodSugarSchema)
