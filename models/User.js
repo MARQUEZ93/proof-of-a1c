@@ -19,26 +19,27 @@ UserSchema.post('save', async function postSave(doc) {
   // TODO see if user has a1cs yet
   const { start, end } = await dexcomService.getDataRange(doc, decryptedAccessToken);
 
-  const startTime = moment(start.systemTime);
-  const oneWeekFromStartTime = moment(start.systemTime).add(1, 'week');
-  const endTime = moment(end.systemTime);
+  const startDate = moment(start.systemTime);
+  const oneWeekFromStartDate = moment(start.systemTime).add(1, 'week');
+  const endDate = moment(end.systemTime);
 
   const userId = doc.id;
-  
-  // record blood sugar value for every week
-  while (startTime.isBefore(endTime) && oneWeekFromStartTime.isBefore(endTime)){
 
+  // record blood sugar value for every week
+  while (startDate.isBefore(endDate) && oneWeekFromStartDate.isBefore(endDate)){
+    console.log(startDate.toISOString().slice(0, 19));
     const bloodSugarResult = await dexcomService.getBloodSugar(decryptedAccessToken, 
-      startTime.toISOString(), oneWeekFromStartTime.toISOString()
+      startDate.toISOString().slice(0, 19), oneWeekFromStartDate.toISOString().slice(0, 19)
     );
 
     const bloodSugar = await BloodSugar.create({ 
       user: userId, 
-      start: startTime.toISOString(),
-      end: oneWeekFromStartTime.toISOString()
+      start: startDate.toISOString(),
+      end: oneWeekFromStartDate.toISOString()
     });
-    startTime.add(1, 'week');
-    oneWeekFromStartTime.add(1, 'week');
+    console.log(bloodSugar);
+    startDate.add(1, 'week');
+    oneWeekFromStartDate.add(1, 'week');
 
   return;
   // TODO hide data:user ???

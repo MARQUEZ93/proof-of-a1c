@@ -9,15 +9,14 @@ export const dexcomService = {
     getBloodSugar
 };
 async function getDataRange(doc, decryptedAccessToken) {
-    console.log("hit gdR");
-    console.log(decryptedAccessToken);
     try {
         const options = {
             method: 'get',
             url: `${process.env.DEXCOM_API}/v2/users/self/dataRange`,
             headers: { 
-                Authorization: `Bearer ${decryptedAccessToken}`
-            }
+                Authorization: `Bearer ${decryptedAccessToken}`,
+                'Content-Type': 'application/json', 
+            },
         };
         const result = await axios(options);
         return result.data.egvs;
@@ -28,19 +27,64 @@ async function getDataRange(doc, decryptedAccessToken) {
         }
     }
 };
-async function getBloodSugar(decryptedAccessToken, startTime, endTime) {
+async function getBloodSugar(decryptedAccessToken, startDate, endDate) {
     try {
+        const requestBody = {
+            targetRanges: [
+              {
+                name:      'day',
+                startTime: '07:00:00',
+                endTime:   '20:00:00',
+                egvRanges: [
+                  {
+                    name: 'urgentLow',
+                    bound: 55,
+                  },
+                  {
+                    name: 'low',
+                    bound: 70,
+                  },
+                  {
+                    name: 'high',
+                    bound: 180,
+                  },
+                ]
+              },
+              {
+                name:      'night',
+                startTime: '20:00:00',
+                endTime:   '07:00:00',
+                egvRanges: [
+                  {
+                    name: 'urgentLow',
+                    bound: 55,
+                  },
+                  {
+                    name: 'low',
+                    bound: 80,
+                  },
+                  {
+                    name: 'high',
+                    bound: 200,
+                  },
+                ]
+              },
+            ]
+          };
         const options = {
             method: 'post',
             url: `${process.env.DEXCOM_API}/v2/users/self/statistics`,
             headers: { 
                 Authorization: `Bearer ${decryptedAccessToken}`
-            }
+            },
+            params: { startDate, endDate },
+            data: requestBody
         };
         const result = await axios(options);
         console.log(result.data);
         return result.data.mean;
     } catch (err) {
+        console.log(err.data.errors);
         // need to refresh token(s)
         if (err.response.status === 401){
             getNewTokens(doc);
