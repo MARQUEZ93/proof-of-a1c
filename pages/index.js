@@ -1,4 +1,5 @@
-import Layout from '../components/layout'
+import Layout from '../components/layout';
+import moment from 'moment';
 
 export default function Page () {
   return (

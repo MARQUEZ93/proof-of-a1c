@@ -5,7 +5,7 @@ export const utilsService = {
     decryptToken
 };
 async function encryptTokens ({access_token, refresh_token}) {
-
+    console.log("hit et");
     const { algorithm, secretKey, iv } = getCipherArguments();
 
     const accessCipher = crypto.createCipheriv(algorithm, secretKey, iv);
@@ -27,8 +27,8 @@ async function encryptTokens ({access_token, refresh_token}) {
 async function decryptToken(content, iv){
     const { algorithm, secretKey } = getCipherArguments();
     const decipher = crypto.createDecipheriv(algorithm, secretKey, Buffer.from(iv, 'hex'));
-    const decrpyted = Buffer.concat([decipher.update(Buffer.from(content, 'hex')), decipher.final()]);
-    return decrpyted.toString();
+    const decrypted = Buffer.concat([decipher.update(Buffer.from(content, 'hex')), decipher.final()]);
+    return decrypted.toString();
 };
 
 function getCipherArguments(){

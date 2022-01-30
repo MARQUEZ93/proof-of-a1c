@@ -1,5 +1,5 @@
 import NextAuth from "next-auth";
-import crypto from 'crypto';
+import { utilsService } from "../../../services";
 
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
@@ -19,6 +19,7 @@ export default NextAuth({
         url: process.env.DEXCOM_AUTH,
       },
       profile(profile) {
+        // TODO this needs to be cleaned up
         return {
           id: '1',
           name: 'Test user',
@@ -99,26 +100,11 @@ export default NextAuth({
       // Persist the OAuth token(s) to the session
       // encrypt them from client 
       if (account) {
-        const algorithm = 'aes-256-ctr';
-        const secretKey = process.env.SECRET_KEY;
-        const iv = crypto.randomBytes(16);
-
-        const accessCipher = crypto.createCipheriv(algorithm, secretKey, iv);
-        const accessEncrypted = Buffer.concat([accessCipher.update(account.access_token), accessCipher.final()]);
-
-        const refreshCipher = crypto.createCipheriv(algorithm, secretKey, iv);
-        const refreshEncrypted = Buffer.concat([refreshCipher.update(account.refresh_token), refreshCipher.final()]);
-
-        const accessToken = {
-          iv: iv.toString('hex'),
-          content: accessEncrypted.toString('hex')
-        };
-        const refreshToken = {
-          iv: iv.toString('hex'),
-          content: refreshEncrypted.toString('hex')
-        };
-        token.accessToken = accessToken;
-        token.refreshToken = refreshToken;
+        const { access_token, refresh_token } = account;
+        console.log(account);
+        const tokens = await utilsService.encryptTokens({access_token, refresh_token});
+        token.accessToken = tokens.accessToken;
+        token.refreshToken = tokens.refreshToken;
       }
       return token;
     }    
@@ -135,7 +121,7 @@ export default NextAuth({
   },
 
   // Enable debug messages in the console if you are having problems
-  debug: false,
+  debug: true,
 
   // adapter: MongoDBAdapter(clientPromise)
 })
