@@ -6,7 +6,7 @@ const secret = process.env.SECRET;
 
 export const dexcomService = {
     getDataRange,
-    getBloodSugar
+    getStats
 };
 async function getDataRange(doc, decryptedAccessToken) {
     try {
@@ -27,7 +27,7 @@ async function getDataRange(doc, decryptedAccessToken) {
         }
     }
 };
-async function getBloodSugar(decryptedAccessToken, startDate, endDate) {
+async function getStats(decryptedAccessToken, startDate, endDate) {
     try {
         const requestBody = {
             targetRanges: [
@@ -81,8 +81,9 @@ async function getBloodSugar(decryptedAccessToken, startDate, endDate) {
             data: requestBody
         };
         const result = await axios(options);
-        return result.data.mean;
+        return result.data;
     } catch (err) {
+        console.log(err.data);
         console.log(err.data.errors);
         // need to refresh token(s)
         if (err.response.status === 401){
