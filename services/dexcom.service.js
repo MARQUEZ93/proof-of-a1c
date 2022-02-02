@@ -21,6 +21,7 @@ async function getDataRange(doc, decryptedAccessToken) {
         const result = await axios(options);
         return result.data.egvs;
     } catch (err) {
+      console.log(err);
         // need to refresh token(s)
         if (err.response.status === 401){
             getNewTokens(doc);
@@ -94,7 +95,6 @@ async function getStats(decryptedAccessToken, startDate, endDate) {
 // save to the user - ensure post.save runs again
 async function getNewTokens(doc) {
     const decryptedRefreshToken = await utilsService.decryptToken(doc.refresh_token_content, doc.refresh_token_iv);
-    console.log(decryptedRefreshToken);
     try {
         const bodyFormData = new FormData();
         bodyFormData.append('client_id', process.env.DEXCOM_CLIENT);
