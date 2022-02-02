@@ -94,7 +94,6 @@ async function getStats(decryptedAccessToken, startDate, endDate) {
 // save to the user - ensure post.save runs again
 async function getNewTokens(doc) {
     const decryptedRefreshToken = await utilsService.decryptToken(doc.refresh_token_content, doc.refresh_token_iv);
-    console.log("hit gNT");
     console.log(decryptedRefreshToken);
     try {
         const bodyFormData = new FormData();
@@ -105,7 +104,7 @@ async function getNewTokens(doc) {
         bodyFormData.append('redirect_uri', process.env.DEXCOM_REDIRECT);
         const options = {
             method: 'post',
-            url: process.env.DEXCOM_TOKEN,
+            url: process.env.DEXCOM_API + process.env.DEXCOM_TOKEN,
             headers: { 
                 'Content-Type': 'application/x-www-form-urlencoded', 
                 'cache-control': 'no-cache',
@@ -113,7 +112,6 @@ async function getNewTokens(doc) {
             data: bodyFormData
         };
         const response = await axios(options);
-        console.log("new tokens block");
         console.log(response.data);
         const encryptedTokens = utilsService.encryptTokens(response.data);
 

@@ -1,5 +1,7 @@
 import NextAuth from "next-auth";
 import { utilsService } from "../../../services";
+import qs from 'qs';
+import axios from 'axios';
 
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
@@ -16,7 +18,7 @@ export default NextAuth({
           grant_type: "authorization_code", scope: 'offline_access', 
           redirect_uri: process.env.DEXCOM_REDIRECT, response_type: "code"
         },
-        url: process.env.DEXCOM_AUTH,
+        url: process.env.DEXCOM_API + process.env.DEXCOM_AUTH,
       },
       profile(profile) {
         // TODO this needs to be cleaned up
@@ -32,10 +34,32 @@ export default NextAuth({
       },
       token: {
         params: { 
-          grant_type: "authorization_code", response_type: "code",
+          grant_type: "authorization_code", 
+          response_type: "code",
           redirect_uri: process.env.DEXCOM_REDIRECT
         },
-        url: process.env.DEXCOM_TOKEN
+        async request(context) {
+          const {code} = context.params;
+          const options = {
+            method: 'POST',
+            url: process.env.DEXCOM_API + process.env.DEXCOM_TOKEN,
+            headers: {
+                'content-type': 'application/x-www-form-urlencoded',
+                'cache-control': 'no-cache',
+            },
+            data: qs.stringify({
+                client_id: process.env.DEXCOM_CLIENT,
+                client_secret: process.env.DEXCOM_SECRET,
+                code: code,
+                grant_type: 'authorization_code',
+                redirect_uri: process.env.DEXCOM_REDIRECT,
+            }),
+        };
+          const tokens = await axios(options).catch( (e) => {
+            console.log(e.message);
+          });
+          return { tokens };
+        },
       }, 
       clientId: process.env.DEXCOM_CLIENT,
       clientSecret: process.env.DEXCOM_SECRET,
@@ -96,15 +120,14 @@ export default NextAuth({
     // async signIn({ user, account, profile, email, credentials }) { return true},
     // async redirect({ url, baseUrl }) { return baseUrl },
     // async session({ session, token, user }) { return session},
-    async jwt({ token, account }) { 
+    async jwt({token, account}) {
       // Persist the OAuth token(s) to the session
       // encrypt them from client 
       if (account) {
-        const { access_token, refresh_token } = account;
-        console.log(account);
-        const tokens = await utilsService.encryptTokens({access_token, refresh_token});
-        token.accessToken = tokens.accessToken;
-        token.refreshToken = tokens.refreshToken;
+        const { access_token, refresh_token } = account.data;
+        const encryptedTokens = await utilsService.encryptTokens({access_token, refresh_token});
+        token.accessToken = encryptedTokens.accessToken;
+        token.refreshToken = encryptedTokens.refreshToken;
       }
       return token;
     }    

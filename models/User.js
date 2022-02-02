@@ -41,7 +41,6 @@ UserSchema.post('save', async function postSave(doc) {
         end: oneWeekFromStartDate.toISOString().slice(0, 19),
         value: mean
       });
-      console.log(a1c);
       startDate.add(1, 'week');
       oneWeekFromStartDate.add(1, 'week');
       // don't wanna make too many request(s) ATM

@@ -5,7 +5,6 @@ export const utilsService = {
     decryptToken
 };
 async function encryptTokens ({access_token, refresh_token}) {
-    console.log("hit et");
     const { algorithm, secretKey, iv } = getCipherArguments();
 
     const accessCipher = crypto.createCipheriv(algorithm, secretKey, iv);

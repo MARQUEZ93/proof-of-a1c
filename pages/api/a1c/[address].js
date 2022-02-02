@@ -17,7 +17,6 @@ export default async function handler (req, res) {
         const a1cs = await A1C.find({ user: user[0]._id.toString() }).select('start end value -_id').exec();
         res.status(200).json({ success: true, data: a1cs });
       } catch (error) {
-        console.log(error);
         res.status(400).json({ success: false });
       }
       break;
