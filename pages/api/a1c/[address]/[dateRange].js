@@ -17,7 +17,11 @@ export default async function handler (req, res) {
         const user = await User.find({ address }).select('_id').exec();
        // get the a1c that belong to the address at that particular date range
         const a1c = await A1C.find({ user: user[0]._id.toString(), start: start, end: end }).select('start end value -_id').exec();
-        res.status(200).json({ success: true, data: a1c });
+        if (a1c){
+          res.status(200).json({ success: true, data: a1c[0] });
+        } else {
+          res.status(400).json({ success: false });
+        }
       } catch (error) {
         console.log(error);
         res.status(400).json({ success: false });
