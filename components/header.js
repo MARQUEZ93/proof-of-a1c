@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Menu } from 'semantic-ui-react';
-import { signIn, signOut, useSession } from "next-auth/react"
+import { signIn, signOut, useSession } from "next-auth/react";
 
 // The approach used in this component shows how to build a sign in and sign out
 // component that works on pages which support both client and server side
@@ -8,6 +8,8 @@ import { signIn, signOut, useSession } from "next-auth/react"
 export default function Header() {
   const { data: session, status } = useSession();
   const loading = status === "loading";
+
+  //TODO do something w/ loading here 
 
   return (
         <Menu style={{ marginTop: '10px' }}>
@@ -20,12 +22,17 @@ export default function Header() {
               <a className="item">Deploy Contract</a>
             </Link>
 
-            {!session && (<Link href="/api/auth/signin">
-              <a className="item">Connect to Dexcom</a>
-            </Link>)}
-            {session && (<Link href="/api/auth/signout">
-              <a className="item">Disconnect from Dexcom</a>
-            </Link>)}
+            {!session ? (
+            <Link href="/api/auth/signin">
+              <a style={{background: '#5fb251 !important'}} className="item">Connect Dexcom</a>
+            </Link>
+            ) : 
+            (
+            <Link href="/api/auth/signout">
+              <a style={{background: '#5fb251 !important'}} className="item">Disconnect Dexcom</a>
+            </Link>
+            )
+            }
         </Menu.Menu>
       </Menu>
   );
