@@ -13,7 +13,7 @@ const UserSchema = new mongoose.Schema({
   access_token_content: String,
   access_token_iv: String
 });
-// query all weekly A1Cs after a user is created
+// query all montly A1Cs after a user is created
 UserSchema.post('save', async function postSave(doc) {
 
   try {
@@ -23,26 +23,26 @@ UserSchema.post('save', async function postSave(doc) {
     const { start, end } = await dexcomService.getDataRange(doc, decryptedAccessToken);
   
     const startDate = moment(start.systemTime);
-    const oneWeekFromStartDate = moment(start.systemTime).add(1, 'week');
+    const oneMonthFromStartDate = moment(start.systemTime).add(1, 'month');
     const endDate = moment(end.systemTime);
   
     const userId = doc.id;
     let count = 0;
   
-    // record blood sugar value for every week
-    while (startDate.isBefore(endDate) && oneWeekFromStartDate.isBefore(endDate)){
+    // record blood sugar value for every month
+    while (startDate.isBefore(endDate) && oneMonthFromStartDate.isBefore(endDate)){
       const {mean} = await dexcomService.getStats(decryptedAccessToken, 
-        startDate.toISOString().slice(0, 19), oneWeekFromStartDate.toISOString().slice(0, 19)
+        startDate.toISOString().slice(0, 19), oneMonthFromStartDate.toISOString().slice(0, 19)
       );
   
       const a1c = await A1C.create({ 
         user: userId, 
         start: startDate.toISOString().slice(0, 19),
-        end: oneWeekFromStartDate.toISOString().slice(0, 19),
+        end: oneMonthFromStartDate.toISOString().slice(0, 19),
         value: mean
       });
-      startDate.add(1, 'week');
-      oneWeekFromStartDate.add(1, 'week');
+      startDate.add(1, 'month');
+      oneMonthFromStartDate.add(1, 'month');
       // don't wanna make too many request(s) ATM
       count++;
       if (count > 3){
@@ -57,11 +57,11 @@ UserSchema.post('save', async function postSave(doc) {
   }
 
 
-    // get value from startTime + 1 week
+    // get value from startTime + 1 month
 
     // save Blood Sugar w/ value, user, start, end
 
-    // iterate startTime by 1 week 
+    // iterate startTime by 1 month 
 
     // compare new starTime to endTime to end the loop
 
