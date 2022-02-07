@@ -35,9 +35,11 @@ contract ProofOfA1C is ChainlinkClient {
     using Chainlink for Chainlink.Request;
     address public diabetic;
     address public owner;
-    uint public amountRewarded;
-    uint public lastProofOfA1C;
-    uint256 public volume;
+
+    uint256 public amountRewarded;
+    uint256 public latestProofOfA1C;
+    uint256 public lastQuery;
+
     address private oracle;
     bytes32 private jobId;
     uint256 private fee;
@@ -58,6 +60,10 @@ contract ProofOfA1C is ChainlinkClient {
         );
         _;
     }
+    function fulfill(bytes32 _requestId, uint256 _volume) public recordChainlinkFulfillment(_requestId)
+    {
+        volume = _volume;
+    }
     function destroySmartContract(address payable _to) public {
         require(msg.sender == diabetic, "You are not the owner");
         selfdestruct(_to);
@@ -65,46 +71,32 @@ contract ProofOfA1C is ChainlinkClient {
     function withdrawLink() external {
 
     }
-}
-
-        fee = 0.1 * 10 ** 18; // (Varies by network and job)
-    /**
-     * Create a Chainlink request to retrieve API response, find the target
-     * data, then multiply by 1000000000000000000 (to remove decimal places from data).
-     */
-    function requestVolumeData() public returns (bytes32 requestId) 
+    function appendThreeStrings(string a, string b, string c, string d, string e) internal pure returns (string) {
+        return string(abi.encodePacked(a, b, c, d, e));
+    }
+    function requestProofOfA1C(string dateStringWithSlash, string endDateTimestamp) public returns (bytes32 requestId) 
     {
-        Chainlink.Request memory request = buildChainlinkRequest(jobId, address(this), this.fulfill.selector);
-        
-        // Set the URL to perform the GET request on
-        request.add("get", "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=ETH&tsyms=USD");
-        
-        // Set the path to find the desired data in the API response, where the response format is:
-        // {"RAW":
-        //   {"ETH":
-        //    {"USD":
-        //     {
-        //      "VOLUME24HOUR": xxx.xxx,
-        //     }
-        //    }
-        //   }
-        //  }
-        request.add("path", "RAW.ETH.USD.VOLUME24HOUR");
+        // TODO require endDateTimestamp is more than a month older than last time query got run
+        endDateTimestamp
+        userAddress = abi.encodePacked(diabetic);
+        Chainlink.Request memory request = 
+        buildChainlinkRequest(jobId, address(this), this.fulfill.selector);
+        endpoint = append(url, userAddress, dateStringWithSlash)
+        request.add("get", endpoint);
+
+        request.add("path", "RAW.DATA.VALUE");
         
         // Multiply the result by 1000000000000000000 to remove decimals
-        int timesAmount = 10**18;
+        int timesAmount = 10**17;
+        //TODO confirm this is 0.1
         request.addInt("times", timesAmount);
         
         // Sends the request
         return sendChainlinkRequestTo(oracle, request, fee);
     }
-    
-    /**
-     * Receive the response in the form of uint256
-     */ 
     function fulfill(bytes32 _requestId, uint256 _volume) public recordChainlinkFulfillment(_requestId)
     {
-        volume = _volume;
+        latestProofOfA1C = _volume;
     }
 
     // function withdrawLink() external {} - Implement a withdraw function to avoid locking your LINK in the contract
