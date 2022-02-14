@@ -22,14 +22,14 @@ class ContractNew extends Component {
     // this.setState({ loading: true, errorMessage: '' });
 
     try {
-      // const accounts = await web3.eth.requestAccounts();
-      // const result = await factory.methods
-      //   .createProofOfA1C()
-      //   .send({
-      //     from: accounts[0]
-      //   });
+      const accounts = await web3.eth.requestAccounts();
+      const result = await factory.methods
+        .createProofOfA1C()
+        .send({
+          from: accounts[0]
+        });
         // create user upon successful contract deployment
-        userService.create({address: '123'});
+        userService.create({address: accounts[0]});
       // Router.pushRoute('/');
     } catch (err) {
       // this.setState({ errorMessage: err.message });

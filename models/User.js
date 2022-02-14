@@ -23,29 +23,29 @@ UserSchema.post('save', async function postSave(doc) {
     const { start, end } = await dexcomService.getDataRange(doc, decryptedAccessToken);
   
     const startDate = moment(start.systemTime);
-    const oneMonthFromStartDate = moment(start.systemTime).add(1, 'month');
+    const threeMonthsFromStartDate = moment(start.systemTime).add(3, 'month');
     const endDate = moment(end.systemTime);
   
     const userId = doc.id;
     let count = 0;
   
-    // record blood sugar value for every month
-    while (startDate.isBefore(endDate) && oneMonthFromStartDate.isBefore(endDate)){
+    // record blood sugar value for every 3 months
+    while (startDate.isBefore(endDate) && threeMonthsFromStartDate.isBefore(endDate)){
       const {mean} = await dexcomService.getStats(decryptedAccessToken, 
-        startDate.toISOString().slice(0, 19), oneMonthFromStartDate.toISOString().slice(0, 19)
+        startDate.toISOString().slice(0, 19), threeMonthsFromStartDate.toISOString().slice(0, 19)
       );
   
       const a1c = await A1C.create({ 
         user: userId, 
         start: startDate.toISOString().slice(0, 19),
-        end: oneMonthFromStartDate.toISOString().slice(0, 19),
+        end: threeMonthsFromStartDate.toISOString().slice(0, 19),
         value: mean
       });
-      startDate.add(1, 'month');
-      oneMonthFromStartDate.add(1, 'month');
+      startDate.add(3, 'month');
+      threeMonthsFromStartDate.add(3, 'month');
       // don't wanna make too many request(s) ATM
       count++;
-      if (count > 3){
+      if (count > 5){
         return;
       }
     }
@@ -57,11 +57,11 @@ UserSchema.post('save', async function postSave(doc) {
   }
 
 
-    // get value from startTime + 1 month
+    // get value from startTime + 3 month
 
     // save Blood Sugar w/ value, user, start, end
 
-    // iterate startTime by 1 month 
+    // iterate startTime by 3 months 
 
     // compare new starTime to endTime to end the loop
 
