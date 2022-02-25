@@ -39,7 +39,7 @@ UserSchema.post('save', async function postSave(doc) {
         user: userId, 
         start: startDate.toISOString().slice(0, 19),
         end: threeMonthsFromStartDate.toISOString().slice(0, 19),
-        value: mean
+        value: parseInt(mean).toString()
       });
       startDate.add(3, 'month');
       threeMonthsFromStartDate.add(3, 'month');
