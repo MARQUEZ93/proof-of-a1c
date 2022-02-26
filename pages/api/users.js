@@ -4,7 +4,6 @@ import { getSession } from 'next-auth/react';
 import { getToken } from 'next-auth/jwt';
 
 export default async function handler (req, res) {
-    // todo santize tokens
   const { method } = req;
   const secret = process.env.SECRET;
 
@@ -23,10 +22,10 @@ export default async function handler (req, res) {
             refresh_token_content: token.refreshToken.content, 
             refresh_token_iv: token.refreshToken.iv, 
             access_token_content: token.accessToken.content,
-            access_token_iv: token.accessToken.iv
+            access_token_iv: token.accessToken.iv,
+            contract: req.body.contract
         });
-        // TODO hide data:user ???
-        res.status(201).json({ success: true, data: user });
+        res.status(200).json({ success: true, data: user });
       } catch (error) {
         res.status(401).json({ success: false });
       }

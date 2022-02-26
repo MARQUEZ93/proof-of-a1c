@@ -1,4 +1,6 @@
 import crypto from 'crypto';
+const HDWalletProvider = require('@truffle/hdwallet-provider');
+const Web3 = require('web3');
 
 export const utilsService = {
     encryptTokens,

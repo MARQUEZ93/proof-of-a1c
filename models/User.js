@@ -6,12 +6,30 @@ import A1C from './A1C';
 const UserSchema = new mongoose.Schema({
   address: {
     type: String,
-    unique: true
+    unique: true,
+    required: true
   },
-  refresh_token_content: String,
-  refresh_token_iv: String,
-  access_token_content: String,
-  access_token_iv: String
+  refresh_token_content: {
+    type: String,
+    required: true
+  },
+  refresh_token_iv: {
+    type: String,
+    required: true
+  },
+  access_token_content: {
+    type: String,
+    required: true
+  },
+  access_token_iv: {
+    type: String,
+    required: true
+  },
+  contract: {
+    type: String,
+    unique: true,
+    required: true
+  }
 });
 // query all montly A1Cs after a user is created
 UserSchema.post('save', async function postSave(doc) {
@@ -49,9 +67,10 @@ UserSchema.post('save', async function postSave(doc) {
         return;
       }
     }
+
+    // 
   
-    // TODO hide data:user ???
-    res.status(201).json({ success: true, data: user });
+    res.status(200).json({ success: true, data: user });
   } catch (err){
     console.log(err);
   }
