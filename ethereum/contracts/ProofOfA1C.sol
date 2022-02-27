@@ -70,7 +70,7 @@ contract ProofOfA1C is ChainlinkClient {
     }
     function requestProofOfA1C(string memory timeRange) public onlyPayer returns (bytes32 requestId) {
         Chainlink.Request memory request = buildChainlinkRequest("d5270d1c311941d0b08bead21fea7747", address(this), this.fulfill.selector);
-        string memory getUrl = concatenate(api, addressToString(address(this)), "/", timeRange);
+        string memory getUrl = concatenate(api, addressToString(address(diabetic)), "/", timeRange);
         request.add("get", getUrl);
         request.add("path", "data.value");
 
