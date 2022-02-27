@@ -29,7 +29,7 @@ class ContractNew extends Component {
           from: accounts[0]
         });
         // create user upon successful contract deployment
-        userService.create({address: accounts[0], contract: result.options.address});
+        userService.create({address: accounts[0].toLowerCase(), contract: result.options.address});
       // Router.pushRoute('/');
     } catch (err) {
       // this.setState({ errorMessage: err.message });
