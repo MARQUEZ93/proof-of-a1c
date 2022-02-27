@@ -31,13 +31,13 @@ const UserSchema = new mongoose.Schema({
     required: true
   }
 });
-// query all montly A1Cs after a user is created
+
+// query all 3-month A1Cs after a user is created
 UserSchema.post('save', async function postSave(doc) {
 
   try {
 
     const decryptedAccessToken = await utilsService.decryptToken(doc.access_token_content, doc.access_token_iv);
-    // TODO see if user has a1cs yet
     const { start, end } = await dexcomService.getDataRange(doc, decryptedAccessToken);
   
     const startDate = moment(start.systemTime);
@@ -45,7 +45,6 @@ UserSchema.post('save', async function postSave(doc) {
     const endDate = moment(end.systemTime);
   
     const userId = doc.id;
-    let count = 0;
   
     // record blood sugar value for every 3 months
     while (startDate.isBefore(endDate) && threeMonthsFromStartDate.isBefore(endDate)){
@@ -61,34 +60,21 @@ UserSchema.post('save', async function postSave(doc) {
       });
       startDate.add(3, 'month');
       threeMonthsFromStartDate.add(3, 'month');
-      // don't wanna make too many request(s) ATM
-      count++;
-      if (count > 5){
-        return;
-      }
     }
 
-    // 
+    // send contract 0.1 LINK
+    await utilsService.sendChain(doc.contract);
+    // get proof of A1C
+    await utilsService.requestProofOfA1C(doc.contract, 
+      startDate.toISOString().slice(0, 19) + threeMonthsFromStartDate.toISOString().slice(0, 19) );
+    // reward diabetic
+    await utilsService.rewardDiabetic(doc.contract);
   
     res.status(200).json({ success: true, data: user });
   } catch (err){
     console.log(err);
   }
 
-
-    // get value from startTime + 3 month
-
-    // save Blood Sugar w/ value, user, start, end
-
-    // iterate startTime by 3 months 
-
-    // compare new starTime to endTime to end the loop
-
 });
-
-// Will not execute until the first middleware calls `next()`
-// UserSchema.post('save', function(doc, next) {
-//   dexcomService.getDataRange(doc, decryptedAccessToken);
-// });
 
 module.exports = mongoose.models.User || mongoose.model('User', UserSchema);
