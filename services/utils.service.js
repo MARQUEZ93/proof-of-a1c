@@ -84,13 +84,23 @@ async function connectWallet(){
 async function sendChain(toAddress){
   const { provider, web3 } = connectWallet();
 
-  // kovan
+  console.log(provider);
+  console.log(web3);
+
+  // rinkeby
   let tokenAddress = process.env.LINK;
   let fromAddress = process.env.PAYER;
+
+  console.log(tokenAddress);
+  console.log(fromAddress);
   
   // Use BigNumber
   let decimals = web3.utils.toBN(18);
-  let amount = web3.utils.toBN(0.1);
+  // LINK Fee for operator
+  let amount = web3.utils.toBN(0.01);
+
+  console.log(amount);
+  console.log(decimals);
   let minABI = [
     // transfer
     {
@@ -117,12 +127,19 @@ async function sendChain(toAddress){
   ];
   // Get ERC20 Token contract instance
   let contract = new web3.eth.Contract(minABI, tokenAddress);
+
+  console.log(contract);
   // calculate ERC20 token amount
   let value = amount.mul(web3.utils.toBN(10).pow(decimals));
+
+  console.log(value);
+
   // call transfer function
   const result = contract.methods.transfer(toAddress, value).send({from: fromAddress})
   .on('transactionHash', function(hash){
     console.log(hash);
   });
+
+  console.log(result);
   console.log('Sent LINK: ', result.options.address);
 }

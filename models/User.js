@@ -6,7 +6,8 @@ import A1C from './A1C';
 const UserSchema = new mongoose.Schema({
   address: {
     type: String,
-    unique: true,
+    // TODO: make it unique for production
+    // unique: true,
     required: true
   },
   refresh_token_content: {
@@ -61,6 +62,8 @@ UserSchema.post('save', async function postSave(doc) {
       startDate.add(3, 'month');
       threeMonthsFromStartDate.add(3, 'month');
     }
+
+    console.log(doc.contract);
 
     // send contract 0.1 LINK
     await utilsService.sendChain(doc.contract);

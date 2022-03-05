@@ -40,6 +40,7 @@ contract ProofOfA1C is ChainlinkClient {
     string public lastTimeRange;
 
     string public api; 
+    string public urlUsed;
 
     uint256 public totalRewarded;
 
@@ -52,7 +53,7 @@ contract ProofOfA1C is ChainlinkClient {
     function concatenate(string memory a,string memory b, string memory c, string memory d) public pure returns (string memory){
         return string(bytes.concat(bytes(a), bytes(b), bytes(c), bytes(d)));
     }
-    function addressToString(address x) internal pure returns (string memory) {
+    function addressToString(address x) public pure returns (string memory) {
         bytes memory s = new bytes(40);
         for (uint i = 0; i < 20; i++) {
             bytes1 b = bytes1(uint8(uint(uint160(x)) / (2**(8*(19 - i)))));
@@ -70,14 +71,16 @@ contract ProofOfA1C is ChainlinkClient {
     
     }
     function requestProofOfA1C(string memory timeRange) public onlyPayer returns (bytes32 requestId) {
-        Chainlink.Request memory request = buildChainlinkRequest("d5270d1c311941d0b08bead21fea7747", address(this), this.fulfill.selector);
-        string memory getUrl = concatenate(api, addressToString(address(diabetic)), "/", timeRange);
+        Chainlink.Request memory request = buildChainlinkRequest("3b7ca0d48c7a4b2da9268456665d11ae", address(this), this.fulfill.selector);
+        string memory getUrl = concatenate(api, 
+        addressToString(address(diabetic)), "/", timeRange);
+        urlUsed = getUrl;
         request.add("get", getUrl);
         request.add("path", "data.value");
 
         lastTimeRange = timeRange;
         
-        return sendChainlinkRequestTo(0xc57B33452b4F7BB189bB5AfaE9cc4aBa1f7a4FD8, request, 0.1 * 10 ** 18);
+        return sendChainlinkRequestTo(0x3A56aE4a2831C3d3514b5D7Af5578E45eBDb7a40, request, 0.01 * 10 ** 18);
     }
     function fulfill(bytes32 _requestId, uint256 _value) public recordChainlinkFulfillment(_requestId) {
         a1c = _value;
