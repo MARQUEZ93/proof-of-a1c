@@ -15,7 +15,8 @@ contract ProofOfA1CFactory {
         endpoint = url; 
     }
     function createProofOfA1C() public {
-        require(!diabetics[msg.sender]);
+        //TODO for final contract, uncomment
+        // require(!diabetics[msg.sender]);
         ProofOfA1C newProofOfA1C = new ProofOfA1C(provider, msg.sender, endpoint);
         deployedContracts.push(address(newProofOfA1C));
         diabetics[msg.sender] = true;
@@ -99,7 +100,7 @@ contract ProofOfA1C is ChainlinkClient {
         LinkTokenInterface link = LinkTokenInterface(chainlinkTokenAddress());
         require(link.transfer(_to, link.balanceOf(address(this))), "Unable to transfer");
     }
-    function rewardDiabetic(address payable _to) public payable onlyPayer {
+     function rewardDiabetic(address payable _to) public payable onlyPayer {
         require(a1c < 154);
         totalRewarded+=getBalance();
         (bool sent, bytes memory data) = _to.call{value: getBalance()}("");

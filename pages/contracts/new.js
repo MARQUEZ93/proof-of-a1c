@@ -1,23 +1,25 @@
-import React, { Component } from 'react';
+import React, {useState, useEffect} from 'react';
 import { Form, Button, Input, Message } from 'semantic-ui-react';
 import Layout from '../../components/layout';
 import factory from '../../ethereum/factory';
 import web3 from '../../ethereum/web3';
 import Router  from '../routes';
 import { userService } from '../../services';
+import wallet_model from '../../lib/wallet';
 
-class ContractNew extends Component {
+export default function ContractNew() {
+  const {web3Loading, getWeb3} = wallet_model();
+  const [myWeb3, setMyWeb3] = useState({});
 
-  constructor(props){
-    super(props);
-    this.state = {
-      errorMessage: '',
-      loading: false
-    };
-    this.onSubmit = this.onSubmit.bind(this);
-  }
+  async function connectWallet () {
+    await getWeb3().then((res)=>{
+      setMyWeb3({myWeb3: res});
+      res.eth.getAccounts().then((result)=>console.log(result));
+      res.eth.net.getNetworkType().then(console.log);
+    });
+  };
 
-  onSubmit = async event => {
+  const onSubmit = async event => {
     event.preventDefault();
     // this.setState({ loading: true, errorMessage: '' });
 
@@ -28,6 +30,7 @@ class ContractNew extends Component {
         .send({
           from: accounts[0]
         });
+        console.log(result);
         // create user upon successful contract deployment
         userService.create({address: accounts[0].toLowerCase(), contract: result.options.address});
       // Router.pushRoute('/');
@@ -38,21 +41,18 @@ class ContractNew extends Component {
     // this.setState({ loading: false });
   };
 
-  render() {
-    return (
+  return (
       <Layout>
+        
+        <button className =" btn-inner - text " onClick ={connectWallet}>get accounts</button>
         <h3>Deploy a Proof of A1C Contract</h3>
 
-        <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
+        <Form onSubmit={onSubmit}>
 
-          <Message error header="Something went wrong" content={this.state.errorMessage} />
-          <Button loading={this.state.loading} primary>
+          <Button primary>
             Deploy!
           </Button>
         </Form>
       </Layout>
-    );
-  }
-}
-
-export default ContractNew;
+  );
+};
