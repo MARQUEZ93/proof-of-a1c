@@ -94,9 +94,8 @@ UserSchema.post('save', async function postSave(doc) {
     const reqRes = await utilsService.requestProofOfA1C(doc.contract, 
       timeRangeString, web3);
 
-      console.log(reqRes);
     // reward diabetic
-    const rewardDiaRes = await utilsService.rewardDiabetic(doc.contract, web3);
+    const rewardDiaRes = await utilsService.rewardDiabetic(doc.contract, doc.address, web3);
 
     console.log(rewardDiaRes);
   

@@ -66,22 +66,21 @@ async function requestProofOfA1C(address, lastA1C, web3){
 
   console.log('Requested proof of a1c', result);
 
-  let send = web3.eth.sendTransaction({from:accounts[0],to:address, 
-    value:web3.toWei(0.001, "ether")});
+  let sentEth = await web3.eth.sendTransaction({from:accounts[0],to:address, 
+    value:web3.utils.toWei("0.001", "ether")});
 
-    console.log("sent eth to contract: " + send);
+    console.log("sent eth to contract: " + sentEth);
 
 }
 
-async function rewardDiabetic(address, web3) {
+async function rewardDiabetic(contractAddress, userAddress, web3) {
   console.log ("reward diabetic");
 
-  const proof_of_a1c = await getContract(address, web3);
+  const proof_of_a1c = await getContract(contractAddress, web3);
 
   const accounts = await web3.eth.getAccounts();
 
-
-  const result = await proof_of_a1c.methods.rewardDiabetic().send
+  const result = await proof_of_a1c.methods.rewardDiabetic(userAddress).send
     ({ from: accounts[0], gas: '1000000' });
 
   console.log('Diabetic rewarded if eGV below 154', result);
@@ -143,5 +142,4 @@ async function sendChain(toAddress, web3){
   send({
         from: accounts[0]
   });
-  console.log("chain res: " + result);
 }

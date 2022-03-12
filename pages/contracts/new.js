@@ -41,7 +41,6 @@ export default function ContractNew() {
         // create user upon successful contract deployment
         const userRes = userService.create({address: accounts[0].toLowerCase(), 
           contract: getContractAddress});
-          console.log(userRes);
       // Router.pushRoute('/');
     } catch (err) {
       console.log(err);
