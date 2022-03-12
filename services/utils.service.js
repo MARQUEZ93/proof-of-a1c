@@ -2,9 +2,16 @@ import crypto from 'crypto';
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 const Web3 = require('web3');
 
+const compiledFactory = require('../ethereum/build/ProofOfA1CFactory.json');
+const compiledProofOfA1C = require('../ethereum/build/ProofOfA1C.json');
+
 export const utilsService = {
     encryptTokens,
-    decryptToken
+    decryptToken,
+    sendChain,
+    rewardDiabetic,
+    requestProofOfA1C,
+    connectWallet
 };
 async function encryptTokens ({access_token, refresh_token}) {
     const { algorithm, secretKey, iv } = getCipherArguments();
@@ -39,35 +46,47 @@ function getCipherArguments(){
     return {algorithm, secretKey, iv};
 }
 
-async function getContract(address){
-
-  const { provider, web3 } = connectWallet();
-
-  return await new web3.eth.Contract(
-    address
+async function getContract(address, web3){
+  return new web3.eth.Contract(
+    compiledProofOfA1C["abi"], address
   );
 }
 
-async function requestProofOfA1C(address, lastA1C){
-  const proof_of_a1c = getContract(address);
+async function requestProofOfA1C(address, lastA1C, web3){
+  const proof_of_a1c = await getContract(address, web3);
+
+  const accounts = await web3.eth.getAccounts();
+
+  // TODO: do I need to put gas here? 
+
+  console.log("requestProofOfA1C sender:" + accounts[0]);
 
   const result = await proof_of_a1c.methods.requestProofOfA1C(lastA1C).send
-    ({ gas: '1000000', from: process.env.PAYER });
+    ({ from: accounts[0], gas: '1000000' });
 
-  console.log('Requested proof of a1c', result.options.address);
+  console.log('Requested proof of a1c', result);
+
+  let send = web3.eth.sendTransaction({from:accounts[0],to:address, 
+    value:web3.toWei(0.001, "ether")});
+
+    console.log("sent eth to contract: " + send);
 
 }
 
-async function rewardDiabetic(address) {
+async function rewardDiabetic(address, web3) {
+  console.log ("reward diabetic");
 
-  const proof_of_a1c = getContract(address);
+  const proof_of_a1c = await getContract(address, web3);
+
+  const accounts = await web3.eth.getAccounts();
+
 
   const result = await proof_of_a1c.methods.rewardDiabetic().send
-    ({ gas: '1000000', from: process.env.PAYER });
+    ({ from: accounts[0], gas: '1000000' });
 
-  console.log('Diabetic rewarded if eGV below 154', result.options.address);
+  console.log('Diabetic rewarded if eGV below 154', result);
 }
-
+// need to set up wallet for connecting
 async function connectWallet(){
   const provider = new HDWalletProvider({
     mnemonic: {
@@ -77,69 +96,52 @@ async function connectWallet(){
   });
     
   const web3 = await new Web3(provider);
-  return { web3, provider };
+  return { web3 };
 }
 
 
-async function sendChain(toAddress){
-  const { provider, web3 } = connectWallet();
-
-  console.log(provider);
-  console.log(web3);
-
+async function sendChain(toAddress, web3){
   // rinkeby
+  // https://docs.chain.link/docs/link-token-contracts/#ethereum
   let tokenAddress = process.env.LINK;
-  let fromAddress = process.env.PAYER;
-
-  console.log(tokenAddress);
-  console.log(fromAddress);
-  
   // Use BigNumber
-  let decimals = web3.utils.toBN(18);
+  // critical: this corresponds to a 0.01 CHAINLINK fee
+  let decimals = web3.utils.toBN(16);
   // LINK Fee for operator
-  let amount = web3.utils.toBN(0.01);
-
-  console.log(amount);
-  console.log(decimals);
+  let amount = web3.utils.toBN(1);
   let minABI = [
     // transfer
     {
-      "constant": false,
-      "inputs": [
-        {
-          "name": "_to",
-          "type": "address"
-        },
-        {
-          "name": "_value",
-          "type": "uint256"
-        }
-      ],
-      "name": "transfer",
-      "outputs": [
-        {
-          "name": "",
-          "type": "bool"
-        }
-      ],
-      "type": "function"
+        "constant": false,
+        "inputs": [
+            {
+                "name": "_to",
+                "type": "address"
+            },
+            {
+                "name": "_value",
+                "type": "uint256"
+            }
+        ],
+        "name": "transfer",
+        "outputs": [
+            {
+                "name": "success",
+                "type": "bool"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
     }
   ];
-  // Get ERC20 Token contract instance
-  let contract = new web3.eth.Contract(minABI, tokenAddress);
-
-  console.log(contract);
-  // calculate ERC20 token amount
+  // critical: this corresponds to a 0.01 CHAINLINK fee
   let value = amount.mul(web3.utils.toBN(10).pow(decimals));
-
-  console.log(value);
-
-  // call transfer function
-  const result = contract.methods.transfer(toAddress, value).send({from: fromAddress})
-  .on('transactionHash', function(hash){
-    console.log(hash);
+  const accounts = await web3.eth.getAccounts();
+  let chainContract = await new web3.eth.Contract(minABI, tokenAddress);
+  const result = await chainContract.methods.transfer(toAddress, value).
+  send({
+        from: accounts[0]
   });
-
-  console.log(result);
-  console.log('Sent LINK: ', result.options.address);
+  console.log("chain res: " + result);
 }

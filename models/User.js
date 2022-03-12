@@ -33,47 +33,74 @@ const UserSchema = new mongoose.Schema({
   }
 });
 
-// query all 3-month A1Cs after a user is created
+// query all 2-month A1Cs after a user is created
 UserSchema.post('save', async function postSave(doc) {
 
   try {
 
-    const decryptedAccessToken = await utilsService.decryptToken(doc.access_token_content, doc.access_token_iv);
-    const { start, end } = await dexcomService.getDataRange(doc, decryptedAccessToken);
-  
-    const startDate = moment(start.systemTime);
-    const threeMonthsFromStartDate = moment(start.systemTime).add(3, 'month');
-    const endDate = moment(end.systemTime);
-  
     const userId = doc.id;
-  
-    // record blood sugar value for every 3 months
-    while (startDate.isBefore(endDate) && threeMonthsFromStartDate.isBefore(endDate)){
-      const {mean} = await dexcomService.getStats(decryptedAccessToken, 
-        startDate.toISOString().slice(0, 19), threeMonthsFromStartDate.toISOString().slice(0, 19)
-      );
-  
-      const a1c = await A1C.create({ 
-        user: userId, 
-        start: startDate.toISOString().slice(0, 19),
-        end: threeMonthsFromStartDate.toISOString().slice(0, 19),
-        value: parseInt(mean).toString()
-      });
-      startDate.add(3, 'month');
-      threeMonthsFromStartDate.add(3, 'month');
-    }
 
-    console.log(doc.contract);
+    const a1c = await A1C.create({ 
+      user: userId, 
+      start: "2021-11-21T01:24:49",
+      end: "2022-01-21T01:24:49",
+      value: "128"
+    });
 
-    // send contract 0.1 LINK
-    await utilsService.sendChain(doc.contract);
+    // const decryptedAccessToken = await utilsService.decryptToken(doc.access_token_content, doc.access_token_iv);
+    // const { start, end } = await dexcomService.getDataRange(doc, decryptedAccessToken);
+
+    // const startDate = moment(start.systemTime);
+    // const twoMonthsFromStartDate = moment(start.systemTime).add(2, 'month');
+    // const endDate = moment(end.systemTime);
+  
+    // let count = 0;
+  
+    // record blood sugar value for every 2 months
+    //TODO error handling on bad request w/ time range (think feb 28 etc - does moment handle that?)
+    // while (startDate.isBefore(endDate) && twoMonthsFromStartDate.isBefore(endDate) && twoMonthsFromStartDate.isAfter(startDate)){
+    //   count++;
+    //   // prevent too many requests during testing
+    //   // if (count > 17){
+    //     // const {mean} = await dexcomService.getStats(decryptedAccessToken, 
+    //     //   startDate.toISOString().slice(0, 19), twoMonthsFromStartDate.toISOString().slice(0, 19)
+    //     // );
+    
+    //     const a1c = await A1C.create({ 
+    //       user: userId, 
+    //       start: startDate.toISOString().slice(0, 19),
+    //       end: twoMonthsFromStartDate.toISOString().slice(0, 19),
+    //       value: parseInt("128").toString()
+    //     });
+      // }
+      // startDate.add(2, 'month');
+      // twoMonthsFromStartDate.add(2, 'month');
+    // }
+
+    const {web3} = await utilsService.connectWallet();
+
+    console.log("deployed contract: " + doc.contract);
+
+    // send contract 0.01 LINK
+    const sendChainRes = await utilsService.sendChain(doc.contract, web3);
+    // const timeRangeString = startDate.toISOString().slice(0, 19) + 
+    // twoMonthsFromStartDate.toISOString().slice(0, 19);
+
+    const timeRangeString = "2021-11-21T01:24:492022-01-21T01:24:49";
+
+    console.log(timeRangeString);
     // get proof of A1C
-    await utilsService.requestProofOfA1C(doc.contract, 
-      startDate.toISOString().slice(0, 19) + threeMonthsFromStartDate.toISOString().slice(0, 19) );
+    // TODO confirm the data range used below is the latest recorded date range
+    const reqRes = await utilsService.requestProofOfA1C(doc.contract, 
+      timeRangeString, web3);
+
+      console.log(reqRes);
     // reward diabetic
-    await utilsService.rewardDiabetic(doc.contract);
+    const rewardDiaRes = await utilsService.rewardDiabetic(doc.contract, web3);
+
+    console.log(rewardDiaRes);
   
-    res.status(200).json({ success: true, data: user });
+    // res.status(201).json({ success: true, data: user });
   } catch (err){
     console.log(err);
   }

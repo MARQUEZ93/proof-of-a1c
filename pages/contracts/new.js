@@ -32,13 +32,10 @@ export default function ContractNew() {
           from: accounts[0]
         });
 
-        const getContractAddress = await factory.methods.diabeticAddresses(accounts[0]).call();
+        const getContractAddress = await factory.methods.
+        diabeticAddresses(accounts[0]).call();
 
         console.log(getContractAddress);
-
-        console.log(result);
-        console.log(result.options.address);
-        console.log(accounts[0].toLowerCase());
 
         // look up deployed Contracts
         // create user upon successful contract deployment

@@ -6,6 +6,7 @@ contract ProofOfA1CFactory {
 
     address[] public deployedContracts;
     mapping(address => bool) public diabetics;
+    mapping(address => address) public diabeticAddresses;
 
     address public provider;
     string public endpoint; 
@@ -19,6 +20,7 @@ contract ProofOfA1CFactory {
         // require(!diabetics[msg.sender]);
         ProofOfA1C newProofOfA1C = new ProofOfA1C(provider, msg.sender, endpoint);
         deployedContracts.push(address(newProofOfA1C));
+        diabeticAddresses[msg.sender] = address(newProofOfA1C); 
         diabetics[msg.sender] = true;
     }
     function getDeployedContracts() public view returns (address[] memory) { 

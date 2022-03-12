@@ -1,5 +1,4 @@
 import dbConnect from '../../../lib/dbconnect';
-
 import A1C from '../../../models/A1C';
 import User from '../../../models/User';
 

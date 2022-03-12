@@ -85,7 +85,7 @@ async function getStats(decryptedAccessToken, startDate, endDate) {
         return result.data;
     } catch (err) {
         console.log(err.data);
-        console.log(err.data.errors);
+        console.log(err);
         // need to refresh token(s)
         if (err.response.status === 401){
             getNewTokens(doc);
@@ -94,6 +94,7 @@ async function getStats(decryptedAccessToken, startDate, endDate) {
 };
 // save to the user - ensure post.save runs again
 async function getNewTokens(doc) {
+  console.log("hit gnt");
     const decryptedRefreshToken = await utilsService.decryptToken(doc.refresh_token_content, doc.refresh_token_iv);
     try {
         const bodyFormData = new FormData();

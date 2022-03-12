@@ -5,7 +5,7 @@ import ProofOfA1CFactory from './build/ProofOfA1CFactory.json';
 //TODO need to switch before production release
 const instance = new web3.eth.Contract(
   ProofOfA1CFactory["abi"],
-  '0x85bE976b5bF502862Be18fa4b5e98865803c8e0e'
+  '0x8e252162eDeCA79a67527aDfD976B45c3D86D969'
 );
 
 export default instance;
