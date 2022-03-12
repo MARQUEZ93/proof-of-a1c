@@ -1,319 +1,634 @@
 {
   "abi": [
+
     {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "factory",
-          "type": "address"
-        },
-        {
-          "internalType": "address",
-          "name": "deployer",
-          "type": "address"
-        },
-        {
-          "internalType": "string",
-          "name": "endpointUrl",
-          "type": "string"
-        }
-      ],
-      "stateMutability": "nonpayable",
-      "type": "constructor"
+
+                    "inputs": [
+
+                                    {
+
+                                                    "internalType": "address",
+
+                                                    "name": "factory",
+
+                                                    "type": "address"
+
+                                    },
+
+                                    {
+
+                                                    "internalType": "address",
+
+                                                    "name": "deployer",
+
+                                                    "type": "address"
+
+                                    },
+
+                                    {
+
+                                                    "internalType": "string",
+
+                                                    "name": "endpointUrl",
+
+                                                    "type": "string"
+
+                                    }
+
+                    ],
+
+                    "stateMutability": "nonpayable",
+
+                    "type": "constructor"
+
     },
+
     {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": true,
-          "internalType": "bytes32",
-          "name": "id",
-          "type": "bytes32"
-        }
-      ],
-      "name": "ChainlinkCancelled",
-      "type": "event"
+
+                    "anonymous": false,
+
+                    "inputs": [
+
+                                    {
+
+                                                    "indexed": true,
+
+                                                    "internalType": "bytes32",
+
+                                                    "name": "id",
+
+                                                    "type": "bytes32"
+
+                                    }
+
+                    ],
+
+                    "name": "ChainlinkCancelled",
+
+                    "type": "event"
+
     },
+
     {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": true,
-          "internalType": "bytes32",
-          "name": "id",
-          "type": "bytes32"
-        }
-      ],
-      "name": "ChainlinkFulfilled",
-      "type": "event"
+
+                    "anonymous": false,
+
+                    "inputs": [
+
+                                    {
+
+                                                    "indexed": true,
+
+                                                    "internalType": "bytes32",
+
+                                                    "name": "id",
+
+                                                    "type": "bytes32"
+
+                                    }
+
+                    ],
+
+                    "name": "ChainlinkFulfilled",
+
+                    "type": "event"
+
     },
+
     {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": true,
-          "internalType": "bytes32",
-          "name": "id",
-          "type": "bytes32"
-        }
-      ],
-      "name": "ChainlinkRequested",
-      "type": "event"
+
+                    "anonymous": false,
+
+                    "inputs": [
+
+                                    {
+
+                                                    "indexed": true,
+
+                                                    "internalType": "bytes32",
+
+                                                    "name": "id",
+
+                                                    "type": "bytes32"
+
+                                    }
+
+                    ],
+
+                    "name": "ChainlinkRequested",
+
+                    "type": "event"
+
     },
+
     {
-      "stateMutability": "payable",
-      "type": "fallback"
+
+                    "stateMutability": "payable",
+
+                    "type": "fallback"
+
     },
+
     {
-      "inputs": [],
-      "name": "a1c",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
+
+                    "inputs": [],
+
+                    "name": "a1c",
+
+                    "outputs": [
+
+                                    {
+
+                                                    "internalType": "uint256",
+
+                                                    "name": "",
+
+                                                    "type": "uint256"
+
+                                    }
+
+                    ],
+
+                    "stateMutability": "view",
+
+                    "type": "function"
+
     },
+
     {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "x",
-          "type": "address"
-        }
-      ],
-      "name": "addressToString",
-      "outputs": [
-        {
-          "internalType": "string",
-          "name": "",
-          "type": "string"
-        }
-      ],
-      "stateMutability": "pure",
-      "type": "function"
+
+                    "inputs": [
+
+                                    {
+
+                                                    "internalType": "address",
+
+                                                    "name": "x",
+
+                                                    "type": "address"
+
+                                    }
+
+                    ],
+
+                    "name": "addressToString",
+
+                    "outputs": [
+
+                                    {
+
+                                                    "internalType": "string",
+
+                                                    "name": "",
+
+                                                    "type": "string"
+
+                                    }
+
+                    ],
+
+                    "stateMutability": "pure",
+
+                    "type": "function"
+
     },
+
     {
-      "inputs": [],
-      "name": "api",
-      "outputs": [
-        {
-          "internalType": "string",
-          "name": "",
-          "type": "string"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
+
+                    "inputs": [],
+
+                    "name": "api",
+
+                    "outputs": [
+
+                                    {
+
+                                                    "internalType": "string",
+
+                                                    "name": "",
+
+                                                    "type": "string"
+
+                                    }
+
+                    ],
+
+                    "stateMutability": "view",
+
+                    "type": "function"
+
     },
+
     {
-      "inputs": [
-        {
-          "internalType": "string",
-          "name": "a",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "b",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "c",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "d",
-          "type": "string"
-        }
-      ],
-      "name": "concatenate",
-      "outputs": [
-        {
-          "internalType": "string",
-          "name": "",
-          "type": "string"
-        }
-      ],
-      "stateMutability": "pure",
-      "type": "function"
+
+                    "inputs": [
+
+                                    {
+
+                                                    "internalType": "string",
+
+                                                    "name": "a",
+
+                                                    "type": "string"
+
+                                    },
+
+                                    {
+
+                                                    "internalType": "string",
+
+                                                    "name": "b",
+
+                                                    "type": "string"
+
+                                    },
+
+                                    {
+
+                                                    "internalType": "string",
+
+                                                    "name": "c",
+
+                                                    "type": "string"
+
+                                    },
+
+                                    {
+
+                                                    "internalType": "string",
+
+                                                    "name": "d",
+
+                                                    "type": "string"
+
+                                    }
+
+                    ],
+
+                    "name": "concatenate",
+
+                    "outputs": [
+
+                                    {
+
+                                                    "internalType": "string",
+
+                                                    "name": "",
+
+                                                    "type": "string"
+
+                                    }
+
+                    ],
+
+                    "stateMutability": "pure",
+
+                    "type": "function"
+
     },
+
     {
-      "inputs": [
-        {
-          "internalType": "address payable",
-          "name": "_to",
-          "type": "address"
-        }
-      ],
-      "name": "destroyContract",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
+
+                    "inputs": [
+
+                                    {
+
+                                                    "internalType": "address payable",
+
+                                                    "name": "_to",
+
+                                                    "type": "address"
+
+                                    }
+
+                    ],
+
+                    "name": "destroyContract",
+
+                    "outputs": [],
+
+                    "stateMutability": "nonpayable",
+
+                    "type": "function"
+
     },
+
     {
-      "inputs": [],
-      "name": "diabetic",
-      "outputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
+
+                    "inputs": [],
+
+                    "name": "diabetic",
+
+                    "outputs": [
+
+                                    {
+
+                                                    "internalType": "address",
+
+                                                    "name": "",
+
+                                                    "type": "address"
+
+                                    }
+
+                    ],
+
+                    "stateMutability": "view",
+
+                    "type": "function"
+
     },
+
     {
-      "inputs": [
-        {
-          "internalType": "bytes32",
-          "name": "_requestId",
-          "type": "bytes32"
-        },
-        {
-          "internalType": "uint256",
-          "name": "_value",
-          "type": "uint256"
-        }
-      ],
-      "name": "fulfill",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
+
+                    "inputs": [
+
+                                    {
+
+                                                    "internalType": "bytes32",
+
+                                                    "name": "_requestId",
+
+                                                    "type": "bytes32"
+
+                                    },
+
+                                    {
+
+                                                    "internalType": "uint256",
+
+                                                    "name": "_value",
+
+                                                    "type": "uint256"
+
+                                    }
+
+                    ],
+
+                    "name": "fulfill",
+
+                    "outputs": [],
+
+                    "stateMutability": "nonpayable",
+
+                    "type": "function"
+
     },
+
     {
-      "inputs": [],
-      "name": "getBalance",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
+
+                    "inputs": [],
+
+                    "name": "getBalance",
+
+                    "outputs": [
+
+                                    {
+
+                                                    "internalType": "uint256",
+
+                                                    "name": "",
+
+                                                    "type": "uint256"
+
+                                    }
+
+                    ],
+
+                    "stateMutability": "view",
+
+                    "type": "function"
+
     },
+
     {
-      "inputs": [],
-      "name": "lastFulfill",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
+
+                    "inputs": [],
+
+                    "name": "lastFulfill",
+
+                    "outputs": [
+
+                                    {
+
+                                                    "internalType": "uint256",
+
+                                                    "name": "",
+
+                                                    "type": "uint256"
+
+                                    }
+
+                    ],
+
+                    "stateMutability": "view",
+
+                    "type": "function"
+
     },
+
     {
-      "inputs": [],
-      "name": "lastTimeRange",
-      "outputs": [
-        {
-          "internalType": "string",
-          "name": "",
-          "type": "string"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
+
+                    "inputs": [],
+
+                    "name": "lastTimeRange",
+
+                    "outputs": [
+
+                                    {
+
+                                                    "internalType": "string",
+
+                                                    "name": "",
+
+                                                    "type": "string"
+
+                                    }
+
+                    ],
+
+                    "stateMutability": "view",
+
+                    "type": "function"
+
     },
+
     {
-      "inputs": [],
-      "name": "payer",
-      "outputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
+
+                    "inputs": [],
+
+                    "name": "payer",
+
+                    "outputs": [
+
+                                    {
+
+                                                    "internalType": "address",
+
+                                                    "name": "",
+
+                                                    "type": "address"
+
+                                    }
+
+                    ],
+
+                    "stateMutability": "view",
+
+                    "type": "function"
+
     },
+
     {
-      "inputs": [
-        {
-          "internalType": "string",
-          "name": "timeRange",
-          "type": "string"
-        }
-      ],
-      "name": "requestProofOfA1C",
-      "outputs": [
-        {
-          "internalType": "bytes32",
-          "name": "requestId",
-          "type": "bytes32"
-        }
-      ],
-      "stateMutability": "nonpayable",
-      "type": "function"
+
+                    "inputs": [
+
+                                    {
+
+                                                    "internalType": "string",
+
+                                                    "name": "timeRange",
+
+                                                    "type": "string"
+
+                                    }
+
+                    ],
+
+                    "name": "requestProofOfA1C",
+
+                    "outputs": [
+
+                                    {
+
+                                                    "internalType": "bytes32",
+
+                                                    "name": "requestId",
+
+                                                    "type": "bytes32"
+
+                                    }
+
+                    ],
+
+                    "stateMutability": "nonpayable",
+
+                    "type": "function"
+
     },
+
     {
-      "inputs": [
-        {
-          "internalType": "address payable",
-          "name": "_to",
-          "type": "address"
-        }
-      ],
-      "name": "rewardDiabetic",
-      "outputs": [],
-      "stateMutability": "payable",
-      "type": "function"
+
+                    "inputs": [
+
+                                    {
+
+                                                    "internalType": "address payable",
+
+                                                    "name": "_to",
+
+                                                    "type": "address"
+
+                                    }
+
+                    ],
+
+                    "name": "rewardDiabetic",
+
+                    "outputs": [],
+
+                    "stateMutability": "payable",
+
+                    "type": "function"
+
     },
+
     {
-      "inputs": [],
-      "name": "totalRewarded",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
+
+                    "inputs": [],
+
+                    "name": "totalRewarded",
+
+                    "outputs": [
+
+                                    {
+
+                                                    "internalType": "uint256",
+
+                                                    "name": "",
+
+                                                    "type": "uint256"
+
+                                    }
+
+                    ],
+
+                    "stateMutability": "view",
+
+                    "type": "function"
+
     },
+
     {
-      "inputs": [],
-      "name": "urlUsed",
-      "outputs": [
-        {
-          "internalType": "string",
-          "name": "",
-          "type": "string"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
+
+                    "inputs": [],
+
+                    "name": "urlUsed",
+
+                    "outputs": [
+
+                                    {
+
+                                                    "internalType": "string",
+
+                                                    "name": "",
+
+                                                    "type": "string"
+
+                                    }
+
+                    ],
+
+                    "stateMutability": "view",
+
+                    "type": "function"
+
     },
+
     {
-      "inputs": [
-        {
-          "internalType": "address payable",
-          "name": "_to",
-          "type": "address"
-        }
-      ],
-      "name": "withdrawLink",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
+
+                    "inputs": [
+
+                                    {
+
+                                                    "internalType": "address payable",
+
+                                                    "name": "_to",
+
+                                                    "type": "address"
+
+                                    }
+
+                    ],
+
+                    "name": "withdrawLink",
+
+                    "outputs": [],
+
+                    "stateMutability": "nonpayable",
+
+                    "type": "function"
+
     },
+
     {
-      "stateMutability": "payable",
-      "type": "receive"
+
+                    "stateMutability": "payable",
+
+                    "type": "receive"
+
     }
-  ]
+
+]
 }
   

@@ -25,7 +25,7 @@ export default function ContractNew() {
 
     try {
       const accounts = await web3.eth.requestAccounts();
-      console.log(accounts);
+      console.log("deployer: " + accounts[0]);
       const result = await factory.methods
         .createProofOfA1C()
         .send({
@@ -35,7 +35,7 @@ export default function ContractNew() {
         const getContractAddress = await factory.methods.
         diabeticAddresses(accounts[0]).call();
 
-        console.log(getContractAddress);
+        console.log("contract address: " + getContractAddress);
 
         // look up deployed Contracts
         // create user upon successful contract deployment
