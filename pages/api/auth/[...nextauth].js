@@ -24,8 +24,8 @@ export default NextAuth({
         // TODO this needs to be cleaned up
         return {
           id: '1',
-          name: 'Test user',
-          email: 'test@test.com',
+          name: 'Alejandro E. Marquez',
+          email: 'proofofa1c@gmail.com',
           image: null
         }
       },
@@ -54,7 +54,7 @@ export default NextAuth({
                 grant_type: 'authorization_code',
                 redirect_uri: process.env.DEXCOM_REDIRECT,
             }),
-        };
+          };
           const tokens = await axios(options).catch( (e) => {
             console.log(e.message);
           });

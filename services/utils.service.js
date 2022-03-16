@@ -2,14 +2,12 @@ import crypto from 'crypto';
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 const Web3 = require('web3');
 
-const compiledFactory = require('../ethereum/build/ProofOfA1CFactory.json');
 const compiledProofOfA1C = require('../ethereum/build/ProofOfA1C.json');
 
 export const utilsService = {
     encryptTokens,
     decryptToken,
     sendChain,
-    // rewardDiabetic,
     requestProofOfA1C,
     sendEth,
     connectWallet
@@ -61,8 +59,6 @@ async function requestProofOfA1C(address, lastA1C, web3){
   const result = await proof_of_a1c.methods.requestProofOfA1C(lastA1C).send
     ({ from: accounts[0], gas: '1000000' });
 
-  console.log('Requested proof of a1c', result);
-
 }
 
 async function sendEth(contractAddress, web3){
@@ -70,34 +66,9 @@ async function sendEth(contractAddress, web3){
 
   const accounts = await web3.eth.getAccounts();
 
-  let sentEth = await web3.eth.sendTransaction({from:accounts[0],to:contractAddress, 
-    value:web3.utils.toWei("0.001", "ether")});
-
-    console.log("sent eth to contract: " + sentEth);
-    if (sentEth.result){
-      console.log(sentEth.result);
-    }
-    if (sentEth.result && sentEth.result.options){
-      console.log(sentEth.result.options);
-    }
-    if (sentEth.options){
-      console.log(sentEth.options);
-    }
+  await web3.eth.sendTransaction({ from:accounts[0], to: contractAddress, 
+    value: web3.utils.toWei("0.001", "ether")});
 }
-
-// async function rewardDiabetic(contractAddress, web3) {
-//   console.log ("reward diabetic");
-
-//   const proof_of_a1c = await getContract(contractAddress, web3);
-
-//   const accounts = await web3.eth.getAccounts();
-
-//   const result = await proof_of_a1c.methods.rewardDiabetic().send
-//     ({ from: accounts[0], gas: '1000000' });
-
-//   console.log('Diabetic rewarded if eGV below 154', result);
-// }
-// need to set up wallet for connecting
 async function connectWallet(){
   const provider = new HDWalletProvider({
     mnemonic: {
@@ -146,12 +117,12 @@ async function sendChain(toAddress, web3){
         "type": "function"
     }
   ];
-  // critical: this corresponds to a 0.01 CHAINLINK fee
+  // this corresponds to a 0.01 CHAINLINK fee
   let value = amount.mul(web3.utils.toBN(10).pow(decimals));
   const accounts = await web3.eth.getAccounts();
   let chainContract = await new web3.eth.Contract(minABI, tokenAddress);
   const result = await chainContract.methods.transfer(toAddress, value).
-  send({
-        from: accounts[0]
-  });
+    send({
+          from: accounts[0]
+    });
 }

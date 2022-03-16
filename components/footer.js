@@ -12,6 +12,10 @@ export default function Footer() {
         <li className={styles.navItem}>
           <a href="https://dromarquez.com">AEM</a>
         </li>
+        {/* TODO: Bryan portfolio etc */}
+        <li className={styles.navItem}>
+          <a href="https://brianmurren.com">BM</a>
+        </li>
         <li className={styles.navItem}>
           <Link href="/about">
             <a>About</a>

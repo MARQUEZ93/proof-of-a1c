@@ -22,10 +22,9 @@ async function getDataRange(doc, decryptedAccessToken) {
         return result.data.egvs;
     } catch (err) {
       console.log(err);
-        // need to refresh token(s)
-        if (err.response.status === 401){
-            getNewTokens(doc);
-        }
+      if (err.response.status === 401){
+        getNewTokens(doc);
+      }
     }
 };
 async function getStats(decryptedAccessToken, startDate, endDate) {
@@ -72,29 +71,26 @@ async function getStats(decryptedAccessToken, startDate, endDate) {
               },
             ]
           };
-        const options = {
-            method: 'post',
-            url: `${process.env.DEXCOM_API}/v2/users/self/statistics`,
-            headers: { 
-                Authorization: `Bearer ${decryptedAccessToken}`
-            },
-            params: { startDate, endDate },
-            data: requestBody
-        };
-        const result = await axios(options);
-        return result.data;
+      const options = {
+        method: 'post',
+        url: `${process.env.DEXCOM_API}/v2/users/self/statistics`,
+        headers: { 
+            Authorization: `Bearer ${decryptedAccessToken}`
+        },
+        params: { startDate, endDate },
+        data: requestBody
+      };
+      const result = await axios(options);
+      return result.data;
     } catch (err) {
         console.log(err.data);
         console.log(err);
-        // need to refresh token(s)
         if (err.response.status === 401){
             getNewTokens(doc);
         }
     }
 };
-// save to the user - ensure post.save runs again
 async function getNewTokens(doc) {
-  console.log("hit gnt");
     const decryptedRefreshToken = await utilsService.decryptToken(doc.refresh_token_content, doc.refresh_token_iv);
     try {
         const bodyFormData = new FormData();
@@ -113,7 +109,6 @@ async function getNewTokens(doc) {
             data: bodyFormData
         };
         const response = await axios(options);
-        console.log(response.data);
         const encryptedTokens = utilsService.encryptTokens(response.data);
 
         doc.access_token_content = encryptedTokens.accessToken.content;
@@ -124,5 +119,4 @@ async function getNewTokens(doc) {
     } catch (err){
         console.log(err);
     }
-    //TODO prevent infinite loops that break their API etc
 };

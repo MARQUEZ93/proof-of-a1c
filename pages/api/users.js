@@ -25,7 +25,10 @@ export default async function handler (req, res) {
             access_token_iv: token.accessToken.iv,
             contract: req.body.contract
         });
-        res.status(200).json({ success: true, data: user });
+        res.status(200).json({ success: true, data: { 
+          address: user.address, 
+          contract: user.contract
+        }});
       } catch (error) {
         res.status(401).json({ success: false });
       }

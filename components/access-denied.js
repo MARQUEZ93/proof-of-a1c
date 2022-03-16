@@ -11,7 +11,7 @@ export default function AccessDenied () {
              signIn()
             }
           }>
-          You must be signed in to view this page
+          You must be connected to Dexcom to view this page
         </a>
       </p>
     </>

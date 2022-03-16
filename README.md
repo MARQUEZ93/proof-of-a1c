@@ -1,10 +1,8 @@
 # Proof of A1C
 Record blood sugar. Reward healthy blood sugar
 
-# Development
+# User
 
-1) Install Metamask on your CPU. 
-2) Switch network to Rinkeby Test Network 
-3) Acquire test rinkeby: https://faucets.chain.link/
-4) Setup your .env file w/ me (talking to you, Bryan)
-4) npm i; npm run dev (I'll probably have to ensure you have LTS version(s) of node/npm enabled)
+1) Must be a dexcom user w/ a username/password
+2) Connect their MetaMask wallet to the Rinkeby Test Network
+3) Deploy contract! User pays for their own gas fee(s)
