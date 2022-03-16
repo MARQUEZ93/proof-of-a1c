@@ -8,17 +8,17 @@ contract ProofOfA1CFactory {
     mapping(address => bool) public diabetics;
     mapping(address => address) public diabeticAddresses;
 
-    address public provider;
-    string public endpoint; 
+    address public payer;
+    string public api; 
 
     constructor(string memory url) {
-        provider = msg.sender;
-        endpoint = url; 
+        payer = msg.sender;
+        api = url; 
     }
     function createProofOfA1C() public {
         //TODO for final contract, uncomment
         // require(!diabetics[msg.sender]);
-        ProofOfA1C newProofOfA1C = new ProofOfA1C(provider, msg.sender, endpoint);
+        ProofOfA1C newProofOfA1C = new ProofOfA1C(payer, msg.sender, api);
         deployedContracts.push(address(newProofOfA1C));
         diabeticAddresses[msg.sender] = address(newProofOfA1C); 
         diabetics[msg.sender] = true;
@@ -27,14 +27,15 @@ contract ProofOfA1CFactory {
         return deployedContracts;
     }
     function destroyContract(address payable _to) public {
-        require(msg.sender == provider, "You are not the owner");
+        require(msg.sender == payer, "You are not the owner");
         selfdestruct(_to);
     }
 }
 
 contract ProofOfA1C is ChainlinkClient {
     using Chainlink for Chainlink.Request;
-    address public diabetic;
+    address public diabetic; 
+    address payable public payableDiabetic;
     address public payer;
 
     uint256 public a1c;
@@ -45,11 +46,13 @@ contract ProofOfA1C is ChainlinkClient {
     string public urlUsed;
 
     uint256 public totalRewarded;
+    bool public allowedToReward; 
 
     constructor(address factory, address deployer, string memory endpointUrl) {
         setPublicChainlinkToken();
         payer = factory;
-        diabetic = deployer;
+        diabetic = deployer; 
+        payableDiabetic = payable(deployer);
         api = endpointUrl;
     }
     function concatenate(string memory a,string memory b, string memory c, string memory d) public pure returns (string memory){
@@ -66,11 +69,9 @@ contract ProofOfA1C is ChainlinkClient {
         }
         return string(s);
     }
-
     function char(bytes1 b) internal pure returns (bytes1 c) {
         if (uint8(b) < 10) return bytes1(uint8(b) + 0x30);
         else return bytes1(uint8(b) + 0x57);
-    
     }
     function requestProofOfA1C(string memory timeRange) public onlyPayer returns (bytes32 requestId) {
         Chainlink.Request memory request = buildChainlinkRequest("3b7ca0d48c7a4b2da9268456665d11ae", address(this), this.fulfill.selector);
@@ -87,12 +88,15 @@ contract ProofOfA1C is ChainlinkClient {
     function fulfill(bytes32 _requestId, uint256 _value) public recordChainlinkFulfillment(_requestId) {
         a1c = _value;
         lastFulfill = block.timestamp;
+        if (_value < 154){
+            allowedToReward = true; 
+            rewardDiabetic();
+        }
     }
     modifier onlyPayer() {
         require(msg.sender == payer);
         _;
     }
-
     function destroyContract(address payable _to) public onlyPayer{
         selfdestruct(_to);
     }
@@ -105,10 +109,12 @@ contract ProofOfA1C is ChainlinkClient {
         LinkTokenInterface link = LinkTokenInterface(chainlinkTokenAddress());
         require(link.transfer(_to, link.balanceOf(address(this))), "Unable to transfer");
     }
-     function rewardDiabetic(address payable _to) public payable onlyPayer {
+    function rewardDiabetic() public payable {
+        require(allowedToReward);
         require(a1c < 154);
         totalRewarded+=getBalance();
-        (bool sent, bytes memory data) = _to.call{value: getBalance()}("");
+        (bool sent, bytes memory data) = payableDiabetic.call{value: getBalance()}("");
         require(sent, "Failed to send Ether");
+        allowedToReward = false; 
     }
 }

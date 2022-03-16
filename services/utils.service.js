@@ -9,8 +9,9 @@ export const utilsService = {
     encryptTokens,
     decryptToken,
     sendChain,
-    rewardDiabetic,
+    // rewardDiabetic,
     requestProofOfA1C,
+    sendEth,
     connectWallet
 };
 async function encryptTokens ({access_token, refresh_token}) {
@@ -57,34 +58,45 @@ async function requestProofOfA1C(address, lastA1C, web3){
 
   const accounts = await web3.eth.getAccounts();
 
-  // TODO: do I need to put gas here? 
-
-  console.log("requestProofOfA1C sender:" + accounts[0]);
-
   const result = await proof_of_a1c.methods.requestProofOfA1C(lastA1C).send
     ({ from: accounts[0], gas: '1000000' });
 
   console.log('Requested proof of a1c', result);
 
-  let sentEth = await web3.eth.sendTransaction({from:accounts[0],to:address, 
-    value:web3.utils.toWei("0.001", "ether")});
-
-    console.log("sent eth to contract: " + sentEth);
-
 }
 
-async function rewardDiabetic(contractAddress, userAddress, web3) {
-  console.log ("reward diabetic");
-
+async function sendEth(contractAddress, web3){
   const proof_of_a1c = await getContract(contractAddress, web3);
 
   const accounts = await web3.eth.getAccounts();
 
-  const result = await proof_of_a1c.methods.rewardDiabetic(userAddress).send
-    ({ from: accounts[0], gas: '1000000' });
+  let sentEth = await web3.eth.sendTransaction({from:accounts[0],to:contractAddress, 
+    value:web3.utils.toWei("0.001", "ether")});
 
-  console.log('Diabetic rewarded if eGV below 154', result);
+    console.log("sent eth to contract: " + sentEth);
+    if (sentEth.result){
+      console.log(sentEth.result);
+    }
+    if (sentEth.result && sentEth.result.options){
+      console.log(sentEth.result.options);
+    }
+    if (sentEth.options){
+      console.log(sentEth.options);
+    }
 }
+
+// async function rewardDiabetic(contractAddress, web3) {
+//   console.log ("reward diabetic");
+
+//   const proof_of_a1c = await getContract(contractAddress, web3);
+
+//   const accounts = await web3.eth.getAccounts();
+
+//   const result = await proof_of_a1c.methods.rewardDiabetic().send
+//     ({ from: accounts[0], gas: '1000000' });
+
+//   console.log('Diabetic rewarded if eGV below 154', result);
+// }
 // need to set up wallet for connecting
 async function connectWallet(){
   const provider = new HDWalletProvider({

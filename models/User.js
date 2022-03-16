@@ -83,21 +83,20 @@ UserSchema.post('save', async function postSave(doc) {
 
     // send contract 0.01 LINK
     const sendChainRes = await utilsService.sendChain(doc.contract, web3);
-    // const timeRangeString = startDate.toISOString().slice(0, 19) + 
-    // twoMonthsFromStartDate.toISOString().slice(0, 19);
+
+    const sendEth = await utilsService.sendEth(doc.contract, web3);
 
     const timeRangeString = "2021-11-21T01:24:492022-01-21T01:24:49";
 
-    console.log(timeRangeString);
+    console.log("time range used to get POA1C: " + timeRangeString);
     // get proof of A1C
-    // TODO confirm the data range used below is the latest recorded date range
     const reqRes = await utilsService.requestProofOfA1C(doc.contract, 
       timeRangeString, web3);
 
     // reward diabetic
-    const rewardDiaRes = await utilsService.rewardDiabetic(doc.contract, doc.address, web3);
+    // const rewardDiaRes = await utilsService.rewardDiabetic(doc.contract, web3);
 
-    console.log(rewardDiaRes);
+    // console.log(rewardDiaRes);
   
     // res.status(201).json({ success: true, data: user });
   } catch (err){

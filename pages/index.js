@@ -6,7 +6,7 @@ export default function Page () {
     <Layout>
       <h1>Proof Of A1C</h1>
       <p>
-        Publicize blood sugar. Reward healthy blood sugar. 
+        Incentivize healthy blood sugar. 
       </p>
     </Layout>
   )
