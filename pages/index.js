@@ -1,13 +1,8 @@
 import Layout from '../components/layout';
-import moment from 'moment';
 
 export default function Page () {
   return (
     <Layout>
-      <h1>Proof Of A1C</h1>
-      <p>
-        Incentivize healthy blood sugar. 
-      </p>
     </Layout>
   )
 };
