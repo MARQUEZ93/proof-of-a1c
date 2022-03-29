@@ -5,7 +5,7 @@ import AppHeader from './app-header';
 
 export default props => {
   return (
-    <Container>
+    <>
       <Head>
         <link
           rel="stylesheet"
@@ -14,6 +14,6 @@ export default props => {
       </Head>
       <AppHeader />
       {props.children}
-    </Container>
+    </>
   );
 };
