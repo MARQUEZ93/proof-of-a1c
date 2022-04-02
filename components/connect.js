@@ -72,7 +72,6 @@ export default function connect() {
     setChainId();
     setNetwork("");
     setMessage("");
-    setSignature("");
     setVerified(undefined);
   };
 
@@ -117,14 +116,17 @@ export default function connect() {
     }
   }, [provider]);
 
-  return ( <div>
-          {!account ? (
-            <Button onClick={connectWallet}>Connect</Button>
-          ) : (
-            <Button onClick={disconnect}>Disconnect</Button>
-          )}
-            <Header>{`Account: ${account}`}</Header>
-          <Header>{`Connected to: Ethereum ${networkName ? networkName.charAt(0).toUpperCase() + networkName.slice(1) : "No Network"}`}</Header>
+  return ( <div style={{display: 'flex', flexDirection: 'column' }}>
+            {!account ? (
+                <Button as='a' circular onClick={connectWallet}>Connect</Button>
+            ) : (
+                <>
+                    <span>{`Account: ${account}`}</span>
+                    <span>{`Connected to: Ethereum ${networkName ? networkName.charAt(0).toUpperCase() 
+                        + networkName.slice(1) : "No Network"}`}</span>
+                    <Button as='a' circular onClick={disconnect}>Disconnect</Button>
+                </>
+            )}
         </div>
   );
 }

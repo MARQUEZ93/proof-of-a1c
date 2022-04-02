@@ -5,6 +5,8 @@ import { createMedia } from '@artsy/fresnel'
 import PropTypes from 'prop-types'
 import React, { Component } from 'react';
 import Connect from './connect';
+import { RiShieldCrossLine } from 'react-icons/ri';
+import { IconContext } from "react-icons";
 import {
   Button,
   Container,
@@ -97,16 +99,29 @@ class DesktopContainer extends Component {
               size='large'
             >
               <Container>
-                <Menu.Item as='a' active>
+                <Menu.Item position='left'>
+                  <div style={{display: 'flex', flexDirection: 'column'}}>
+                    <Header as='h1' style={{textTransform: 'uppercase'}}>
+                      Proof
+                    </Header>
+                    <Header as='h1' style={{textTransform: 'uppercase', marginTop: '-15px'}}>
+                      Of A1C
+                    </Header>
+                  </div>
+                  <span as='h5' style={{color: "#7fe5ff", fontWeight: '100'}}>beta</span>
+                  <IconContext.Provider value={{ color: "#00ccff", className: "global-class-name"}}>
+                    <Header as='h1' style={{}}>
+                      <RiShieldCrossLine />
+                    </Header>
+                  </IconContext.Provider>
+                </Menu.Item>
+                <Menu.Item as='a' active position='right'>
                   Home
                 </Menu.Item>
-                <Menu.Item as='a'>Work</Menu.Item>
-                <Menu.Item as='a'>Company</Menu.Item>
-                <Menu.Item as='a'>Careers</Menu.Item>
+                <Menu.Item position='right' as='a'>Why</Menu.Item>
+                <Menu.Item position='right' as='a'>How</Menu.Item>
+                <Menu.Item position='right' as='a'>Leaderboard</Menu.Item>
                 <Menu.Item position='right'>
-                  <Button as='a' circular>
-                    Connect
-                  </Button>
                   <Connect />
                 </Menu.Item>
               </Container>
@@ -149,11 +164,9 @@ class MobileContainer extends Component {
             <Menu.Item as='a' active>
               Home
             </Menu.Item>
-            <Menu.Item as='a'>Work</Menu.Item>
-            <Menu.Item as='a'>Company</Menu.Item>
-            <Menu.Item as='a'>Careers</Menu.Item>
-            <Menu.Item as='a'>Log in</Menu.Item>
-            <Menu.Item as='a'>Sign Up</Menu.Item>
+            <Menu.Item as='a'>Why</Menu.Item>
+            <Menu.Item as='a'>How</Menu.Item>
+            <Menu.Item as='a'>Leaderboard</Menu.Item>
           </Sidebar>
 
           <Sidebar.Pusher dimmed={sidebarOpened}>
