@@ -95,53 +95,35 @@ HomepageHeading.propTypes = {
 class DesktopContainer extends Component {
   state = {}
 
-  hideFixedMenu = () => this.setState({ fixed: false })
+  hideFixedMenu = () => this.setState({ fixed: true })
   showFixedMenu = () => this.setState({ fixed: true })
 
   render() {
-    const { children } = this.props
-    const { fixed } = this.state
+    const { children } = this.props;
+    const { fixed } = this.state;
 
     return (
       <Media greaterThan='mobile'>
         <Visibility
           once={false}
-          onBottomPassed={this.showFixedMenu}
-          onBottomPassedReverse={this.hideFixedMenu}
         >
-          <Segment
-            textAlign='center'
-            style={{ minHeight: 700, padding: '1em 0em' }}
-            vertical
-          >
             <Menu
-              fixed={fixed ? 'top' : null}
+              fixed='top'
               // pointing={!fixed}
               // secondary={!fixed}
               secondary={true}  
               size='large'
+              style={{paddingTop: '25px', paddingLeft: '-25px', width: '100%', zIndex: '100', backgroundColor: 'white'}}
             >
-              <Container style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center',
-                padding: '0px', position: 'absolute'}}>
+              <Container style={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center',
+                 zIndex: '101'}}>
                 <Menu.Item header position='left'>
-                  <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-end'}}>
-                    <Header as='h1' style={{
-                      textTransform: 'uppercase', 
-                      fontFamily: 'DM Sans',
-                      fontStyle: 'normal',
-                      fontWeight: '700',
-                      fontSize: '48px',
-                      lineHeight: '32px',
-                      color: '#262626',
-                      margin: '0px 16px'
-                    }}>
-                      <IconContext.Provider value={{ color: "#1EC1F7", className: "global-class-name"}}>
-                        <RiShieldCrossLine />
-                      </IconContext.Provider>
-                      Proof of A1C
-                    </Header>
-                    <span as='h5' style={{color: "#68D5F9", fontWeight: '400', fontFamily: 'DM Sans'}}>beta</span>
-                  </div>
+                   <ImageNext
+                      src="/../public/SVG/Logo.svg"
+                      alt="Proof of A1C"
+                      width={458}
+                      height={39}
+                />
                 </Menu.Item>
                 <Menu.Menu position='right' style={{fontFamily: 'DM Sans', fontStyle: 'normal'}}>
                   <Menu.Item as='a'>Home</Menu.Item>
@@ -150,9 +132,6 @@ class DesktopContainer extends Component {
                 </Menu.Menu>
               </Container>
             </Menu>
-            <HomepageHeading />
-            <Connect />
-          </Segment>
         </Visibility>
 
         {children}
