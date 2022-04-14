@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useReducer, useCallback } from "react";
 
-import { ethers } from "ethers";
+import { ethers, providers } from "ethers";
 import Web3Modal from "web3modal";
 import { providerOptions } from "../ethereum/providerOptions";
 
@@ -19,114 +19,178 @@ import {
     Visibility,
   } from 'semantic-ui-react';
 
-// const web3Modal = new Web3Modal({
-//   cacheProvider: true, // optional
-//   providerOptions // required
-// });
+  let web3Modal;
+  if (typeof window !== 'undefined') {
+    web3Modal = new Web3Modal({
+      cacheProvider: true, // optional
+      network: "rinkeby", // optional
+      providerOptions // required
+    });
+  };
+
+  const StateType = {
+    provider: null, 
+    web3Provider:null,
+    address: '',
+    chainId: null
+  };
+  
+  const actionType = {
+    'SET_WEB3_PROVIDER': {
+        provider: StateType['provider'],
+        web3Provider: StateType['web3Provider'],
+        address: StateType['address'],
+        chainId: StateType['chainId']
+    }, 
+    'SET_ADDRESS': {
+      address: StateType['address']
+    }, 
+    'SET_CHAIN_ID': {
+      chainId: StateType['chainId']
+    }, 
+    'RESET_WEB3_PROVIDER': {}
+  };
+  
+  const initialState = {
+    provider: null,
+    web3Provider: null,
+    address: null,
+    chainId: null,
+  };
+  
+  function reducer(state, action) {
+    switch (action.type) {
+      case 'SET_WEB3_PROVIDER':
+        return {
+          ...state,
+          provider: action.provider,
+          web3Provider: action.web3Provider,
+          address: action.address,
+          chainId: action.chainId,
+        };
+      case 'SET_ADDRESS':
+        return {
+          ...state,
+          address: action.address,
+        };
+      case 'SET_CHAIN_ID':
+        return {
+          ...state,
+          chainId: action.chainId,
+        };
+      case 'RESET_WEB3_PROVIDER':
+        return initialState;
+      default:
+        throw new Error();
+    }
+  };
 
 export default function connect() {
-  const [provider, setProvider] = useState();
-  const [library, setLibrary] = useState();
-  const [account, setAccount] = useState();
-  const [error, setError] = useState("");
-  const [chainId, setChainId] = useState();
-  const [network, setNetwork] = useState();
-  const [message, setMessage] = useState("");
-  const [verified, setVerified] = useState();
-  const [web3Modal, setWeb3Modal] = useState();
-  const [networkName, setNetworkName] = useState("");
+  const [state, dispatch] = useReducer(reducer, initialState)
+  const { provider, web3Provider, address, chainId } = state;
 
-  const connectWallet = async () => {
-    try {
-        setWeb3Modal(new Web3Modal({
-            cacheProvider: true, // optional
-            providerOptions // required
-          }));
-      const provider = await web3Modal.connect();
-      const library = new ethers.providers.Web3Provider(provider);
-      console.log(library);
-      const accounts = await library.listAccounts();
-      const network = await library.getNetwork();
-      setNetworkName(network.name);
-      setProvider(provider);
-      setLibrary(library);
-      if (accounts) setAccount(accounts[0]);
-      setChainId(network.chainId);
-    } catch (error) {
-      setError(error);
-    }
-  };
+  const connect = useCallback(async function () {
+    // This is the initial `provider` that is returned when
+    // using web3Modal to connect. Can be MetaMask or WalletConnect.
+    const provider = await web3Modal.connect()
 
-  const handleNetwork = (e) => {
-    const id = e.target.value;
-    setNetwork(Number(id));
-  };
+    // We plug the initial `provider` into ethers.js and get back
+    // a Web3Provider. This will add on methods from ethers.js and
+    // event listeners such as `.on()` will be different.
+    const web3Provider = new providers.Web3Provider(provider)
 
-  const handleInput = (e) => {
-    const msg = e.target.value;
-    setMessage(msg);
-  };
+    const signer = web3Provider.getSigner()
+    const address = await signer.getAddress()
 
-  const refreshState = () => {
-    setAccount();
-    setChainId();
-    setNetwork("");
-    setMessage("");
-    setVerified(undefined);
-  };
+    const network = await web3Provider.getNetwork()
 
-  const disconnect = async () => {
-    await web3Modal.clearCachedProvider();
-    refreshState();
-  };
-
-  useEffect(() => {
-    if (web3Modal && web3Modal.cachedProvider) {
-      connectWallet();
-    }
+    dispatch({
+      type: 'SET_WEB3_PROVIDER',
+      provider,
+      web3Provider,
+      address,
+      chainId: network.chainId,
+    })
   }, []);
 
+  const disconnect = useCallback(
+    async function () {
+      await web3Modal.clearCachedProvider()
+      if (provider?.disconnect && typeof provider.disconnect === 'function') {
+        await provider.disconnect()
+      }
+      dispatch({
+        type: 'RESET_WEB3_PROVIDER',
+      })
+    },
+    [provider]
+  )
+
+  // Auto connect to the cached provider
+  useEffect(() => {
+    console.log(web3Modal);
+    if (web3Modal.cachedProvider) {
+      connect();
+    }
+  }, [connect])
+
+  // A `provider` should come with EIP-1193 events. We'll listen for those events
+  // here so that when a user switches accounts or networks, we can update the
+  // local React state with that new information.
   useEffect(() => {
     if (provider?.on) {
       const handleAccountsChanged = (accounts) => {
-        console.log("accountsChanged", accounts);
-        if (accounts) setAccount(accounts[0]);
-      };
+        // eslint-disable-next-line no-console
+        console.log('accountsChanged', accounts)
+        dispatch({
+          type: 'SET_ADDRESS',
+          address: accounts[0],
+        })
+      }
 
+      // https://docs.ethers.io/v5/concepts/best-practices/#best-practices--network-changes
       const handleChainChanged = (_hexChainId) => {
-        setChainId(_hexChainId);
-      };
+        window.location.reload()
+      }
 
-      const handleDisconnect = () => {
-        console.log("disconnect", error);
+      const handleDisconnect = (error) => {
+        // eslint-disable-next-line no-console
+        console.log('disconnect', error)
         disconnect();
-      };
+      }
 
-      provider.on("accountsChanged", handleAccountsChanged);
-      provider.on("chainChanged", handleChainChanged);
-      provider.on("disconnect", handleDisconnect);
+      provider.on('accountsChanged', handleAccountsChanged)
+      provider.on('chainChanged', handleChainChanged)
+      provider.on('disconnect', handleDisconnect)
 
+      // Subscription Cleanup
       return () => {
         if (provider.removeListener) {
-          provider.removeListener("accountsChanged", handleAccountsChanged);
-          provider.removeListener("chainChanged", handleChainChanged);
-          provider.removeListener("disconnect", handleDisconnect);
+          provider.removeListener('accountsChanged', handleAccountsChanged)
+          provider.removeListener('chainChanged', handleChainChanged)
+          provider.removeListener('disconnect', handleDisconnect)
         }
-      };
+      }
     }
-  }, [provider]);
+  }, [provider, disconnect])
 
-  return ( <div style={{display: 'flex', flexDirection: 'column' }}>
-            {!account ? (
-                <Button as='a' circular onClick={connectWallet}>Connect</Button>
+  return ( 
+  
+  <>
+            {!address ? (
+                <Button as='a' circular onClick={connect} style={{backgroundColor: '#1EC1F7', color: 'white'}}
+                >
+                  Connect
+                </Button>
             ) : (
                 <>
-                    <span>{`Account: ${account}`}</span>
-                    <span>{`Connected to: Ethereum ${networkName ? networkName.charAt(0).toUpperCase() 
-                        + networkName.slice(1) : "No Network"}`}</span>
+                    <span>{`Account: ${address}`}</span>
+                    {/* <span>{`Connected to: Ethereum ${networkName ? networkName.charAt(0).toUpperCase() 
+                        + networkName.slice(1) : "No Network"}`}</span> */}
+                        <span>{`Connected to: Ethereum ${chainId ? chainId : "No Network"}`}</span>
                     <Button as='a' circular onClick={disconnect}>Disconnect</Button>
                 </>
             )}
-        </div>
+  </>
   );
 }

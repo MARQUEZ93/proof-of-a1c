@@ -7,6 +7,8 @@ import React, { Component } from 'react';
 import Connect from './connect';
 import { RiShieldCrossLine } from 'react-icons/ri';
 import { IconContext } from "react-icons";
+import ImageNext from 'next/image';
+import "@fontsource/dm-sans";
 import {
   Button,
   Container,
@@ -20,6 +22,7 @@ import {
   Segment,
   Sidebar,
   Visibility,
+  BreadcrumbDivider,
 } from 'semantic-ui-react';
 
 const { MediaContextProvider, Media } = createMedia({
@@ -35,30 +38,49 @@ const { MediaContextProvider, Media } = createMedia({
  * components for such things.
  */
 const HomepageHeading = ({ mobile }) => (
-  <Container text>
-    <Header
-      as='h1'
-      content='Imagine-a-Company'
-      style={{
-        fontSize: mobile ? '2em' : '4em',
-        fontWeight: 'normal',
-        marginBottom: 0,
-        marginTop: mobile ? '1.5em' : '3em',
-      }}
-    />
-    <Header
-      as='h2'
-      content='Do whatever you want when you want to.'
-      style={{
-        fontSize: mobile ? '1.5em' : '1.7em',
-        fontWeight: 'normal',
-        marginTop: mobile ? '0.5em' : '1.5em',
-      }}
-    />
-    <Button primary size='huge'>
-      Get Started
-      <Icon name='right arrow' />
-    </Button>
+  <Container style={{display: 'flex', backgroundColor: '#FEFEFE'}}>
+      <div style={{width: '50%'}}>
+        <Header
+          as='h3'
+          // content='The healthy lifestyle platform for '
+          style={{
+            fontSize: mobile ? '2em' : '2.7em',
+            fontWeight: '700',
+            fontFamily: 'DM Sans',
+            fontStyle: 'normal',
+            lineHeight: '80px',
+            textAlign: 'center',
+            marginTop: mobile ? '1.5em' : '3em',
+          }}
+        > 
+          The healthy lifestyle platform for young adults
+        </Header>
+        <Header
+          as='h4'
+          content='Incentivize lower blood sugar* by earning Ethereum**'
+          style={{
+            fontSize: mobile ? '1.5em' : '1.3em',
+            fontWeight: 'normal',
+            fontFamily: 'DM Sans',
+            fontStyle: 'normal',
+            marginTop: mobile ? '0.5em' : '1.5em',
+          }}
+        />
+        <Header
+          as='h6'
+          style={{
+            fontSize: mobile ? '0.75em' : '1em',
+            fontWeight: 'normal',
+            fontFamily: 'DM Sans',
+            fontStyle: 'normal',
+            marginTop: mobile ? '0.5em' : '1.5em',
+          }}
+          content='*Use of this platform requires a Dexcom CGM System. **Ethereum Rinkeby Test Network'
+        />
+      </div>
+      <div style={{width: '50%'}}>
+        <ImageNext src="/lady_cgm.jpeg" alt="lady_with_cgm" width='475px' height='372px'/>
+      </div>
   </Container>
 )
 
@@ -94,39 +116,42 @@ class DesktopContainer extends Component {
           >
             <Menu
               fixed={fixed ? 'top' : null}
-              pointing={!fixed}
-              secondary={!fixed}
+              // pointing={!fixed}
+              // secondary={!fixed}
+              secondary={true}  
               size='large'
             >
-              <Container>
-                <Menu.Item position='left'>
-                  <div style={{display: 'flex', flexDirection: 'column'}}>
-                    <Header as='h1' style={{textTransform: 'uppercase'}}>
-                      Proof
+              <Container style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center',
+                padding: '0px', position: 'absolute'}}>
+                <Menu.Item header position='left'>
+                  <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-end'}}>
+                    <Header as='h1' style={{
+                      textTransform: 'uppercase', 
+                      fontFamily: 'DM Sans',
+                      fontStyle: 'normal',
+                      fontWeight: '700',
+                      fontSize: '48px',
+                      lineHeight: '32px',
+                      color: '#262626',
+                      margin: '0px 16px'
+                    }}>
+                      <IconContext.Provider value={{ color: "#1EC1F7", className: "global-class-name"}}>
+                        <RiShieldCrossLine />
+                      </IconContext.Provider>
+                      Proof of A1C
                     </Header>
-                    <Header as='h1' style={{textTransform: 'uppercase', marginTop: '-15px'}}>
-                      Of A1C
-                    </Header>
+                    <span as='h5' style={{color: "#68D5F9", fontWeight: '400', fontFamily: 'DM Sans'}}>beta</span>
                   </div>
-                  <span as='h5' style={{color: "#7fe5ff", fontWeight: '100'}}>beta</span>
-                  <IconContext.Provider value={{ color: "#00ccff", className: "global-class-name"}}>
-                    <Header as='h1' style={{}}>
-                      <RiShieldCrossLine />
-                    </Header>
-                  </IconContext.Provider>
                 </Menu.Item>
-                <Menu.Item as='a' active position='right'>
-                  Home
-                </Menu.Item>
-                <Menu.Item position='right' as='a'>Why</Menu.Item>
-                <Menu.Item position='right' as='a'>How</Menu.Item>
-                <Menu.Item position='right' as='a'>Leaderboard</Menu.Item>
-                <Menu.Item position='right'>
-                  <Connect />
-                </Menu.Item>
+                <Menu.Menu position='right' style={{fontFamily: 'DM Sans', fontStyle: 'normal'}}>
+                  <Menu.Item as='a'>Home</Menu.Item>
+                  <Menu.Item as='a'>Why</Menu.Item>
+                  <Menu.Item as='a'>How</Menu.Item>
+                </Menu.Menu>
               </Container>
             </Menu>
             <HomepageHeading />
+            <Connect />
           </Segment>
         </Visibility>
 
