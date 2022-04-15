@@ -7,7 +7,7 @@ import React, { Component } from 'react';
 import Connect from './connect';
 import { RiShieldCrossLine } from 'react-icons/ri';
 import { IconContext } from "react-icons";
-import ImageNext from 'next/image';
+import Image from 'next/image';
 import "@fontsource/dm-sans";
 import {
   Button,
@@ -16,7 +16,6 @@ import {
   Grid,
   Header,
   Icon,
-  Image,
   List,
   Menu,
   Segment,
@@ -38,11 +37,10 @@ const { MediaContextProvider, Media } = createMedia({
  * components for such things.
  */
 const HomepageHeading = ({ mobile }) => (
-  <Container style={{display: 'flex', backgroundColor: '#FEFEFE'}}>
+  <Container style={{display: 'flex'}}>
       <div style={{width: '50%'}}>
         <Header
           as='h3'
-          // content='The healthy lifestyle platform for '
           style={{
             fontSize: mobile ? '2em' : '2.7em',
             fontWeight: '700',
@@ -78,9 +76,9 @@ const HomepageHeading = ({ mobile }) => (
           content='*Use of this platform requires a Dexcom CGM System. **Ethereum Rinkeby Test Network'
         />
       </div>
-      <div style={{width: '50%'}}>
-        <ImageNext src="/lady_cgm.jpeg" alt="lady_with_cgm" width='475px' height='372px'/>
-      </div>
+      {/* <div style={{width: '50%'}}>
+        <Image src="/lady_cgm.jpeg" alt="lady_with_cgm" width='475px' height='372px'/>
+      </div> */}
   </Container>
 )
 
@@ -109,26 +107,26 @@ class DesktopContainer extends Component {
         >
             <Menu
               fixed='top'
-              // pointing={!fixed}
-              // secondary={!fixed}
               secondary={true}  
               size='large'
-              style={{paddingTop: '25px', paddingLeft: '-25px', width: '100%', zIndex: '100', backgroundColor: 'white'}}
+              style={{ paddingTop: '25px', paddingLeft: '-25px', width: '100%', 
+                backgroundColor: '#F1F1F1'}}
             >
-              <Container style={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center',
-                 zIndex: '101'}}>
+              <Container style={{ display: 'flex', flexDirection: 'row', 
+                alignItems: 'center'}}>
                 <Menu.Item header position='left'>
-                   <ImageNext
-                      src="/../public/SVG/Logo.svg"
+                   <Image
+                      src="/../public/SVG/logo.svg"
                       alt="Proof of A1C"
-                      width={458}
-                      height={39}
-                />
+                      width={400}
+                      height={26.8}
+                  />
                 </Menu.Item>
-                <Menu.Menu position='right' style={{fontFamily: 'DM Sans', fontStyle: 'normal'}}>
-                  <Menu.Item as='a'>Home</Menu.Item>
-                  <Menu.Item as='a'>Why</Menu.Item>
-                  <Menu.Item as='a'>How</Menu.Item>
+                <Menu.Menu position='right' style={{fontFamily: 'DM Sans', 
+                  fontStyle: 'normal'}}>
+                  <Menu.Item style={{color: 'black', cursor: 'pointer', fontWeight: 'bold'}}>Home</Menu.Item>
+                  <Menu.Item style={{color: '#262626', cursor: 'pointer'}}>Why</Menu.Item>
+                  <Menu.Item style={{color: '#262626', cursor: 'pointer'}}>How</Menu.Item>
                 </Menu.Menu>
               </Container>
             </Menu>
@@ -169,7 +167,7 @@ class MobileContainer extends Component {
               Home
             </Menu.Item>
             <Menu.Item as='a'>Why</Menu.Item>
-            <Menu.Item as='a'>How</Menu.Item>
+            <Menu.Item color={'blue'} as='a'>How</Menu.Item>
             <Menu.Item as='a'>Leaderboard</Menu.Item>
           </Sidebar>
 
@@ -223,32 +221,37 @@ ResponsiveContainer.propTypes = {
 
 const HomepageLayout = () => (
   <ResponsiveContainer>
-    <Segment style={{ padding: '8em 0em' }} vertical>
+    <Segment style={{ padding: '9em 0em', backgroundColor: '#F1F1F1' }} vertical>
       <Grid container stackable verticalAlign='middle'>
         <Grid.Row>
-          <Grid.Column width={8}>
-            <Header as='h3' style={{ fontSize: '2em' }}>
-              We Help Companies and Companions
+          <Grid.Column width={8} style={{paddingLeft: '8em'}}>
+            <Header as='h3' style={{ fontSize: '3em', textAlign: 'center' }}>
+              The healthy lifestyle platform for <span style={{color: '#1EC1F7'}}>young</span> adults
             </Header>
-            <p style={{ fontSize: '1.33em' }}>
-              We can give your company superpowers to do things that they never thought possible.
-              Let us delight your customers and empower your needs... through pure data analytics.
+            <p style={{ fontSize: '1.33em', textAlign: 'center'}}>
+              Incentivize lower blood sugar* by earning Ethereum**
             </p>
-            <Header as='h3' style={{ fontSize: '2em' }}>
-              We Make Bananas That Can Dance
-            </Header>
-            <p style={{ fontSize: '1.33em' }}>
-              Yes that's right, you thought it was the stuff of dreams, but even bananas can be
-              bioengineered.
+            <p style={{ fontSize: '0.8em', textAlign: 'center'}}>
+              *Use of this platform requires a Dexcom CGM device
             </p>
+            <p style={{ fontSize: '0.8em', textAlign: 'center'}}>
+              **Ethereum Rinkeby Test Network
+            </p>
+            <p style={{ 
+              fontFamily: 'DM Sans',
+              fontStyle: 'normal',
+              fontWeight: '200',
+              color: '#FEFEFE',
+              margin: 'auto', width: '50%',
+              transform: 'rotate(0.16deg)', 
+              fontSize: '1.2em', textAlign: 'center', backgroundColor: '#1EC1F7', 
+              borderRadius: '48px', color: 'white', border: '1px solid #FEFEFE', boxSizing: 'border-box'}}>
+              Connect Wallet
+            </p>
+            {/* <Connect style={{textAlign: 'center'}}/> */}
           </Grid.Column>
-          <Grid.Column floated='right' width={6}>
-            <Image bordered rounded size='large' src='/images/wireframe/white-image.png' />
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-          <Grid.Column textAlign='center'>
-            <Button size='huge'>Check Them Out</Button>
+          <Grid.Column floated='right' width={6} style={{}}>
+            <Image width="476" height="373" src='/../public/PNG/lady.png' />
           </Grid.Column>
         </Grid.Row>
       </Grid>
@@ -268,7 +271,7 @@ const HomepageLayout = () => (
               "I shouldn't have gone with their competitor."
             </Header>
             <p style={{ fontSize: '1.33em' }}>
-              <Image avatar src='/images/avatar/large/nan.jpg' />
+              {/* <Image avatar src='/images/avatar/large/nan.jpg' /> */}
               <b>Nan</b> Chief Fun Officer Acme Toys
             </p>
           </Grid.Column>

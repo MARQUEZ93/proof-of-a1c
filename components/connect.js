@@ -178,9 +178,10 @@ export default function connect() {
   
   <>
             {!address ? (
-                <Button as='a' circular onClick={connect} style={{backgroundColor: '#1EC1F7', color: 'white'}}
+                <Button as='a' circular onClick={connect} style={{ 
+                  backgroundColor: '#1EC1F7', textAlign: 'center', color: 'white' }}
                 >
-                  Connect
+                  Connect Wallet
                 </Button>
             ) : (
                 <>
