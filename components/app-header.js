@@ -55,7 +55,7 @@ const HomepageHeading = ({ mobile }) => (
         </Header>
         <Header
           as='h4'
-          content='Incentivize lower blood sugar* by earning Ethereum**'
+          content='Encourage lower blood sugar* by earning Ethereum**'
           style={{
             fontSize: mobile ? '1.5em' : '1.3em',
             fontWeight: 'normal',
@@ -229,26 +229,15 @@ const HomepageLayout = () => (
               The healthy lifestyle platform for <span style={{color: '#1EC1F7'}}>young</span> adults
             </Header>
             <p style={{ fontSize: '1.33em', textAlign: 'center'}}>
-              Incentivize lower blood sugar* by earning Ethereum**
+              Encourage lower blood sugar* by earning Ethereum**
             </p>
-            <p style={{ fontSize: '0.8em', textAlign: 'center'}}>
+            <p style={{ fontSize: '0.8em', textAlign: 'center', marginBottom: '-1px'}}>
               *Use of this platform requires a Dexcom CGM device
             </p>
             <p style={{ fontSize: '0.8em', textAlign: 'center'}}>
               **Ethereum Rinkeby Test Network
             </p>
-            <p style={{ 
-              fontFamily: 'DM Sans',
-              fontStyle: 'normal',
-              fontWeight: '200',
-              color: '#FEFEFE',
-              margin: 'auto', width: '50%',
-              transform: 'rotate(0.16deg)', 
-              fontSize: '1.2em', textAlign: 'center', backgroundColor: '#1EC1F7', 
-              borderRadius: '48px', color: 'white', border: '1px solid #FEFEFE', boxSizing: 'border-box'}}>
-              Connect Wallet
-            </p>
-            {/* <Connect style={{textAlign: 'center'}}/> */}
+            <Connect style={{textAlign: 'center'}}/>
           </Grid.Column>
           <Grid.Column floated='right' width={6} style={{}}>
             <Image width="476" height="373" src='/../public/PNG/lady.png' />

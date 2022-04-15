@@ -32,7 +32,8 @@ import {
     provider: null, 
     web3Provider:null,
     address: '',
-    chainId: null
+    chainId: null,
+    network: null
   };
   
   const actionType = {
@@ -40,7 +41,8 @@ import {
         provider: StateType['provider'],
         web3Provider: StateType['web3Provider'],
         address: StateType['address'],
-        chainId: StateType['chainId']
+        chainId: StateType['chainId'],
+        network: StateType['network']
     }, 
     'SET_ADDRESS': {
       address: StateType['address']
@@ -48,6 +50,9 @@ import {
     'SET_CHAIN_ID': {
       chainId: StateType['chainId']
     }, 
+    'SET_NETWORK': {
+      network: StateType['network']
+    },
     'RESET_WEB3_PROVIDER': {}
   };
   
@@ -56,6 +61,7 @@ import {
     web3Provider: null,
     address: null,
     chainId: null,
+    network: null
   };
   
   function reducer(state, action) {
@@ -67,6 +73,7 @@ import {
           web3Provider: action.web3Provider,
           address: action.address,
           chainId: action.chainId,
+          network: action.network
         };
       case 'SET_ADDRESS':
         return {
@@ -78,6 +85,11 @@ import {
           ...state,
           chainId: action.chainId,
         };
+      case 'SET_NETWORK':
+        return {
+          ...state,
+          network: action.network,
+        };
       case 'RESET_WEB3_PROVIDER':
         return initialState;
       default:
@@ -87,7 +99,7 @@ import {
 
 export default function connect() {
   const [state, dispatch] = useReducer(reducer, initialState)
-  const { provider, web3Provider, address, chainId } = state;
+  const { provider, web3Provider, address, chainId, network } = state;
 
   const connect = useCallback(async function () {
     // This is the initial `provider` that is returned when
@@ -110,6 +122,7 @@ export default function connect() {
       web3Provider,
       address,
       chainId: network.chainId,
+      network: network.name
     })
   }, []);
 
@@ -175,22 +188,43 @@ export default function connect() {
   }, [provider, disconnect])
 
   return ( 
-  
   <>
             {!address ? (
-                <Button as='a' circular onClick={connect} style={{ 
-                  backgroundColor: '#1EC1F7', textAlign: 'center', color: 'white' }}
+              <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                <span style={{color: '#1EC1F7', fontSize: '0.8em',}}>{'Rinkeby Test Network'}</span>
+                <div onClick={connect} style={{ 
+                  fontFamily: 'DM Sans',
+                  cursor: 'pointer',
+                  fontStyle: 'normal',
+                  fontWeight: '200',
+                  color: '#FEFEFE',
+                  margin: 'auto', width: '50%',
+                  transform: 'rotate(0.16deg)', 
+                  fontSize: '1.2em', textAlign: 'center', backgroundColor: '#1EC1F7', 
+                  borderRadius: '48px', border: '1px solid #FEFEFE', boxSizing: 'border-box'}}
                 >
                   Connect Wallet
-                </Button>
+                </div>
+                </div>
             ) : (
-                <>
-                    <span>{`Account: ${address}`}</span>
-                    {/* <span>{`Connected to: Ethereum ${networkName ? networkName.charAt(0).toUpperCase() 
-                        + networkName.slice(1) : "No Network"}`}</span> */}
-                        <span>{`Connected to: Ethereum ${chainId ? chainId : "No Network"}`}</span>
-                    <Button as='a' circular onClick={disconnect}>Disconnect</Button>
-                </>
+                <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                  <span style={{color: '#1EC1F7', fontSize: '0.8em'}}>{`${
+                    network.charAt(0).toUpperCase() 
+                    + network.slice(1)} Test Network (${address.slice(0, 5)}...${address.slice(38)})`}</span>
+                  <div onClick={disconnect} style={{ 
+                    fontFamily: 'DM Sans',
+                    cursor: 'pointer',
+                    fontStyle: 'normal',
+                    fontWeight: '200',
+                    color: '#1EC1F7',
+                    margin: 'auto', width: '50%',
+                    transform: 'rotate(0.16deg)', 
+                    fontSize: '1.2em', textAlign: 'center', backgroundColor: '#FEFEFE', 
+                    borderRadius: '48px', border: '1px solid #1EC1F7', boxSizing: 'border-box'}}
+                  >
+                    Disconnect Wallet
+                  </div>
+                </div>
             )}
   </>
   );
