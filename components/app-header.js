@@ -223,14 +223,16 @@ ResponsiveContainer.propTypes = {
 }
 
 const descriptions = {
-  "why": "Each time you go for a run, walk after a meal or pass up a pizza, you work towards lowering your blood sugar. With Proof of A1C, every month you achieve a safe blood sugar, you will be rewarded Etheruem.",
+  "why": "Each time you go for a run, walk after a meal or pass up a pizza, you work towards lowering your blood sugar. With Proof of A1C, every month you achieve a safe blood sugar, you will be rewarded Ethereum.",
   "exist": "Insurance companies currently incentivize healthy behavior with points for lower premiums. Our idea is to incentivize with an appreciating digital asset. Preventitive care (lowering your blood sugar) improves long term health outcomes & reduces health care costs. Both the plan-member & the provider benefit! ",
   "next": "We believe Proof of A1C can provide a service between insurance providers and their plan members. By creating a smart contract between them, the provider can monitor the plan-member's blood sugar & reward them when they maintain a safe level."
 };
 
 const howDescriptions = {
   "connect": "Allow your wallet and the Proof of A1C platform to interact with each other. This creates the initial connection between you and the blood sugar data submitted by Dexcom.",
-  "authenticate": "Authentication allows Proof of A1C to query your Dexcom CGM System for your most recent blood sugar level."
+  "authenticate": "Authentication provides Proof of A1C the necessary authentication tokens to query your Dexcom CGM System. Every month, these tokens are used to record your blood sugar average. This recording is used by the smart contract you deploy in the next step.",
+  "deploy": "Grant Proof of A1C the ability to make the transaction of submitting your blood sugar data to the blockchain. The smart contract is the agreement that if your blood sugar is below a certain value, Ethereum is rewarded.",
+  "explain": "Every month your most recent blood sugar is submitted to the blockchain. When that number reads at a level deemed safe by medical profesisonals - you are rewarded Ethereum!"
 }
 
 const HomepageLayout = () => (
@@ -279,32 +281,23 @@ const HomepageLayout = () => (
       <Segment style={{ width: '75%', margin: 'auto', padding: '0em', 
         backgroundColor: '#F1F1F1', borderTop: '2px solid #FEFEFE'}} vertical>
           <div style={{paddingTop: '3em'}}>
-          <p style={{ fontSize: '1.1em', textAlign: 'left', fontWeight: 'bold'}}>
-                                {'Can I try it out?'}
-          </p>
-          <p style={{ fontSize: '2.5em', textAlign: 'left', fontWeight: 'bold', color: '#1EC1F7'}}>
-                                {'Glad you asked!'}
-          </p>
-          <Grid >
-        {/* width={8} */}
-        <Grid.Row>
-      <Grid.Column width={8}>
-      <p style={{ fontSize: '1.5em', cursor: 'pointer', textDecoration: 'underline', color: '#1EC1F7'}}>
-                                {'1. Connect your Web3 Wallet'}
-      </p>
-                                {howDescriptions.connect}
-      </Grid.Column>
-      <Grid.Column width={8}>
-      <p style={{ fontSize: '1.5em', cursor: 'pointer', textDecoration: 'underline', color: '#1EC1F7'}}>
-                                {'2. Authenticate with Dexcom'}
-      </p>
-      <p>
-                                {howDescriptions.authenticate}
-                            </p>
-      </Grid.Column>
-    </Grid.Row>
-      </Grid>
-        </div>
+            <p style={{ fontSize: '1.1em', textAlign: 'left', fontWeight: 'bold'}}>
+                                  {'Can I try it out?'}
+            </p>
+            <p style={{ fontSize: '2.5em', textAlign: 'left', fontWeight: 'bold', color: '#1EC1F7'}}>
+                                  {'Glad you asked!'}
+            </p>
+            <Grid>
+              <Grid.Row>
+                <How description={howDescriptions.connect} title={'1. Connect your Web3 Wallet'}/>
+                <How description={howDescriptions.authenticate} title={'2. Authenticate with Dexcom'}/>
+              </Grid.Row>
+              <Grid.Row>
+                <How description={howDescriptions.deploy} title={'3. Deploy your Smart Contract'}/>
+                <How description={howDescriptions.explain} link={false} title={'4. Lower your A1C. Earn Ethereum'}/>
+              </Grid.Row>
+            </Grid>
+          </div>
       </Segment>
     </div>
 
