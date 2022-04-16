@@ -8,6 +8,8 @@ import Connect from './connect';
 import { RiShieldCrossLine } from 'react-icons/ri';
 import { IconContext } from "react-icons";
 import Image from 'next/image';
+import Info from './info';
+
 import "@fontsource/dm-sans";
 import {
   Button,
@@ -219,9 +221,15 @@ ResponsiveContainer.propTypes = {
   children: PropTypes.node,
 }
 
+const descriptions = {
+  "why": "Each time you go for a run, walk after a meal or pass up a pizza, you will work towards lowering your blood sugar. With Proof of A1C, every month you achieve a safe blood sugar, you will be rewarded Etheruem.",
+  "exist": "Insurance companies currently incentivize healthy behavior with ‘points’ for lower premiums. Idea: Wouldn’t it be better to be rewarded with an appreciating digital asset? Preventitive care (lowering your blood sugar) improves long term health outcomes for the plan-member as well as reducing health care costs for the provider. ",
+  "next": "We believe Proof of A1C can provide a service between insurance providers and their plan members. By creating a smart contract between them, the provider can monitor the plan-member's blood sugar & reward them when they maintain a safe level."
+};
+
 const HomepageLayout = () => (
-  <ResponsiveContainer>
-    <Segment style={{ padding: '9em 0em', backgroundColor: '#F1F1F1' }} vertical>
+  <ResponsiveContainer style={{backgroundColor: '#F1F1F1'}}>
+    <Segment style={{ padding: '9em 0em', backgroundColor: '#F1F1F1', border: 'none'}} vertical>
       <Grid container stackable verticalAlign='middle'>
         <Grid.Row>
           <Grid.Column width={8} style={{paddingLeft: '8em'}}>
@@ -245,28 +253,20 @@ const HomepageLayout = () => (
         </Grid.Row>
       </Grid>
     </Segment>
-
-    <Segment style={{ padding: '0em' }} vertical>
-      <Grid celled='internally' columns='equal' stackable>
-        <Grid.Row textAlign='center'>
-          <Grid.Column style={{ paddingBottom: '5em', paddingTop: '5em' }}>
-            <Header as='h3' style={{ fontSize: '2em' }}>
-              "What a Company"
-            </Header>
-            <p style={{ fontSize: '1.33em' }}>That is what they all say about us</p>
-          </Grid.Column>
-          <Grid.Column style={{ paddingBottom: '5em', paddingTop: '5em' }}>
-            <Header as='h3' style={{ fontSize: '2em' }}>
-              "I shouldn't have gone with their competitor."
-            </Header>
-            <p style={{ fontSize: '1.33em' }}>
-              {/* <Image avatar src='/images/avatar/large/nan.jpg' /> */}
-              <b>Nan</b> Chief Fun Officer Acme Toys
-            </p>
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
-    </Segment>
+    <div style={{backgroundColor: '#F1F1F1'}}>
+      <Segment style={{ width: '75%', margin: 'auto', padding: '0em', 
+        backgroundColor: '#F1F1F1', borderTop: '2px solid #FEFEFE'}} vertical>
+        <Info textRight={true} description={descriptions.why} header={'Motivation for health '} lastHeaderWord={'living'}
+          question={'Why Proof of A1C?'} image={'/../public/SVG/why.svg'}
+        />
+        <Info textRight={false} description={descriptions.exist} header={'Yes, but '} lastHeaderWord={'no'}
+          question={`...doesn't this already exist?`} image={'/../public/SVG/exist.svg'}
+        />
+        <Info textRight={true} description={descriptions.next} header={'This platform is a proof of '} lastHeaderWord={'concept'}
+          question={`So, what's next? We all have dreams...`} image={'/../public/SVG/next.svg'}
+        />
+      </Segment>
+    </div>
 
     <Segment style={{ padding: '8em 0em' }} vertical>
       <Container text>

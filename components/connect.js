@@ -200,6 +200,7 @@ export default function connect() {
                   color: '#FEFEFE',
                   margin: 'auto', width: '50%',
                   transform: 'rotate(0.16deg)', 
+                  padding: '10px',
                   fontSize: '1.2em', textAlign: 'center', backgroundColor: '#1EC1F7', 
                   borderRadius: '48px', border: '1px solid #FEFEFE', boxSizing: 'border-box'}}
                 >
@@ -217,6 +218,7 @@ export default function connect() {
                     fontStyle: 'normal',
                     fontWeight: '200',
                     color: '#1EC1F7',
+                    padding: '10px',
                     margin: 'auto', width: '50%',
                     transform: 'rotate(0.16deg)', 
                     fontSize: '1.2em', textAlign: 'center', backgroundColor: '#FEFEFE', 
