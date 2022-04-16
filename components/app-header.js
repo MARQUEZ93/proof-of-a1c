@@ -224,8 +224,8 @@ ResponsiveContainer.propTypes = {
 
 const descriptions = {
   "why": "Each time you go for a run, walk after a meal or pass up a pizza, you work towards lowering your blood sugar. With Proof of A1C, every month you achieve a safe blood sugar, you will be rewarded Ethereum.",
-  "exist": "Insurance companies currently incentivize healthy behavior with points for lower premiums. Our idea is to incentivize with an appreciating digital asset. Preventitive care (lowering your blood sugar) improves long term health outcomes & reduces health care costs. Both the plan-member & the provider benefit! ",
-  "next": "We believe Proof of A1C can provide a service between insurance providers and their plan members. By creating a smart contract between them, the provider can monitor the plan-member's blood sugar & reward them when they maintain a safe level."
+  "exist": "Insurance companies currently promote healthy behavior with lower premiums for those enrolled in wellness programs. Our idea is to incentivize with an appreciating digital asset. Preventitive care (lowering your blood sugar) improves long term health outcomes & reduces health care costs. Both the plan-member & the provider benefit! ",
+  "next": "Proof of A1C aims to provide a service between insurance providers and their plan members. By creating a smart contract between them, the provider can monitor the plan-member's blood sugar & reward them when they maintain a safe level."
 };
 
 const howDescriptions = {
@@ -298,6 +298,12 @@ const HomepageLayout = () => (
               </Grid.Row>
             </Grid>
           </div>
+      </Segment>
+    </div>
+
+    <div style={{backgroundColor: '#F1F1F1', paddingBottom: '3em'}}>
+      <Segment style={{ width: '75%', margin: 'auto', padding: '0em', 
+        backgroundColor: '#F1F1F1', borderTop: '2px solid #FEFEFE' }} vertical>
       </Segment>
     </div>
 
