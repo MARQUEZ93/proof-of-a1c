@@ -9,6 +9,7 @@ import { RiShieldCrossLine } from 'react-icons/ri';
 import { IconContext } from "react-icons";
 import Image from 'next/image';
 import Info from './info';
+import How from './how';
 
 import "@fontsource/dm-sans";
 import {
@@ -222,10 +223,15 @@ ResponsiveContainer.propTypes = {
 }
 
 const descriptions = {
-  "why": "Each time you go for a run, walk after a meal or pass up a pizza, you will work towards lowering your blood sugar. With Proof of A1C, every month you achieve a safe blood sugar, you will be rewarded Etheruem.",
-  "exist": "Insurance companies currently incentivize healthy behavior with ‘points’ for lower premiums. Idea: Wouldn’t it be better to be rewarded with an appreciating digital asset? Preventitive care (lowering your blood sugar) improves long term health outcomes for the plan-member as well as reducing health care costs for the provider. ",
+  "why": "Each time you go for a run, walk after a meal or pass up a pizza, you work towards lowering your blood sugar. With Proof of A1C, every month you achieve a safe blood sugar, you will be rewarded Etheruem.",
+  "exist": "Insurance companies currently incentivize healthy behavior with points for lower premiums. Our idea is to incentivize with an appreciating digital asset. Preventitive care (lowering your blood sugar) improves long term health outcomes & reduces health care costs. Both the plan-member & the provider benefit! ",
   "next": "We believe Proof of A1C can provide a service between insurance providers and their plan members. By creating a smart contract between them, the provider can monitor the plan-member's blood sugar & reward them when they maintain a safe level."
 };
+
+const howDescriptions = {
+  "connect": "Allow your wallet and the Proof of A1C platform to interact with each other. This creates the initial connection between you and the blood sugar data submitted by Dexcom.",
+  "authenticate": "Authentication allows Proof of A1C to query your Dexcom CGM System for your most recent blood sugar level."
+}
 
 const HomepageLayout = () => (
   <ResponsiveContainer style={{backgroundColor: '#F1F1F1'}}>
@@ -253,10 +259,10 @@ const HomepageLayout = () => (
         </Grid.Row>
       </Grid>
     </Segment>
-    <div style={{backgroundColor: '#F1F1F1'}}>
+    <div style={{backgroundColor: '#F1F1F1', paddingBottom: '3em'}}>
       <Segment style={{ width: '75%', margin: 'auto', padding: '0em', 
-        backgroundColor: '#F1F1F1', borderTop: '2px solid #FEFEFE'}} vertical>
-        <Info textRight={true} description={descriptions.why} header={'Motivation for health '} lastHeaderWord={'living'}
+        backgroundColor: '#F1F1F1', borderTop: '2px solid #FEFEFE' }} vertical>
+        <Info textRight={true} description={descriptions.why} header={'Motivation for healthy '} lastHeaderWord={'living'}
           question={'Why Proof of A1C?'} image={'/../public/SVG/why.svg'}
         />
         <Info textRight={false} description={descriptions.exist} header={'Yes, but '} lastHeaderWord={'no'}
@@ -268,42 +274,39 @@ const HomepageLayout = () => (
       </Segment>
     </div>
 
-    <Segment style={{ padding: '8em 0em' }} vertical>
-      <Container text>
-        <Header as='h3' style={{ fontSize: '2em' }}>
-          Breaking The Grid, Grabs Your Attention
-        </Header>
-        <p style={{ fontSize: '1.33em' }}>
-          Instead of focusing on content creation and hard work, we have learned how to master the
-          art of doing nothing by providing massive amounts of whitespace and generic content that
-          can seem massive, monolithic and worth your attention.
-        </p>
-        <Button as='a' size='large'>
-          Read More
-        </Button>
-
-        <Divider
-          as='h4'
-          className='header'
-          horizontal
-          style={{ margin: '3em 0em', textTransform: 'uppercase' }}
-        >
-          <a href='#'>Case Studies</a>
-        </Divider>
-
-        <Header as='h3' style={{ fontSize: '2em' }}>
-          Did We Tell You About Our Bananas?
-        </Header>
-        <p style={{ fontSize: '1.33em' }}>
-          Yes I know you probably disregarded the earlier boasts as non-sequitur filler content, but
-          it's really true. It took years of gene splicing and combinatory DNA research, but our
-          bananas can really dance.
-        </p>
-        <Button as='a' size='large'>
-          I'm Still Quite Interested
-        </Button>
-      </Container>
-    </Segment>
+    <div style={{backgroundColor: '#F1F1F1', fontFamily: 'DM Sans',
+            fontStyle: 'normal' }}>
+      <Segment style={{ width: '75%', margin: 'auto', padding: '0em', 
+        backgroundColor: '#F1F1F1', borderTop: '2px solid #FEFEFE'}} vertical>
+          <div style={{paddingTop: '3em'}}>
+          <p style={{ fontSize: '1.1em', textAlign: 'left', fontWeight: 'bold'}}>
+                                {'Can I try it out?'}
+          </p>
+          <p style={{ fontSize: '2.5em', textAlign: 'left', fontWeight: 'bold', color: '#1EC1F7'}}>
+                                {'Glad you asked!'}
+          </p>
+          <Grid >
+        {/* width={8} */}
+        <Grid.Row>
+      <Grid.Column width={8}>
+      <p style={{ fontSize: '1.5em', cursor: 'pointer', textDecoration: 'underline', color: '#1EC1F7'}}>
+                                {'1. Connect your Web3 Wallet'}
+      </p>
+                                {howDescriptions.connect}
+      </Grid.Column>
+      <Grid.Column width={8}>
+      <p style={{ fontSize: '1.5em', cursor: 'pointer', textDecoration: 'underline', color: '#1EC1F7'}}>
+                                {'2. Authenticate with Dexcom'}
+      </p>
+      <p>
+                                {howDescriptions.authenticate}
+                            </p>
+      </Grid.Column>
+    </Grid.Row>
+      </Grid>
+        </div>
+      </Segment>
+    </div>
 
     <Segment vertical style={{ padding: '5em 0em' }}>
       <Container>
