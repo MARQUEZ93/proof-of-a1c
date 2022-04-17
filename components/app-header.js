@@ -302,42 +302,39 @@ const HomepageLayout = () => (
       </Segment>
     </div>
 
-    <div style={{backgroundColor: '#F1F1F1'}}>
+    <div style={{backgroundColor: '#F1F1F1', paddingBottom: '3em'}}>
       <Segment style={{ width: '75%', margin: 'auto', paddingTop: '6em', 
         backgroundColor: '#F1F1F1', borderTop: '2px solid #FEFEFE' }} vertical>
           <Who />
       </Segment>
     </div>
 
-    <Segment vertical style={{ padding: '5em 0em' }}>
+    <Segment vertical style={{ backgroundColor: '#262626', paddingTop: '3em', paddingBottom: '3em', color: '#FEFEFE' }}>
       <Container>
         <Grid divided stackable>
           <Grid.Row>
-            <Grid.Column width={3}>
-              <Header as='h4' content='About' />
-              <List link>
-                <List.Item as='a'>Sitemap</List.Item>
-                <List.Item as='a'>Contact Us</List.Item>
-                <List.Item as='a'>Religious Ceremonies</List.Item>
-                <List.Item as='a'>Gazebo Plans</List.Item>
-              </List>
+          <Grid.Column width={8}>
+              <a href="mailto:ProofOfA1C.com">
+                <Header as='h4' style={{color: '#FEFEFE', fontSize: '1.2em', marginBottom: '5px'}}>
+                  ProofOfA1C@Gmail.com
+                </Header>
+              </a>
+              <p style={{ fontSize: '0.8em'}}>
+              All rights reserved.
+            </p>
             </Grid.Column>
-            <Grid.Column width={3}>
-              <Header as='h4' content='Services' />
-              <List link>
-                <List.Item as='a'>Banana Pre-Order</List.Item>
-                <List.Item as='a'>DNA FAQ</List.Item>
-                <List.Item as='a'>How To Access</List.Item>
-                <List.Item as='a'>Favorite X-Men</List.Item>
+            <Grid.Column width={8}>
+              <a href="mailto:ProofOfA1C.com">
+                <Header as='h4' style={{color: '#FEFEFE', fontSize: '1.2em', marginBottom: '5px'}}>
+                  Auxiliary Websites
+                </Header>
+              </a>
+              <List link horizontal>
+                <List.Item style={{color: '#FEFEFE'}} as='a'>Banana Pre-Order</List.Item>
+                <List.Item style={{color: '#FEFEFE'}} as='a'>DNA FAQ</List.Item>
+                <List.Item style={{color: '#FEFEFE'}} as='a'>How To Access</List.Item>
+                <List.Item style={{color: '#FEFEFE'}} as='a'>Favorite X-Men</List.Item>
               </List>
-            </Grid.Column>
-            <Grid.Column width={7}>
-              <Header as='h4'>
-                Footer Header
-              </Header>
-              <p>
-                Extra space for a call to action inside the footer that could help re-engage users.
-              </p>
             </Grid.Column>
           </Grid.Row>
         </Grid>
