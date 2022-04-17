@@ -10,6 +10,7 @@ import { IconContext } from "react-icons";
 import Image from 'next/image';
 import Info from './info';
 import How from './how';
+import Who from './who';
 
 import "@fontsource/dm-sans";
 import {
@@ -232,7 +233,7 @@ const howDescriptions = {
   "connect": "Allow your wallet and the Proof of A1C platform to interact with each other. This creates the initial connection between you and the blood sugar data submitted by Dexcom.",
   "authenticate": "Authentication provides Proof of A1C the necessary authentication tokens to query your Dexcom CGM System. Every month, these tokens are used to record your blood sugar average. This recording is used by the smart contract you deploy in the next step.",
   "deploy": "Grant Proof of A1C the ability to make the transaction of submitting your blood sugar data to the blockchain. The smart contract is the agreement that if your blood sugar is below a certain value, Ethereum is rewarded.",
-  "explain": "Every month your most recent blood sugar is submitted to the blockchain. When that number reads at a level deemed safe by medical profesisonals - you are rewarded Ethereum!"
+  "explain": "Every month your most recent blood sugar is submitted to the blockchain. When that number reads at a level deemed safe by medical professionals - you are rewarded Ethereum!"
 }
 
 const HomepageLayout = () => (
@@ -277,7 +278,7 @@ const HomepageLayout = () => (
     </div>
 
     <div style={{backgroundColor: '#F1F1F1', fontFamily: 'DM Sans',
-            fontStyle: 'normal' }}>
+            fontStyle: 'normal', paddingBottom: '3em' }}>
       <Segment style={{ width: '75%', margin: 'auto', padding: '0em', 
         backgroundColor: '#F1F1F1', borderTop: '2px solid #FEFEFE'}} vertical>
           <div style={{paddingTop: '3em'}}>
@@ -301,9 +302,10 @@ const HomepageLayout = () => (
       </Segment>
     </div>
 
-    <div style={{backgroundColor: '#F1F1F1', paddingBottom: '3em'}}>
-      <Segment style={{ width: '75%', margin: 'auto', padding: '0em', 
+    <div style={{backgroundColor: '#F1F1F1'}}>
+      <Segment style={{ width: '75%', margin: 'auto', paddingTop: '6em', 
         backgroundColor: '#F1F1F1', borderTop: '2px solid #FEFEFE' }} vertical>
+          <Who />
       </Segment>
     </div>
 
