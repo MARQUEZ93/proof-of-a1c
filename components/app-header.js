@@ -4,7 +4,6 @@
 import { createMedia } from '@artsy/fresnel'
 import PropTypes from 'prop-types'
 import React, { Component } from 'react';
-import Connect from './connect';
 import { RiShieldCrossLine } from 'react-icons/ri';
 import { IconContext } from "react-icons";
 import Image from 'next/image';
@@ -13,6 +12,7 @@ import How from './how';
 import Who from './who';
 import {Link} from 'react-scroll';
 import GetStarted from './get-started';
+import Connect from './Connect';
 
 import "@fontsource/dm-sans";
 import {
@@ -131,9 +131,9 @@ class DesktopContainer extends Component {
                 </Menu.Item></Link>
                 <Menu.Menu position='right' style={{fontFamily: 'DM Sans', 
                   fontStyle: 'normal'}}>
-                  <Link onSetActive={this.handleSetActive} spy smooth={true} to="home"><Menu.Item style={{color: this.state.to === 'home' ? 'red': '#262626', cursor: 'pointer', fontWeight: this.state.to === 'home' ? 'bold':'normal'}}>Home</Menu.Item></Link>
-                  <Link onSetActive={this.handleSetActive} spy smooth={true} to="why"><Menu.Item style={{color: this.state.to === 'why' ? 'red': '#262626', cursor: 'pointer', fontWeight: this.state.to === 'why' ? 'bold':'normal'}}>Why</Menu.Item></Link>
-                  <Link onSetActive={this.handleSetActive} spy smooth={true} to="get-started"><Menu.Item style={{color: this.state.to === 'get-started' ? 'red': '#262626', cursor: 'pointer', fontWeight: this.state.to === 'get-started' ? 'bold':'normal'}}>Get Started</Menu.Item></Link>
+                  <Link onSetActive={this.handleSetActive} spy smooth={true} to="home"><Menu.Item style={{color: '#262626', cursor: 'pointer', fontWeight: this.state.to === 'home' ? 'bold':'normal'}}>Home</Menu.Item></Link>
+                  <Link onSetActive={this.handleSetActive} spy smooth={true} to="why"><Menu.Item style={{color: '#262626', cursor: 'pointer', fontWeight: this.state.to === 'why' ? 'bold':'normal'}}>Why</Menu.Item></Link>
+                  <Link onSetActive={this.handleSetActive} spy smooth={true} to="get-started"><Menu.Item style={{color: '#262626', cursor: 'pointer', fontWeight: this.state.to === 'get-started' ? 'bold':'normal'}}>Get Started</Menu.Item></Link>
                 </Menu.Menu>
               </Container>
             </Menu>
@@ -293,7 +293,7 @@ const HomepageLayout = () => (
             </p>
             <Grid>
               <Grid.Row>
-                <How description={howDescriptions.connect} title={'1. Connect your Web3 Wallet'}/>
+                <How button={'connect'} description={howDescriptions.connect} title={'1. Connect your Web3 Wallet'}/>
                 <How description={howDescriptions.authenticate} title={'2. Authenticate with Dexcom'}/>
               </Grid.Row>
               <Grid.Row>

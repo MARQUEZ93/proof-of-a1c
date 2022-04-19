@@ -45,7 +45,7 @@ export default function who() {
                             {'Alejandro Marquez'}
                         </a>
                         <p>
-                            {'Alejandro works as a software engineer at a healthcare software company, he is also Type-1.'}
+                            {'Alejandro is Type 1 Diabetic. He works as a software developer at a healthcare software company.'}
                         </p>
                         <div style={{ 
                   fontFamily: 'DM Sans',
@@ -81,7 +81,7 @@ export default function who() {
                             {'Bryan Murren'}
                         </a>
                         <p>
-                            {'Alejandro works as a software engineer at a healthcare software company, he is also Type-1.'}
+                            {'Bryan’s day job is as an architectural designer. He spends his time learning to design a more equitable future.'}
                         </p>
                         <div style={{ 
                   fontFamily: 'DM Sans',
