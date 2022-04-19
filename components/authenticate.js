@@ -16,11 +16,13 @@ import {
 } from 'semantic-ui-react';
 
 
-export default function how({title, description}) {
+export default function authenticate() {
+    const cursorStyling = link ? 'pointer' : 'normal';
+    const textDecorationStyling = link ? 'underline' : 'none'; 
     return (
         <Grid.Column width={8}>
-            <p style={{ fontSize: '1.5em', marginBottom: '0px',
-                textDecoration: 'underline', color: '#1EC1F7'}}>
+            <p style={{ fontSize: '1.5em', marginBottom: '0px', cursor:  cursorStyling, 
+                textDecoration: textDecorationStyling, color: '#1EC1F7'}}>
                 {title}
             </p>
             <p>

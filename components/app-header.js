@@ -11,6 +11,8 @@ import Image from 'next/image';
 import Info from './info';
 import How from './how';
 import Who from './who';
+import {Link} from 'react-scroll';
+import GetStarted from './get-started';
 
 import "@fontsource/dm-sans";
 import {
@@ -95,14 +97,14 @@ HomepageHeading.propTypes = {
  * It can be more complicated, but you can create really flexible markup.
  */
 class DesktopContainer extends Component {
-  state = {}
+  state = { to: 'home' };
 
-  hideFixedMenu = () => this.setState({ fixed: true })
-  showFixedMenu = () => this.setState({ fixed: true })
+  handleSetActive = (to) => {
+    this.setState({to})
+  };
 
   render() {
     const { children } = this.props;
-    const { fixed } = this.state;
 
     return (
       <Media greaterThan='mobile'>
@@ -118,19 +120,20 @@ class DesktopContainer extends Component {
             >
               <Container style={{ display: 'flex', flexDirection: 'row', 
                 alignItems: 'center'}}>
-                <Menu.Item header position='left'>
+
+                <Link smooth={true} to="home"><Menu.Item header position='left'>
                    <Image
                       src="/../public/SVG/logo.svg"
                       alt="Proof of A1C"
                       width={400}
                       height={26.8}
                   />
-                </Menu.Item>
+                </Menu.Item></Link>
                 <Menu.Menu position='right' style={{fontFamily: 'DM Sans', 
                   fontStyle: 'normal'}}>
-                  <Menu.Item style={{color: 'black', cursor: 'pointer', fontWeight: 'bold'}}>Home</Menu.Item>
-                  <Menu.Item style={{color: '#262626', cursor: 'pointer'}}>Why</Menu.Item>
-                  <Menu.Item style={{color: '#262626', cursor: 'pointer'}}>How</Menu.Item>
+                  <Link onSetActive={this.handleSetActive} spy smooth={true} to="home"><Menu.Item style={{color: this.state.to === 'home' ? 'red': '#262626', cursor: 'pointer', fontWeight: this.state.to === 'home' ? 'bold':'normal'}}>Home</Menu.Item></Link>
+                  <Link onSetActive={this.handleSetActive} spy smooth={true} to="why"><Menu.Item style={{color: this.state.to === 'why' ? 'red': '#262626', cursor: 'pointer', fontWeight: this.state.to === 'why' ? 'bold':'normal'}}>Why</Menu.Item></Link>
+                  <Link onSetActive={this.handleSetActive} spy smooth={true} to="get-started"><Menu.Item style={{color: this.state.to === 'get-started' ? 'red': '#262626', cursor: 'pointer', fontWeight: this.state.to === 'get-started' ? 'bold':'normal'}}>Get Started</Menu.Item></Link>
                 </Menu.Menu>
               </Container>
             </Menu>
@@ -149,9 +152,9 @@ DesktopContainer.propTypes = {
 class MobileContainer extends Component {
   state = {}
 
-  handleSidebarHide = () => this.setState({ sidebarOpened: false })
+  handleSidebarHide = () => this.setState({ sidebarOpened: false });
 
-  handleToggle = () => this.setState({ sidebarOpened: true })
+  handleToggle = () => this.setState({ sidebarOpened: true });
 
   render() {
     const { children } = this.props
@@ -233,12 +236,12 @@ const howDescriptions = {
   "connect": "Allow your wallet and the Proof of A1C platform to interact with each other. This creates the initial connection between you and the blood sugar data submitted by Dexcom.",
   "authenticate": "Authentication provides Proof of A1C the necessary authentication tokens to query your Dexcom CGM System. Every month, these tokens are used to record your blood sugar average. This recording is used by the smart contract you deploy in the next step.",
   "deploy": "Grant Proof of A1C the ability to make the transaction of submitting your blood sugar data to the blockchain. The smart contract is the agreement that if your blood sugar is below a certain value, Ethereum is rewarded.",
-  "explain": "Every month your most recent blood sugar is submitted to the blockchain. When that number reads at a level deemed safe by medical professionals - you are rewarded Ethereum!"
+  "explain": "Every month your most recent blood sugar is submitted to the blockchain. When that number reads at a level deemed safe by medical professionals below - you are rewarded Ethereum!"
 }
 
 const HomepageLayout = () => (
   <ResponsiveContainer style={{backgroundColor: '#F1F1F1'}}>
-    <Segment style={{ padding: '9em 0em', backgroundColor: '#F1F1F1', border: 'none'}} vertical>
+    <Segment style={{ padding: '9em 0em', backgroundColor: '#F1F1F1', border: 'none'}} vertical id="home">
       <Grid container stackable verticalAlign='middle'>
         <Grid.Row>
           <Grid.Column width={8} style={{paddingLeft: '8em'}}>
@@ -254,7 +257,7 @@ const HomepageLayout = () => (
             <p style={{ fontSize: '0.8em', textAlign: 'center'}}>
               **Ethereum Rinkeby Test Network
             </p>
-            <Connect style={{textAlign: 'center'}}/>
+            <GetStarted style={{textAlign: 'center'}}/>
           </Grid.Column>
           <Grid.Column floated='right' width={6} style={{}}>
             <Image width="476" height="373" src='/../public/PNG/lady.png' />
@@ -262,7 +265,7 @@ const HomepageLayout = () => (
         </Grid.Row>
       </Grid>
     </Segment>
-    <div style={{backgroundColor: '#F1F1F1', paddingBottom: '3em'}}>
+    <div id="why" style={{backgroundColor: '#F1F1F1', paddingTop: '3em', paddingBottom: '3em'}}>
       <Segment style={{ width: '75%', margin: 'auto', padding: '0em', 
         backgroundColor: '#F1F1F1', borderTop: '2px solid #FEFEFE' }} vertical>
         <Info textRight={true} description={descriptions.why} header={'Motivation for healthy '} lastHeaderWord={'living'}
@@ -277,8 +280,8 @@ const HomepageLayout = () => (
       </Segment>
     </div>
 
-    <div style={{backgroundColor: '#F1F1F1', fontFamily: 'DM Sans',
-            fontStyle: 'normal', paddingBottom: '3em' }}>
+    <div id="get-started" style={{backgroundColor: '#F1F1F1', fontFamily: 'DM Sans',
+            fontStyle: 'normal', paddingBottom: '3em', paddingTop: '5em' }}>
       <Segment style={{ width: '75%', margin: 'auto', padding: '0em', 
         backgroundColor: '#F1F1F1', borderTop: '2px solid #FEFEFE'}} vertical>
           <div style={{paddingTop: '3em'}}>
@@ -295,7 +298,7 @@ const HomepageLayout = () => (
               </Grid.Row>
               <Grid.Row>
                 <How description={howDescriptions.deploy} title={'3. Deploy your Smart Contract'}/>
-                <How description={howDescriptions.explain} link={false} title={'4. Lower your A1C. Earn Ethereum'}/>
+                <How description={howDescriptions.explain} title={'4. Lower your A1C. Earn Ethereum'}/>
               </Grid.Row>
             </Grid>
           </div>

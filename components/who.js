@@ -70,15 +70,15 @@ export default function who() {
                             <Grid.Row>
                             <Grid.Column width={8}>
                             <Image
-                      src="/../public/SVG/alejandro.svg"
-                      alt="Alejandro Marquez"
+                      src="/../public/SVG/bryan.svg"
+                      alt="Bryan Murren"
                       width={240}
                       height={240}
                   />
                             </Grid.Column>
                             <Grid.Column width={8}>
                         <a style={{ fontSize: '1.5em', marginBottom: '0px', color: '#1EC1F7'}}>
-                            {'Alejandro Marquez'}
+                            {'Bryan Murren'}
                         </a>
                         <p>
                             {'Alejandro works as a software engineer at a healthcare software company, he is also Type-1.'}
