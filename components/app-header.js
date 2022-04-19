@@ -12,7 +12,6 @@ import How from './how';
 import Who from './who';
 import {Link} from 'react-scroll';
 import GetStarted from './get-started';
-import Connect from './Connect';
 
 import "@fontsource/dm-sans";
 import {
@@ -257,7 +256,7 @@ const HomepageLayout = () => (
             <p style={{ fontSize: '0.8em', textAlign: 'center'}}>
               **Ethereum Rinkeby Test Network
             </p>
-            <GetStarted style={{textAlign: 'center'}}/>
+            <GetStarted style={{textAlign: 'center'}} />
           </Grid.Column>
           <Grid.Column floated='right' width={6} style={{}}>
             <Image width="476" height="373" src='/../public/PNG/lady.png' />
@@ -294,7 +293,7 @@ const HomepageLayout = () => (
             <Grid>
               <Grid.Row>
                 <How button={'connect'} description={howDescriptions.connect} title={'1. Connect your Web3 Wallet'}/>
-                <How description={howDescriptions.authenticate} title={'2. Authenticate with Dexcom'}/>
+                <How button={'authenticate'} description={howDescriptions.authenticate} title={'2. Authenticate with Dexcom'}/>
               </Grid.Row>
               <Grid.Row>
                 <How description={howDescriptions.deploy} title={'3. Deploy your Smart Contract'}/>

@@ -141,7 +141,6 @@ export default function connect() {
 
   // Auto connect to the cached provider
   useEffect(() => {
-    console.log(web3Modal);
     if (web3Modal.cachedProvider) {
       connect();
     }
@@ -168,7 +167,7 @@ export default function connect() {
 
       const handleDisconnect = (error) => {
         // eslint-disable-next-line no-console
-        console.log('disconnect', error)
+        console.log('disconnect', error);
         disconnect();
       }
 
@@ -190,15 +189,15 @@ export default function connect() {
   return ( 
   <>
             {!address ? (
-              <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-                <span style={{color: '#1EC1F7', fontSize: '0.8em',}}>{'Rinkeby Test Network'}</span>
+              <div style={{display: 'flex', flexDirection: 'column'}}>
+                <span style={{color: '#1EC1F7', fontSize: '0.8em', paddingLeft: '25px'}}>Rinkeby Test Network</span>
                 <div onClick={connect} style={{ 
                   fontFamily: 'DM Sans',
                   cursor: 'pointer',
                   fontStyle: 'normal',
                   fontWeight: '200',
                   color: '#FEFEFE',
-                  margin: 'auto', width: '50%',
+                  width: '10em',
                   transform: 'rotate(0.16deg)', 
                   padding: '10px',
                   fontSize: '1.2em', textAlign: 'center', backgroundColor: '#1EC1F7', 
@@ -208,10 +207,12 @@ export default function connect() {
                 </div>
                 </div>
             ) : (
-                <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-                  <span style={{color: '#1EC1F7', fontSize: '0.8em'}}>{`${
+                <div style={{display: 'flex', flexDirection: 'column'}}>
+                  <span style={{color: '#1EC1F7', fontSize: '0.8em', paddingLeft: '13px'}}>{`${
                     network.charAt(0).toUpperCase() 
-                    + network.slice(1)} Test Network (${address.slice(0, 5)}...${address.slice(38)})`}</span>
+                    + network.slice(1)} Test Network`}</span>
+                     <span style={{color: '#1EC1F7', fontSize: '0.8em', paddingLeft: '13px'}}>{`
+                     (${address.slice(0, 10)}...${address.slice(36)})`}</span>
                   <div onClick={disconnect} style={{ 
                     fontFamily: 'DM Sans',
                     cursor: 'pointer',
@@ -219,7 +220,7 @@ export default function connect() {
                     fontWeight: '200',
                     color: '#1EC1F7',
                     padding: '10px',
-                    margin: 'auto', width: '50%',
+                    width: '10em',
                     transform: 'rotate(0.16deg)', 
                     fontSize: '1.2em', textAlign: 'center', backgroundColor: '#FEFEFE', 
                     borderRadius: '48px', border: '1px solid #1EC1F7', boxSizing: 'border-box'}}

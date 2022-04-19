@@ -21,7 +21,7 @@ import Authenticate from './authenticate';
 
 
 export default function how({title, description, button}) {
-    const Button = button === 'connect' ? <Connect /> : <Connect />
+    const Button = button === 'connect' ? <Connect /> : button === 'authenticate' ? <Authenticate /> : null;
     return (
         <Grid.Column width={8}>
             <p style={{ fontSize: '1.5em', marginBottom: '0px',
