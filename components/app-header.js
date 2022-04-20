@@ -296,7 +296,7 @@ const HomepageLayout = () => (
                 <How button={'authenticate'} description={howDescriptions.authenticate} title={'2. Authenticate with Dexcom'}/>
               </Grid.Row>
               <Grid.Row>
-                <How description={howDescriptions.deploy} title={'3. Deploy your Smart Contract'}/>
+                <How button={'deploy'} description={howDescriptions.deploy} title={'3. Deploy your Smart Contract'}/>
                 <How description={howDescriptions.explain} title={'4. Lower your A1C. Earn Ethereum'}/>
               </Grid.Row>
             </Grid>
