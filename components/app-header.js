@@ -316,7 +316,7 @@ const HomepageLayout = () => (
         <Grid divided stackable>
           <Grid.Row>
           <Grid.Column width={8}>
-              <a href="mailto:ProofOfA1C.com">
+              <a href="mailto:ProofOfA1C@gmail.com">
                 <Header as='h4' style={{color: '#FEFEFE', fontSize: '1.2em', marginBottom: '5px'}}>
                   ProofOfA1C@Gmail.com
                 </Header>
@@ -326,16 +326,16 @@ const HomepageLayout = () => (
             </p>
             </Grid.Column>
             <Grid.Column width={8}>
-              <a href="mailto:ProofOfA1C.com">
+              <a href="mailto:ProofOfA1C@gmail.com">
                 <Header as='h4' style={{color: '#FEFEFE', fontSize: '1.2em', marginBottom: '5px'}}>
                   Auxiliary Websites
                 </Header>
               </a>
               <List link horizontal>
-                <List.Item style={{color: '#FEFEFE'}} as='a'>Banana Pre-Order</List.Item>
-                <List.Item style={{color: '#FEFEFE'}} as='a'>DNA FAQ</List.Item>
-                <List.Item style={{color: '#FEFEFE'}} as='a'>How To Access</List.Item>
-                <List.Item style={{color: '#FEFEFE'}} as='a'>Favorite X-Men</List.Item>
+                <List.Item><a style={{color: '#FEFEFE', fontSize: '10px'}} href="https://dromarquez.com">Academic Blockchain & Medical Articles</a></List.Item>
+                <List.Item><a style={{color: '#FEFEFE', fontSize: '10px'}} href="https://github.com/marquez93/proof-of-a1c">Open Source Code</a></List.Item>
+                <List.Item><a style={{color: '#FEFEFE', fontSize: '10px'}} href="https://dromarquez.com/about">Alejandro Marquez</a></List.Item>
+                <List.Item><a style={{color: '#FEFEFE', fontSize: '10px'}} href="https://dromarquez.com">Bryan Murren</a></List.Item>
               </List>
             </Grid.Column>
           </Grid.Row>
