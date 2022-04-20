@@ -120,9 +120,9 @@ class DesktopContainer extends Component {
               <Container style={{ display: 'flex', flexDirection: 'row', 
                 alignItems: 'center'}}>
 
-                <Link smooth={true} to="home"><Menu.Item header position='left'>
+                <Link smooth={true} to="home"><Menu.Item header style={{cursor: 'pointer'}} position='left'>
                    <Image
-                      src="/../public/SVG/logo.svg"
+                      src="/SVG/logo.svg"
                       alt="Proof of A1C"
                       width={400}
                       height={26.8}
@@ -259,7 +259,7 @@ const HomepageLayout = () => (
             <GetStarted style={{textAlign: 'center'}} />
           </Grid.Column>
           <Grid.Column floated='right' width={6} style={{}}>
-            <Image width="476" height="373" src='/../public/PNG/lady.png' />
+            <Image width="476" height="373" src='/PNG/lady.png' />
           </Grid.Column>
         </Grid.Row>
       </Grid>
@@ -268,13 +268,13 @@ const HomepageLayout = () => (
       <Segment style={{ width: '75%', margin: 'auto', padding: '0em', 
         backgroundColor: '#F1F1F1', borderTop: '2px solid #FEFEFE' }} vertical>
         <Info textRight={true} description={descriptions.why} header={'Motivation for healthy '} lastHeaderWord={'living'}
-          question={'Why Proof of A1C?'} image={'/../public/SVG/why.svg'}
+          question={'Why Proof of A1C?'} image={'/SVG/why.svg'}
         />
         <Info textRight={false} description={descriptions.exist} header={'Yes, but '} lastHeaderWord={'no'}
-          question={`...doesn't this already exist?`} image={'/../public/SVG/exist.svg'}
+          question={`...doesn't this already exist?`} image={'/SVG/exist.svg'}
         />
         <Info textRight={true} description={descriptions.next} header={'This platform is a proof of '} lastHeaderWord={'concept'}
-          question={`So, what's next? We all have dreams...`} image={'/../public/SVG/next.svg'}
+          question={`So, what's next? We all have dreams...`} image={'/SVG/next.svg'}
         />
       </Segment>
     </div>

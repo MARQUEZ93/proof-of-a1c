@@ -34,7 +34,7 @@ export default function who() {
                             <Grid.Row>
                             <Grid.Column width={8}>
                             <Image
-                      src="/../public/SVG/alejandro.svg"
+                      src="/SVG/alejandro.svg"
                       alt="Alejandro Marquez"
                       width={240}
                       height={240}
@@ -70,7 +70,7 @@ export default function who() {
                             <Grid.Row>
                             <Grid.Column width={8}>
                             <Image
-                      src="/../public/SVG/bryan.svg"
+                      src="/SVG/bryan.svg"
                       alt="Bryan Murren"
                       width={240}
                       height={240}
