@@ -1,6 +1,9 @@
 import Image from 'next/image';
 import "@fontsource/dm-sans";
 import Link from 'next/link';
+import { signIn, signOut } from "next-auth/react"
+import { useEffect, useState, useReducer, useCallback } from "react";
+import { useSession } from 'next-auth/react';
 import {
   Button,
   Container,
@@ -17,11 +20,20 @@ import {
 } from 'semantic-ui-react';
 
 
-export default function authenticate() {
-    return ( 
-        <>
-                  {!true ? (
-                    <div style={{display: 'flex', flexDirection: 'column'}}>
+    export default function Authenticated() {
+        const { data: session, status } = useSession();
+        const loading = status === 'loading';
+        let url;
+        if (typeof window !== 'undefined') {
+            url = window.location.href + "#get-started";
+        } else {
+            url = process.env.NEXTAUTH_URL + "#get-started";
+        }
+        console.log(url);
+        // If no session exists, display access denied message
+        if (typeof window !== 'undefined' && loading) return null;
+        if (!session) { return  (
+            <div onClick={() => signIn('dexcom', {callbackUrl: url})} style={{display: 'flex', flexDirection: 'column'}}>
                       <div style={{ 
                         fontFamily: 'DM Sans',
                         cursor: 'pointer',
@@ -37,8 +49,8 @@ export default function authenticate() {
                         Authenticate
                       </div>
                       </div>
-                  ) : (
-                      <div style={{display: 'flex', flexDirection: 'column'}}>
+        )};
+    return ( <div onClick={() => signOut('dexcom', {callbackUrl: `${process.env.NEXTAUTH_URL}#get-started`})} style={{display: 'flex', flexDirection: 'column'}}>
                         <div style={{ 
                           fontFamily: 'DM Sans',
                           cursor: 'pointer',
@@ -51,10 +63,8 @@ export default function authenticate() {
                           fontSize: '1.2em', textAlign: 'center', backgroundColor: '#FEFEFE', 
                           borderRadius: '48px', border: '1px solid #1EC1F7', boxSizing: 'border-box'}}
                         >
-                          Authenticated!
+                          Logout from Dexcom
                         </div>
                       </div>
-                  )}
-        </>
-    );
+                  )
 };
