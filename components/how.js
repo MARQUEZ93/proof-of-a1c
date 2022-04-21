@@ -16,13 +16,14 @@ import {
 import Deploy from './deploy';
 import Connect from './connect';
 import Authenticate from './authenticate';
+import Contract from './contract';
 
 
 
 
 export default function how({title, description, button}) {
     const Button = button === 'connect' ? <Connect /> : button === 'authenticate' ? <Authenticate /> : (
-        button === 'deploy' ? <Deploy /> : null);
+        button === 'deploy' ? <Deploy /> : <Contract />);
     return (
         <Grid.Column width={8}>
             <p style={{ fontSize: '1.5em', marginBottom: '0px',

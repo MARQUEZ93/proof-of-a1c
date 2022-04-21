@@ -6,7 +6,7 @@ import { userService } from '../services';
 import { useSession } from 'next-auth/react';
 
 
-export default function deploy() {
+export default function contract() {
 
   const { data: session, status } = useSession();
   const loading = status === 'loading';
@@ -45,6 +45,8 @@ export default function deploy() {
     // this.setState({ loading: false });
   };
 
+//   TODO MVP: link to rinkeby smart contract
+
   const pointerEventsStyling = session ? 'auto' : 'none';
   const onClickFunction = session ? onSubmit : null;
 
@@ -56,13 +58,13 @@ export default function deploy() {
       fontStyle: 'normal',
       fontWeight: '200',
       color: '#FEFEFE',
-      width: '10em',
+      width: '12em',
       transform: 'rotate(0.16deg)', 
       padding: '10px',
       fontSize: '1.2em', textAlign: 'center', backgroundColor: '#1EC1F7', 
       borderRadius: '48px', border: '1px solid #FEFEFE', boxSizing: 'border-box'}}
     >
-      Deploy Contract
+      Find your Contract
     </div>
     </div>
   );

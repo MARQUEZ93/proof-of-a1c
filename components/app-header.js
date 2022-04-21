@@ -106,7 +106,7 @@ class DesktopContainer extends Component {
     const { children } = this.props;
 
     return (
-      <Media greaterThan='mobile'>
+      <Media greaterThan='mobile' style={{backgroundColor: '#F1F1F1'}}>
         <Visibility
           once={false}
         >
@@ -128,11 +128,12 @@ class DesktopContainer extends Component {
                       height={26.8}
                   />
                 </Menu.Item></Link>
-                <Menu.Menu position='right' style={{fontFamily: 'DM Sans', 
+                <Menu.Menu pointing secondary position='right' style={{fontFamily: 'DM Sans', 
                   fontStyle: 'normal'}}>
-                  <Link onSetActive={this.handleSetActive} spy smooth={true} to="home"><Menu.Item style={{color: '#262626', cursor: 'pointer', fontWeight: this.state.to === 'home' ? 'bold':'normal'}}>Home</Menu.Item></Link>
-                  <Link onSetActive={this.handleSetActive} spy smooth={true} to="why"><Menu.Item style={{color: '#262626', cursor: 'pointer', fontWeight: this.state.to === 'why' ? 'bold':'normal'}}>Why</Menu.Item></Link>
-                  <Link onSetActive={this.handleSetActive} spy smooth={true} to="get-started"><Menu.Item style={{color: '#262626', cursor: 'pointer', fontWeight: this.state.to === 'get-started' ? 'bold':'normal'}}>Get Started</Menu.Item></Link>
+                  <Link onSetActive={this.handleSetActive} spy smooth={true} to="home"><Menu.Item style={{color: '#262626', cursor: 'pointer', fontWeight: this.state.to === 'home' ? '900':'300'}}>Home</Menu.Item></Link>
+                  <Link onSetActive={this.handleSetActive} spy smooth={true} to="why"><Menu.Item style={{color: '#262626', cursor: 'pointer', fontWeight: this.state.to === 'why' ? '900':'300'}}>Why</Menu.Item></Link>
+                  <Link onSetActive={this.handleSetActive} spy smooth={true} to="get-started"><Menu.Item style={{color: '#262626', cursor: 'pointer', fontWeight: this.state.to === 'get-started' ? '900':'300'}}>How</Menu.Item></Link>
+                  <Link onSetActive={this.handleSetActive} spy smooth={true} to="contact"><Menu.Item style={{color: '#262626', cursor: 'pointer', fontWeight: this.state.to === 'contact' ? '900':'300'}}>Contact</Menu.Item></Link>
                 </Menu.Menu>
               </Container>
             </Menu>
@@ -232,10 +233,10 @@ const descriptions = {
 };
 
 const howDescriptions = {
-  "connect": "Allow your wallet and the Proof of A1C platform to interact with each other. This creates the initial connection between you and the blood sugar data submitted by Dexcom.",
-  "authenticate": "Authentication provides Proof of A1C the necessary authentication tokens to query your Dexcom CGM System. Every month, these tokens are used to record your blood sugar average. This recording is used by the smart contract you deploy in the next step.",
-  "deploy": "Grant Proof of A1C the ability to make the transaction of submitting your blood sugar data to the blockchain. The smart contract is the agreement that if your blood sugar is below a certain value, Ethereum is rewarded.",
-  "explain": "Every month your most recent blood sugar is submitted to the blockchain. When that number reads at a level deemed safe by medical professionals below - you are rewarded Ethereum!"
+  "connect": "Connect your Web3 wallet to the Ethereum Rinkeby Test Network. This will allow you to deploy a Proof Of A1C smart contract.",
+  "authenticate": "Authentication provides Proof of A1C the necessary access tokens to query your Dexcom CGM System. The query results allow Proof Of A1C to record your monthly blood sugar average.",
+  "deploy": "Proof of A1C donates Ethereum to your smart contract as an incentivize. The contract is then triggered to record your monthly blood sugar results using your Dexcom credentials.",
+  "explain": "After every monthly blood sugar recording, the smart contract measures your monthly average blood sugar. If it is below 154 mg/dL, the contract rewards it's entire Ethereum balance to your Web3 Wallet!"
 }
 
 const HomepageLayout = () => (
@@ -279,8 +280,8 @@ const HomepageLayout = () => (
       </Segment>
     </div>
 
-    <div id="get-started" style={{backgroundColor: '#F1F1F1', fontFamily: 'DM Sans',
-            fontStyle: 'normal', paddingBottom: '3em', paddingTop: '5em' }}>
+    <div style={{backgroundColor: '#F1F1F1', fontFamily: 'DM Sans',
+            fontStyle: 'normal', paddingBottom: '3em', paddingTop: '5em', marginBottom: '3em' }} id="get-started">
       <Segment style={{ width: '75%', margin: 'auto', padding: '0em', 
         backgroundColor: '#F1F1F1', borderTop: '2px solid #FEFEFE'}} vertical>
           <div style={{paddingTop: '3em'}}>
@@ -297,25 +298,26 @@ const HomepageLayout = () => (
               </Grid.Row>
               <Grid.Row>
                 <How button={'deploy'} description={howDescriptions.deploy} title={'3. Deploy your Smart Contract'}/>
-                <How description={howDescriptions.explain} title={'4. Lower your A1C. Earn Ethereum'}/>
+                <How button={'contract'} description={howDescriptions.explain} title={'4. Lower your A1C. Earn Ethereum'}/>
               </Grid.Row>
             </Grid>
           </div>
       </Segment>
     </div>
 
-    <div style={{backgroundColor: '#F1F1F1', paddingBottom: '3em'}}>
-      <Segment style={{ width: '75%', margin: 'auto', paddingTop: '6em', 
+    <div style={{backgroundColor: '#F1F1F1', paddingTop: '3em', paddingBottom: '2em'}} id="contact">
+      <Segment style={{ width: '75%', margin: 'auto', paddingTop: '5em', 
         backgroundColor: '#F1F1F1', borderTop: '2px solid #FEFEFE' }} vertical>
           <Who />
       </Segment>
     </div>
 
-    <Segment vertical style={{ backgroundColor: '#262626', paddingTop: '3em', paddingBottom: '3em', color: '#FEFEFE' }}>
+    <Segment vertical style={{ backgroundColor: '#262626', paddingTop: '1.5em', paddingBottom: '1em', color: '#FEFEFE' }}>
       <Container>
         <Grid divided stackable>
           <Grid.Row>
           <Grid.Column width={8}>
+            {/* MVP TODO fix double authenticate */}
               <a href="mailto:ProofOfA1C@gmail.com">
                 <Header as='h4' style={{color: '#FEFEFE', fontSize: '1.2em', marginBottom: '5px'}}>
                   ProofOfA1C@Gmail.com
