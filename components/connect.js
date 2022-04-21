@@ -189,8 +189,8 @@ export default function connect() {
   return ( 
   <>
             {!address ? (
-              <div style={{display: 'flex', flexDirection: 'column'}}>
-                <span style={{color: '#1EC1F7', fontSize: '0.8em', paddingLeft: '25px'}}>Rinkeby Test Network</span>
+              <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'self-start'}}>
+                <span style={{color: '#1EC1F7', fontSize: '0.7em', width: '20em', paddingLeft: '25px'}}>Ethereum Rinkeby Test Network</span>
                 <div onClick={connect} style={{ 
                   fontFamily: 'DM Sans',
                   cursor: 'pointer',
@@ -208,11 +208,11 @@ export default function connect() {
                 </div>
             ) : (
                 <div style={{display: 'flex', flexDirection: 'column'}}>
-                  <span style={{color: '#1EC1F7', fontSize: '0.8em', paddingLeft: '13px'}}>{`${
+                  <span style={{color: '#1EC1F7', fontSize: '0.7em', paddingLeft: '25px'}}>{`${
                     network.charAt(0).toUpperCase() 
-                    + network.slice(1)} Test Network`}</span>
-                     <span style={{color: '#1EC1F7', fontSize: '0.8em', paddingLeft: '13px'}}>{`
-                     (${address.slice(0, 10)}...${address.slice(36)})`}</span>
+                    + network.slice(1)} Test Network`}{`
+                    (${address.slice(0, 5)}...${address.slice(38)})`}</span>
+                 
                   <div onClick={disconnect} style={{ 
                     fontFamily: 'DM Sans',
                     cursor: 'pointer',

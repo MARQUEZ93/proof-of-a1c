@@ -47,7 +47,7 @@ export default function who() {
                         <p>
                             {'Alejandro is Type 1 Diabetic. He works as a software developer at a healthcare software company.'}
                         </p>
-                        <div style={{ 
+                        {/* <div style={{ 
                   fontFamily: 'DM Sans',
                   cursor: 'pointer',
                   fontStyle: 'normal',
@@ -60,7 +60,7 @@ export default function who() {
                   borderRadius: '48px', border: '1px solid #FEFEFE', boxSizing: 'border-box'}}
                 >
                   Connect Wallet
-                </div>
+                </div> */}
                 </Grid.Column>
                 </Grid.Row>
                 </Grid>
@@ -83,7 +83,7 @@ export default function who() {
                         <p>
                             {'Bryan’s day job is as an architectural designer. He spends his time learning to design a more equitable future.'}
                         </p>
-                        <div style={{ 
+                        {/* <div style={{ 
                   fontFamily: 'DM Sans',
                   cursor: 'pointer',
                   fontStyle: 'normal',
@@ -96,7 +96,7 @@ export default function who() {
                   borderRadius: '48px', border: '1px solid #FEFEFE', boxSizing: 'border-box'}}
                 >
                   Connect Wallet
-                </div>
+                </div> */}
                 </Grid.Column>
                 </Grid.Row>
                 </Grid>
