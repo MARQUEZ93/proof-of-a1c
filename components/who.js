@@ -25,9 +25,9 @@ export default function who() {
             <p style={{color: '#262626'}}>
                 Click <a style={{color: '#1EC1F7'}} 
                     href="https://react.semantic-ui.com/collections/grid/#content-columns">
-                    here</a> to see what some academic research on the potential between Web3 and the Healthcare Industry.
+                    here</a> to see academic research on the potential between Blockchains and the Healthcare Industry.
             </p>
-            <Grid>
+            <Grid style={{paddingTop: '3em'}}>
                 <Grid.Row>
                     <Grid.Column width={8}>
                         <Grid>

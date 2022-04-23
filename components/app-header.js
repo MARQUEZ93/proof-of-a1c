@@ -38,60 +38,6 @@ const { MediaContextProvider, Media } = createMedia({
 })
 
 /* Heads up!
- * HomepageHeading uses inline styling, however it's not the best practice. Use CSS or styled
- * components for such things.
- */
-const HomepageHeading = ({ mobile }) => (
-  <Container style={{display: 'flex'}}>
-      <div style={{width: '50%'}}>
-        <Header
-          as='h3'
-          style={{
-            fontSize: mobile ? '2em' : '2.7em',
-            fontWeight: '700',
-            fontFamily: 'DM Sans',
-            fontStyle: 'normal',
-            lineHeight: '80px',
-            textAlign: 'center',
-            marginTop: mobile ? '1.5em' : '3em',
-          }}
-        > 
-          The healthy lifestyle platform for young adults
-        </Header>
-        <Header
-          as='h4'
-          content='Encourage lower blood sugar* by earning Ethereum**'
-          style={{
-            fontSize: mobile ? '1.5em' : '1.3em',
-            fontWeight: 'normal',
-            fontFamily: 'DM Sans',
-            fontStyle: 'normal',
-            marginTop: mobile ? '0.5em' : '1.5em',
-          }}
-        />
-        <Header
-          as='h6'
-          style={{
-            fontSize: mobile ? '0.75em' : '1em',
-            fontWeight: 'normal',
-            fontFamily: 'DM Sans',
-            fontStyle: 'normal',
-            marginTop: mobile ? '0.5em' : '1.5em',
-          }}
-          content='*Use of this platform requires a Dexcom CGM System. **Ethereum Rinkeby Test Network'
-        />
-      </div>
-      {/* <div style={{width: '50%'}}>
-        <Image src="/lady_cgm.jpeg" alt="lady_with_cgm" width='475px' height='372px'/>
-      </div> */}
-  </Container>
-)
-
-HomepageHeading.propTypes = {
-  mobile: PropTypes.bool,
-}
-
-/* Heads up!
  * Neither Semantic UI nor Semantic UI React offer a responsive navbar, however, it can be implemented easily.
  * It can be more complicated, but you can create really flexible markup.
  */
@@ -150,7 +96,11 @@ DesktopContainer.propTypes = {
 }
 
 class MobileContainer extends Component {
-  state = {}
+  state = { to: 'home' };
+
+  handleSetActive = (to) => {
+    this.setState({ to })
+  };
 
   handleSidebarHide = () => this.setState({ sidebarOpened: false });
 
@@ -161,7 +111,7 @@ class MobileContainer extends Component {
     const { sidebarOpened } = this.state
 
     return (
-      <Media as={Sidebar.Pushable} at='mobile'>
+      <Media as={Sidebar.Pushable} at='mobile' style={{backgroundColor: '#F1F1F1'}}>
         <Sidebar.Pushable>
           <Sidebar
             as={Menu}
@@ -169,13 +119,28 @@ class MobileContainer extends Component {
             onHide={this.handleSidebarHide}
             vertical
             visible={sidebarOpened}
+            style={{ paddingTop: '10em', paddingLeft: '10em', width: '100%', 
+                backgroundColor: '#F1F1F1'}}
           >
-            <Menu.Item as='a' active>
-              Home
-            </Menu.Item>
-            <Menu.Item as='a'>Why</Menu.Item>
-            <Menu.Item color={'blue'} as='a'>How</Menu.Item>
-            <Menu.Item as='a'>Leaderboard</Menu.Item>
+             <Container style={{ display: 'flex', flexDirection: 'row', 
+                alignItems: 'center'}}>
+
+                <Link smooth={true} to="home"><Menu.Item header style={{cursor: 'pointer'}} position='left'>
+                   <Image
+                      src="/SVG/logo.svg"
+                      alt="Proof of A1C"
+                      width={400}
+                      height={26.8}
+                  />
+                </Menu.Item></Link>
+                <Menu.Menu pointing secondary position='right' style={{fontFamily: 'DM Sans', 
+                  fontStyle: 'normal'}}>
+                  <Link onSetActive={this.handleSetActive} spy smooth={true} to="home"><Menu.Item style={{color: '#262626', cursor: 'pointer', fontWeight: this.state.to === 'home' ? '900':'300'}}>Home</Menu.Item></Link>
+                  <Link onSetActive={this.handleSetActive} spy smooth={true} to="why"><Menu.Item style={{color: '#262626', cursor: 'pointer', fontWeight: this.state.to === 'why' ? '900':'300'}}>Why</Menu.Item></Link>
+                  <Link onSetActive={this.handleSetActive} spy smooth={true} to="get-started"><Menu.Item style={{color: '#262626', cursor: 'pointer', fontWeight: this.state.to === 'get-started' ? '900':'300'}}>How</Menu.Item></Link>
+                  <Link onSetActive={this.handleSetActive} spy smooth={true} to="contact"><Menu.Item style={{color: '#262626', cursor: 'pointer', fontWeight: this.state.to === 'contact' ? '900':'300'}}>Contact</Menu.Item></Link>
+                </Menu.Menu>
+              </Container>
           </Sidebar>
 
           <Sidebar.Pusher dimmed={sidebarOpened}>
@@ -185,18 +150,35 @@ class MobileContainer extends Component {
               vertical
             >
               <Container>
-                <Menu pointing secondary size='large'>
-                  <Menu.Item onClick={this.handleToggle}>
-                    <Icon name='sidebar' />
-                  </Menu.Item>
-                  <Menu.Item position='right'>
-                    <Button as='a'>
-                      Log in
-                    </Button>
-                  </Menu.Item>
-                </Menu>
+              <Menu
+              fixed='top'
+              secondary={true}  
+              size='large'
+              style={{ paddingTop: '25px', paddingLeft: '-25px', width: '100%', 
+                backgroundColor: '#F1F1F1'}}
+            >
+              <Container style={{ display: 'flex', flexDirection: 'row', 
+                alignItems: 'center'}}>
+
+                <Link smooth={true} to="home"><Menu.Item header style={{cursor: 'pointer'}} position='left'>
+                   <Image
+                      src="/SVG/logo.svg"
+                      alt="Proof of A1C"
+                      width={400}
+                      height={26.8}
+                  />
+                </Menu.Item></Link>
+                <Menu.Menu pointing secondary position='right' style={{fontFamily: 'DM Sans', 
+                  fontStyle: 'normal'}}>
+                  <Link onSetActive={this.handleSetActive} spy smooth={true} to="home"><Menu.Item style={{color: '#262626', cursor: 'pointer', fontWeight: this.state.to === 'home' ? '900':'300'}}>Home</Menu.Item></Link>
+                  <Link onSetActive={this.handleSetActive} spy smooth={true} to="why"><Menu.Item style={{color: '#262626', cursor: 'pointer', fontWeight: this.state.to === 'why' ? '900':'300'}}>Why</Menu.Item></Link>
+                  <Link onSetActive={this.handleSetActive} spy smooth={true} to="get-started"><Menu.Item style={{color: '#262626', cursor: 'pointer', fontWeight: this.state.to === 'get-started' ? '900':'300'}}>How</Menu.Item></Link>
+                  <Link onSetActive={this.handleSetActive} spy smooth={true} to="contact"><Menu.Item style={{color: '#262626', cursor: 'pointer', fontWeight: this.state.to === 'contact' ? '900':'300'}}>Contact</Menu.Item></Link>
+                </Menu.Menu>
               </Container>
-              <HomepageHeading mobile />
+            </Menu>
+              </Container>
+              {/* <HomepageHeading mobile /> */}
             </Segment>
 
             {children}
