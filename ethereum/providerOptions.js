@@ -22,5 +22,15 @@ export const providerOptions = {
         await provider.enable()
             return provider;
         },
+    },
+    'custom-metamask': {
+        display: {
+            logo: providers.METAMASK.logo, name: 'Install MetaMask',description: 'Connect using browser wallet'
+          },
+          package: {},
+          connector: async () => {
+            window.open('https://metamask.io')
+            throw new Error('MetaMask not installed');
+          }
     }
-};
+}

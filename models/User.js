@@ -77,7 +77,7 @@ UserSchema.post('save', async function postSave(doc) {
       // twoMonthsFromStartDate.add(2, 'month');
     // }
 
-    const {web3} = await utilsService.connectWallet();
+    const { web3 } = await utilsService.connectWallet();
 
     console.log("deployed contract: " + doc.contract);
 
