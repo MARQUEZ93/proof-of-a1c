@@ -105,17 +105,13 @@ class DesktopContainer extends Component {
       const { sidebarOpened } = this.state;
   
       return (
-        <Media as={Sidebar.Pushable} at='mobile' style={{backgroundColor: '#F1F1F1'}}>
-          <Sidebar.Pushable>
-            <Sidebar
-              as={Menu}
-              animation='overlay'
-              onHide={this.handleSidebarHide}
-              vertical
-              visible={sidebarOpened}
-              // style={{ paddingTop: '10em', paddingLeft: '10em', width: '100%', 
-              //     backgroundColor: '#F1F1F1'}}
-            >
+        <Media at='mobile' style={{backgroundColor: '#F1F1F1'}}>
+        <Menu 
+        fixed='top'
+                secondary={true}  
+                size='tiny' 
+                style={{ paddingTop: '25px', paddingLeft: '-25px', width: '100%', 
+                  backgroundColor: '#F1F1F1'}}>
                <Container style={{ display: 'flex', flexDirection: 'row', 
                   alignItems: 'center'}}>
   
@@ -138,50 +134,10 @@ class DesktopContainer extends Component {
                     <Link onSetActive={this.handleSetActive} spy smooth={true} to="contact"><Menu.Item style={{color: '#262626', cursor: 'pointer', fontWeight: this.state.to === 'contact' ? '900':'300'}}>Contact</Menu.Item></Link>
                   </Menu.Menu>
                 </Container>
-            </Sidebar>
-  
-            <Sidebar.Pusher dimmed={sidebarOpened}>
-              <Segment
-                textAlign='center'
-                // style={{ minHeight: 350, padding: '1em 0em' }}
-                vertical
-              >
-                <Container>
-                <Menu
-                fixed='top'
-                secondary={true}  
-                size='large'
-                style={{ paddingTop: '25px', paddingLeft: '-25px', width: '100%', 
-                  backgroundColor: '#F1F1F1'}}
-              >
-                <Container style={{ display: 'flex', flexDirection: 'row', 
-                  alignItems: 'center'}}>
-  
-                  <Link smooth={true} to="home"><Menu.Item header style={{cursor: 'pointer'}} position='left'>
-                     <Image
-                        src="/SVG/logo.svg"
-                        alt="Proof of A1C"
-                        width={1600}
-                        height={100}
-                    />
-                  </Menu.Item></Link>
-                  <Menu.Menu pointing secondary position='right' style={{fontFamily: 'DM Sans', 
-                    fontStyle: 'normal'}}>
-                    <Link onSetActive={this.handleSetActive} spy smooth={true} to="home"><Menu.Item style={{color: '#262626', cursor: 'pointer', fontWeight: this.state.to === 'home' ? '900':'300'}}>Home</Menu.Item></Link>
-                    <Link onSetActive={this.handleSetActive} spy smooth={true} to="why"><Menu.Item style={{color: '#262626', cursor: 'pointer', fontWeight: this.state.to === 'why' ? '900':'300'}}>Why</Menu.Item></Link>
-                    <Link onSetActive={this.handleSetActive} spy smooth={true} to="get-started"><Menu.Item style={{color: '#262626', cursor: 'pointer', fontWeight: this.state.to === 'get-started' ? '900':'300'}}>How</Menu.Item></Link>
-                    <Link onSetActive={this.handleSetActive} spy smooth={true} to="contact"><Menu.Item style={{color: '#262626', cursor: 'pointer', fontWeight: this.state.to === 'contact' ? '900':'300'}}>Contact</Menu.Item></Link>
-                  </Menu.Menu>
-                </Container>
               </Menu>
-                </Container>
-              </Segment>
-  
               {children}
-            </Sidebar.Pusher>
-          </Sidebar.Pushable>
-        </Media>
-      )
+              </Media>
+      );
     }
 };
 
@@ -218,6 +174,6 @@ const App = () => (
     <Footer />
     
   </ResponsiveContainer>
-)
+);
 
 export default App;
