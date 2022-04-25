@@ -33,7 +33,7 @@ const UserSchema = new mongoose.Schema({
   }
 });
 
-// query all 2-month A1Cs after a user is created
+// query all 1-month blood-sugar averages after a user is created
 UserSchema.post('save', async function postSave(doc) {
 
   try {
@@ -51,30 +51,30 @@ UserSchema.post('save', async function postSave(doc) {
     // const { start, end } = await dexcomService.getDataRange(doc, decryptedAccessToken);
 
     // const startDate = moment(start.systemTime);
-    // const twoMonthsFromStartDate = moment(start.systemTime).add(2, 'month');
+    // const oneMonthFromStartDate = moment(start.systemTime).add(1, 'month');
     // const endDate = moment(end.systemTime);
   
     // let count = 0;
   
-    // record blood sugar value for every 2 months
-    //TODO error handling on bad request w/ time range (think feb 28 etc - does moment handle that?)
-    // while (startDate.isBefore(endDate) && twoMonthsFromStartDate.isBefore(endDate) && twoMonthsFromStartDate.isAfter(startDate)){
+    // record blood sugar value for every 1 month
+    //TODO error handling on bad request w/ time range (think feb 30 etc - does moment handle that?)
+    // while (startDate.isBefore(endDate) && oneMonthFromStartDate.isBefore(endDate) && oneMonthFromStartDate.isAfter(startDate)){
     //   count++;
     //   // prevent too many requests during testing
     //   // if (count > 17){
     //     // const {mean} = await dexcomService.getStats(decryptedAccessToken, 
-    //     //   startDate.toISOString().slice(0, 19), twoMonthsFromStartDate.toISOString().slice(0, 19)
+    //     //   startDate.toISOString().slice(0, 19), oneMonthFromStartDate.toISOString().slice(0, 19)
     //     // );
     
     //     const a1c = await A1C.create({ 
     //       user: userId, 
     //       start: startDate.toISOString().slice(0, 19),
-    //       end: twoMonthsFromStartDate.toISOString().slice(0, 19),
+    //       end: oneMonthFromStartDate.toISOString().slice(0, 19),
     //       value: parseInt("128").toString()
     //     });
       // }
-      // startDate.add(2, 'month');
-      // twoMonthsFromStartDate.add(2, 'month');
+      // startDate.add(1, 'month');
+      // oneMonthFromStartDate.add(1, 'month');
     // }
 
     const { web3 } = await utilsService.connectWallet();
