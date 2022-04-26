@@ -187,8 +187,8 @@ export default function connect({isMobile = false}) {
   return ( 
   <>
             {!address ? (
-              <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'self-start'}}>
-                <span style={{color: '#1EC1F7', fontSize: '0.7em', width: '20em', paddingLeft: '25px'}}>Ethereum Rinkeby Test Network</span>
+              <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+                <span style={{color: '#1EC1F7', fontSize: '0.7em', width: '20em', textAlign: 'center'}}>Ethereum Rinkeby Test Network</span>
                 <div onClick={connect} style={{ 
                   fontFamily: 'DM Sans',
                   cursor: 'pointer',
@@ -205,8 +205,8 @@ export default function connect({isMobile = false}) {
                 </div>
                 </div>
             ) : (
-                <div style={{display: 'flex', flexDirection: 'column'}}>
-                  <span style={{color: '#1EC1F7', fontSize: '0.7em', paddingLeft: '25px'}}>{`${
+                <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+                  <span style={{color: '#1EC1F7', fontSize: '0.7em', textAlign: 'center'}}>{`${
                     network.charAt(0).toUpperCase() 
                     + network.slice(1)} Test Network`}{`
                     (${address.slice(0, 5)}...${address.slice(38)})`}</span>

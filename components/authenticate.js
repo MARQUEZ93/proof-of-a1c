@@ -32,7 +32,7 @@ import {
         // If no session exists, display access denied message
         if (typeof window !== 'undefined' && loading) return null;
         if (!session) { return  (
-            <div onClick={() => signIn('dexcom', {callbackUrl: url})} style={{display: 'flex', flexDirection: 'column'}}>
+            <div onClick={() => signIn('dexcom', {callbackUrl: url})} style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                       <div style={{ 
                         fontFamily: 'DM Sans',
                         cursor: 'pointer',
@@ -49,7 +49,7 @@ import {
                       </div>
                       </div>
         )};
-    return ( <div onClick={() => signOut('dexcom', {callbackUrl: `${process.env.NEXTAUTH_URL}#get-started`})} style={{display: 'flex', flexDirection: 'column'}}>
+    return ( <div onClick={() => signOut('dexcom', {callbackUrl: `${process.env.NEXTAUTH_URL}#get-started`})} style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                         <div style={{ 
                           fontFamily: 'DM Sans',
                           cursor: 'pointer',

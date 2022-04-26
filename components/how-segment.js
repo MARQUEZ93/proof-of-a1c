@@ -20,13 +20,17 @@ export default function howSegment({isMobile=false}) {
             <p style={{ fontSize: '2.5em', textAlign: 'left', fontWeight: 'bold', color: '#1EC1F7'}}>
                                   {'Glad you asked!'}
             </p>
-            <Grid stackable>
+            <Grid stackable textAlign='center' verticalAlign='middle'>
               <Grid.Row>
                 <How isMobile={isMobile} button={'connect'} description={howDescriptions.connect} title={'1. Connect your Web3 Wallet'}/>
+              </Grid.Row>
+              <Grid.Row>
                 <How isMobile={isMobile} button={'authenticate'} description={howDescriptions.authenticate} title={'2. Authenticate with Dexcom'}/>
               </Grid.Row>
               <Grid.Row>
                 <How isMobile={isMobile} button={'deploy'} description={howDescriptions.deploy} title={'3. Deploy your Smart Contract'}/>
+              </Grid.Row>
+              <Grid.Row>
                 <How isMobile={isMobile} button={'contract'} description={howDescriptions.explain} title={'4. Lower your A1C. Earn Ethereum'}/>
               </Grid.Row>
             </Grid>

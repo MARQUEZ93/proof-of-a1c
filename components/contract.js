@@ -46,7 +46,7 @@ export default function contract({isMobile=false}) {
   const onClickFunction = session ? onSubmit : null;
 
   return (
-    <div onClick={onClickFunction} style={{display: 'flex', flexDirection: 'column'}}>
+    <div onClick={onClickFunction} style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
     <div style={{ 
       fontFamily: 'DM Sans',
       cursor: 'pointer',
