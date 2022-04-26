@@ -25,7 +25,10 @@ import {
         const loading = status === 'loading';
         let url;
         if (typeof window !== 'undefined') {
-            url = window.location.href + "#get-started";
+            url = window.location.href;
+            if (url.toLowerCase().indexOf("#get-started") === -1){
+              url+='#get-started';
+            }
         } else {
             url = process.env.NEXTAUTH_URL + "#get-started";
         }

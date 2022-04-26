@@ -45,7 +45,7 @@ export default function who({isMobile=false}) {
                             {'Alejandro Marquez'}
                         </a>
                         <p>
-                            {'Alejandro is Type 1 Diabetic. He originated the project. He works as a software developer at a healthcare software company.'}
+                            {'Alejandro is Type 1 Diabetic. He originated the project. He works as a software developer at a healthcare company.'}
                         </p>
                 </Grid.Column>
                 </Grid.Row>
