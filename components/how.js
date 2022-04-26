@@ -21,9 +21,9 @@ import Contract from './contract';
 
 
 
-export default function how({title, description, button}) {
-    const Button = button === 'connect' ? <Connect /> : button === 'authenticate' ? <Authenticate /> : (
-        button === 'deploy' ? <Deploy /> : <Contract />);
+export default function how({title, description, button, isMobile=false}) {
+    const Button = button === 'connect' ? <Connect isMobile={isMobile}/> : button === 'authenticate' ? <Authenticate isMobile={isMobile}/> : (
+        button === 'deploy' ? <Deploy isMobile={isMobile}/> : <Contract isMobile={isMobile}/>);
     return (
         <Grid.Column width={8}>
             <p style={{ fontSize: '1.5em', marginBottom: '0px',

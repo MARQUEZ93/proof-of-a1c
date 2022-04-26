@@ -7,7 +7,7 @@ import How from './how';
 
 import howDescriptions from './helpers/how-descriptions';
 
-export default function howSegment() {
+export default function howSegment({isMobile=false}) {
     return (
       <div style={{backgroundColor: '#F1F1F1', fontFamily: 'DM Sans',
           fontStyle: 'normal', paddingBottom: '3em', paddingTop: '5em', marginBottom: '3em' }} id="get-started">
@@ -20,14 +20,14 @@ export default function howSegment() {
             <p style={{ fontSize: '2.5em', textAlign: 'left', fontWeight: 'bold', color: '#1EC1F7'}}>
                                   {'Glad you asked!'}
             </p>
-            <Grid>
+            <Grid stackable>
               <Grid.Row>
-                <How button={'connect'} description={howDescriptions.connect} title={'1. Connect your Web3 Wallet'}/>
-                <How button={'authenticate'} description={howDescriptions.authenticate} title={'2. Authenticate with Dexcom'}/>
+                <How isMobile={isMobile} button={'connect'} description={howDescriptions.connect} title={'1. Connect your Web3 Wallet'}/>
+                <How isMobile={isMobile} button={'authenticate'} description={howDescriptions.authenticate} title={'2. Authenticate with Dexcom'}/>
               </Grid.Row>
               <Grid.Row>
-                <How button={'deploy'} description={howDescriptions.deploy} title={'3. Deploy your Smart Contract'}/>
-                <How button={'contract'} description={howDescriptions.explain} title={'4. Lower your A1C. Earn Ethereum'}/>
+                <How isMobile={isMobile} button={'deploy'} description={howDescriptions.deploy} title={'3. Deploy your Smart Contract'}/>
+                <How isMobile={isMobile} button={'contract'} description={howDescriptions.explain} title={'4. Lower your A1C. Earn Ethereum'}/>
               </Grid.Row>
             </Grid>
           </div>

@@ -82,6 +82,16 @@ class DesktopContainer extends Component {
                 </Container>
               </Menu>
           </Visibility>
+
+          <HomeSegment />
+
+              <WhySegment />
+
+              <HowSegment />
+
+              <WhoSegment />
+
+              <Footer />
   
           {children}
         </Media>
@@ -135,6 +145,15 @@ class DesktopContainer extends Component {
                   </Menu.Menu>
                 </Container>
               </Menu>
+              <HomeSegment isMobile={true} />
+
+              <WhySegment isMobile={true} />
+
+              <HowSegment />
+
+              <WhoSegment isMobile={true} />
+
+              <Footer isMobile={true}/>
               {children}
               </Media>
       );
@@ -161,19 +180,7 @@ const ResponsiveContainer = ({ children }) => (
 );
 
 const App = () => (
-  <ResponsiveContainer>
-    
-    <HomeSegment />
-
-    <WhySegment />
-
-    <HowSegment />
-
-    <WhoSegment />
-
-    <Footer />
-    
-  </ResponsiveContainer>
+  <ResponsiveContainer />
 );
 
 export default App;

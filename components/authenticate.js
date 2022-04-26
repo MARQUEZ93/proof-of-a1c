@@ -20,7 +20,7 @@ import {
 } from 'semantic-ui-react';
 
 
-    export default function Authenticated() {
+    export default function Authenticated({isMobile = false}) {
         const { data: session, status } = useSession();
         const loading = status === 'loading';
         let url;

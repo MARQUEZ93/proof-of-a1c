@@ -97,7 +97,7 @@ import {
     }
   };
 
-export default function connect() {
+export default function connect({isMobile = false}) {
   const [state, dispatch] = useReducer(reducer, initialState)
   const { provider, web3Provider, address, chainId, network } = state;
 

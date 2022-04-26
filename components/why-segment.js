@@ -8,7 +8,7 @@ import {
   Sidebar,
 } from 'semantic-ui-react';
 
-export default function whySegment() {
+export default function whySegment({isMobile=false}) {
     return (
         <div id="why" style={{backgroundColor: '#F1F1F1', paddingTop: '3em', paddingBottom: '3em'}}>
             <Segment style={{ width: '75%', margin: 'auto', padding: '0em', 
@@ -16,7 +16,7 @@ export default function whySegment() {
                 <Info textRight={true} description={whyDescriptions.why} header={'Motivation for healthy '} lastHeaderWord={'living'}
                 question={'Why Proof of A1C?'} image={'/SVG/why.svg'}
                 />
-                <Info textRight={false} description={whyDescriptions.exist} header={'Yes, but '} lastHeaderWord={'no'}
+                <Info textRight={isMobile} description={whyDescriptions.exist} header={'Yes, but '} lastHeaderWord={'no'}
                 question={`...doesn't this already exist?`} image={'/SVG/exist.svg'}
                 />
                 <Info textRight={true} description={whyDescriptions.next} header={'This platform is a proof of '} lastHeaderWord={'concept'}

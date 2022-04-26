@@ -16,7 +16,8 @@ import {
 } from 'semantic-ui-react';
 
 
-export default function who() {
+export default function who({isMobile=false}) {
+    console.log(isMobile);
     return (
         <div style={{fontFamily: 'DM Sans', textAlign: 'center', fontStyle: 'normal'}}>
             <p style={{ fontSize: '2em', color: '#1EC1F7'}}>
@@ -27,7 +28,7 @@ export default function who() {
                     href="https://react.semantic-ui.com/collections/grid/#content-columns">
                     here</a> to see academic research on the potential between Blockchains and the Healthcare Industry.
             </p>
-            <Grid style={{paddingTop: '3em'}}>
+            <Grid style={{paddingTop: '3em'}} stackable>
                 <Grid.Row>
                     <Grid.Column width={8}>
                         <Grid>
@@ -36,8 +37,8 @@ export default function who() {
                             <Image
                       src="/SVG/alejandro.svg"
                       alt="Alejandro Marquez"
-                      width={240}
-                      height={240}
+                      width={isMobile ? 120 : 240}
+                      height={isMobile ? 120 : 240}
                   />
                             </Grid.Column>
                             <Grid.Column width={8}>
@@ -45,22 +46,8 @@ export default function who() {
                             {'Alejandro Marquez'}
                         </a>
                         <p>
-                            {'Alejandro is Type 1 Diabetic. He works as a software developer at a healthcare software company.'}
+                            {'Alejandro is Type 1 Diabetic. He originated the project. He works as a software developer at a healthcare software company.'}
                         </p>
-                        {/* <div style={{ 
-                  fontFamily: 'DM Sans',
-                  cursor: 'pointer',
-                  fontStyle: 'normal',
-                  fontWeight: '200',
-                  color: '#FEFEFE',
-                  margin: 'auto', width: '50%',
-                  transform: 'rotate(0.16deg)', 
-                  padding: '10px',
-                  fontSize: '1.2em', textAlign: 'center', backgroundColor: '#1EC1F7', 
-                  borderRadius: '48px', border: '1px solid #FEFEFE', boxSizing: 'border-box'}}
-                >
-                  Connect Wallet
-                </div> */}
                 </Grid.Column>
                 </Grid.Row>
                 </Grid>
@@ -72,8 +59,8 @@ export default function who() {
                             <Image
                       src="/SVG/bryan.svg"
                       alt="Bryan Murren"
-                      width={240}
-                      height={240}
+                      width={isMobile ? 120 : 240}
+                      height={isMobile ? 120 : 240}
                   />
                             </Grid.Column>
                             <Grid.Column width={8}>
@@ -81,22 +68,8 @@ export default function who() {
                             {'Bryan Murren'}
                         </a>
                         <p>
-                            {'Bryan’s day job is as an architectural designer. He spends his time learning to design a more equitable future.'}
+                            {'Bryan’s day job is as an architectural designer. He spends his time learning to design a more equitable future. He led the way on UX/Design.'}
                         </p>
-                        {/* <div style={{ 
-                  fontFamily: 'DM Sans',
-                  cursor: 'pointer',
-                  fontStyle: 'normal',
-                  fontWeight: '200',
-                  color: '#FEFEFE',
-                  margin: 'auto', width: '50%',
-                  transform: 'rotate(0.16deg)', 
-                  padding: '10px',
-                  fontSize: '1.2em', textAlign: 'center', backgroundColor: '#1EC1F7', 
-                  borderRadius: '48px', border: '1px solid #FEFEFE', boxSizing: 'border-box'}}
-                >
-                  Connect Wallet
-                </div> */}
                 </Grid.Column>
                 </Grid.Row>
                 </Grid>

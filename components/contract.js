@@ -6,7 +6,7 @@ import { userService } from '../services';
 import { useSession } from 'next-auth/react';
 
 
-export default function contract() {
+export default function contract({isMobile=false}) {
 
   const { data: session, status } = useSession();
   const loading = status === 'loading';

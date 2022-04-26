@@ -20,7 +20,7 @@ import GetStarted from './get-started';
 
 import Who from './who';
 
-export default function homeSegment() {
+export default function homeSegment({isMobile=false}) {
     return (
         <Segment style={{ padding: '9em 0em', backgroundColor: '#F1F1F1', border: 'none'}} vertical id="home">
           <Grid container stackable verticalAlign='middle'>
@@ -40,9 +40,18 @@ export default function homeSegment() {
                 </p>
                 <GetStarted style={{textAlign: 'center'}} />
               </Grid.Column>
-              <Grid.Column floated='right' width={6} style={{}}>
+              {/* { isMobile ? (<Grid.Column width={6} textAlign='center'>
+                <Image width="238" height="186" src='/PNG/lady.png' />
+              </Grid.Column>) : (<Grid.Column floated='right' width={6} style={{}}>
                 <Image width="476" height="373" src='/PNG/lady.png' />
               </Grid.Column>
+              )
+            } */}
+            {isMobile ? null : (<Grid.Column floated='right' width={6} style={{}}>
+                <Image width="476" height="373" src='/PNG/lady.png' />
+              </Grid.Column>
+              )
+            }
             </Grid.Row>
           </Grid>
         </Segment>
