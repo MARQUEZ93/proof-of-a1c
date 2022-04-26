@@ -21,7 +21,6 @@ async function getDataRange(doc, decryptedAccessToken) {
         const result = await axios(options);
         return result.data.egvs;
     } catch (err) {
-      console.log(err);
       if (err.response.status === 401){
         getNewTokens(doc);
       }
@@ -83,8 +82,6 @@ async function getStats(decryptedAccessToken, startDate, endDate) {
       const result = await axios(options);
       return result.data;
     } catch (err) {
-        console.log(err.data);
-        console.log(err);
         if (err.response.status === 401){
             getNewTokens(doc);
         }
@@ -117,6 +114,5 @@ async function getNewTokens(doc) {
         doc.refresh_token_iv = encryptedTokens.refreshToken.iv;
         await doc.save();
     } catch (err){
-        console.log(err);
     }
 };

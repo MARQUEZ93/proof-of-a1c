@@ -29,7 +29,6 @@ import {
         } else {
             url = process.env.NEXTAUTH_URL + "#get-started";
         }
-        console.log(url);
         // If no session exists, display access denied message
         if (typeof window !== 'undefined' && loading) return null;
         if (!session) { return  (

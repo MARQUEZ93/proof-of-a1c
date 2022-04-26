@@ -153,7 +153,6 @@ export default function connect({isMobile = false}) {
     if (provider?.on) {
       const handleAccountsChanged = (accounts) => {
         // eslint-disable-next-line no-console
-        console.log('accountsChanged', accounts)
         dispatch({
           type: 'SET_ADDRESS',
           address: accounts[0],
@@ -167,7 +166,6 @@ export default function connect({isMobile = false}) {
 
       const handleDisconnect = (error) => {
         // eslint-disable-next-line no-console
-        console.log('disconnect', error);
         disconnect();
       }
 

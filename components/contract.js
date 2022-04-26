@@ -19,7 +19,6 @@ export default function contract({isMobile=false}) {
 
     try {
       const accounts = await web3.eth.requestAccounts();
-      console.log("deployer: " + accounts[0]);
       const result = await factory.methods
         .createProofOfA1C()
         .send({
@@ -29,16 +28,12 @@ export default function contract({isMobile=false}) {
         const getContractAddress = await factory.methods.
         diabeticAddresses(accounts[0]).call();
 
-        console.log("contract address: " + getContractAddress);
-
         // look up deployed Contracts
         // create user upon successful contract deployment
         const userRes = userService.create({address: accounts[0].toLowerCase(), 
           contract: getContractAddress});
       // Router.pushRoute('/');
     } catch (err) {
-      console.log(err);
-      console.log(err.message);
       // this.setState({ errorMessage: err.message });
     }
 

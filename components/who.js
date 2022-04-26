@@ -17,7 +17,6 @@ import {
 
 
 export default function who({isMobile=false}) {
-    console.log(isMobile);
     return (
         <div style={{fontFamily: 'DM Sans', textAlign: 'center', fontStyle: 'normal'}}>
             <p style={{ fontSize: '2em', color: '#1EC1F7'}}>

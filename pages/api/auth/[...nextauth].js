@@ -56,7 +56,6 @@ export default NextAuth({
             }),
           };
           const tokens = await axios(options).catch( (e) => {
-            console.log(e.message);
           });
           return { tokens };
         },
