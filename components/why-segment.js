@@ -10,7 +10,7 @@ import {
 
 export default function whySegment({isMobile=false}) {
     return (
-        <div id="why" style={{backgroundColor: '#F1F1F1', paddingTop: '3em', paddingBottom: '3em'}}>
+        <div id="why" style={{backgroundColor: '#F1F1F1', paddingTop: isMobile ? '0em' : '3em', paddingBottom: '3em'}}>
             <Segment style={{ width: '75%', margin: 'auto', padding: '0em', 
                 backgroundColor: '#F1F1F1', borderTop: '2px solid #FEFEFE' }} vertical>
                 <Info textRight={true} description={whyDescriptions.why} header={'Motivation for healthy '} lastHeaderWord={'living'}
