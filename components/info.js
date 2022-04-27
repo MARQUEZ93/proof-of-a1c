@@ -1,17 +1,7 @@
 import Image from 'next/image';
 import {
-  Button,
-  Container,
-  Divider,
   Grid,
   Header,
-  Icon,
-  List,
-  Menu,
-  Segment,
-  Sidebar,
-  Visibility,
-  BreadcrumbDivider,
 } from 'semantic-ui-react';
 
 

@@ -8,7 +8,8 @@ export default function how({ title, description, button, isMobile=false }) {
     const Button = button === 'connect' ? <Connect isMobile={isMobile}/> : button === 'authenticate' ? <Authenticate isMobile={isMobile}/> : (
         button === 'deploy' ? <Deploy isMobile={isMobile}/> : <Contract isMobile={isMobile}/>);
     return (
-        <Grid.Column largeScreen={2} mobile={10} computer={8} style={{backgroundColor: '#FEFEFE', borderRadius: '40px', padding: '2em'}}>
+        <Grid.Column largeScreen={2} mobile={10} computer={8} style={{backgroundColor: button === 'contract' ? '#F1F1F1' : '#FEFEFE', borderRadius: '40px', padding: '2em', 
+            border: button === 'contract' ? '1px solid #1EC1F7':''}}>
             <p style={{ fontSize: '1.5em', marginBottom: '0px', color: '#1EC1F7', textAlign: 'left', fontWeight: 'bold'}}>
                 {title}
             </p>

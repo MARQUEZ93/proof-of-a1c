@@ -1,101 +1,86 @@
-import { useEffect, useState, useReducer, useCallback } from "react";
+import { useEffect, useReducer, useCallback } from "react";
 
-import { ethers, providers } from "ethers";
+import { providers } from "ethers";
 import Web3Modal from "web3modal";
 import { providerOptions } from "../../ethereum/providerOptions";
 
-import {
-    Button,
-    Container,
-    Divider,
-    Grid,
-    Header,
-    Icon,
-    Image,
-    List,
-    Menu,
-    Segment,
-    Sidebar,
-    Visibility,
-  } from 'semantic-ui-react';
+let web3Modal;
+if (typeof window !== 'undefined') {
+  web3Modal = new Web3Modal({
+    cacheProvider: true, // optional
+    network: "rinkeby", // optional
+    providerOptions // required
+  });
+};
 
-  let web3Modal;
-  if (typeof window !== 'undefined') {
-    web3Modal = new Web3Modal({
-      cacheProvider: true, // optional
-      network: "rinkeby", // optional
-      providerOptions // required
-    });
-  };
+const StateType = {
+  provider: null, 
+  web3Provider:null,
+  address: '',
+  chainId: null,
+  network: null
+};
 
-  const StateType = {
-    provider: null, 
-    web3Provider:null,
-    address: '',
-    chainId: null,
-    network: null
-  };
-  
-  const actionType = {
-    'SET_WEB3_PROVIDER': {
-        provider: StateType['provider'],
-        web3Provider: StateType['web3Provider'],
-        address: StateType['address'],
-        chainId: StateType['chainId'],
-        network: StateType['network']
-    }, 
-    'SET_ADDRESS': {
-      address: StateType['address']
-    }, 
-    'SET_CHAIN_ID': {
-      chainId: StateType['chainId']
-    }, 
-    'SET_NETWORK': {
+const actionType = {
+  'SET_WEB3_PROVIDER': {
+      provider: StateType['provider'],
+      web3Provider: StateType['web3Provider'],
+      address: StateType['address'],
+      chainId: StateType['chainId'],
       network: StateType['network']
-    },
-    'RESET_WEB3_PROVIDER': {}
-  };
+  }, 
+  'SET_ADDRESS': {
+    address: StateType['address']
+  }, 
+  'SET_CHAIN_ID': {
+    chainId: StateType['chainId']
+  }, 
+  'SET_NETWORK': {
+    network: StateType['network']
+  },
+  'RESET_WEB3_PROVIDER': {}
+};
   
-  const initialState = {
-    provider: null,
-    web3Provider: null,
-    address: null,
-    chainId: null,
-    network: null
-  };
+const initialState = {
+  provider: null,
+  web3Provider: null,
+  address: null,
+  chainId: null,
+  network: null
+};
   
-  function reducer(state, action) {
-    switch (action.type) {
-      case 'SET_WEB3_PROVIDER':
-        return {
-          ...state,
-          provider: action.provider,
-          web3Provider: action.web3Provider,
-          address: action.address,
-          chainId: action.chainId,
-          network: action.network
-        };
-      case 'SET_ADDRESS':
-        return {
-          ...state,
-          address: action.address,
-        };
-      case 'SET_CHAIN_ID':
-        return {
-          ...state,
-          chainId: action.chainId,
-        };
-      case 'SET_NETWORK':
-        return {
-          ...state,
-          network: action.network,
-        };
-      case 'RESET_WEB3_PROVIDER':
-        return initialState;
-      default:
-        throw new Error();
-    }
-  };
+function reducer(state, action) {
+  switch (action.type) {
+    case 'SET_WEB3_PROVIDER':
+      return {
+        ...state,
+        provider: action.provider,
+        web3Provider: action.web3Provider,
+        address: action.address,
+        chainId: action.chainId,
+        network: action.network
+      };
+    case 'SET_ADDRESS':
+      return {
+        ...state,
+        address: action.address,
+      };
+    case 'SET_CHAIN_ID':
+      return {
+        ...state,
+        chainId: action.chainId,
+      };
+    case 'SET_NETWORK':
+      return {
+        ...state,
+        network: action.network,
+      };
+    case 'RESET_WEB3_PROVIDER':
+      return initialState;
+    default:
+      throw new Error();
+  }
+};
 
 export default function connect({isMobile = false}) {
   const [state, dispatch] = useReducer(reducer, initialState)

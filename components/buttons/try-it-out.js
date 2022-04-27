@@ -1,18 +1,4 @@
 import {Link} from 'react-scroll';
-import {
-    Button,
-    Container,
-    Divider,
-    Grid,
-    Header,
-    Icon,
-    Image,
-    List,
-    Menu,
-    Segment,
-    Sidebar,
-    Visibility,
-  } from 'semantic-ui-react';
 
 export default function tryItOut() {
 

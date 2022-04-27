@@ -1,19 +1,11 @@
-import Link from "next/link";
 import links from './helpers/links';
 
 import {
-  Button,
   Container,
-  Divider,
   Grid,
   Header,
-  Icon,
   List,
-  Menu,
   Segment,
-  Sidebar,
-  Visibility,
-  BreadcrumbDivider,
 } from 'semantic-ui-react';
 
 export default function Footer({isMobile = false}) {

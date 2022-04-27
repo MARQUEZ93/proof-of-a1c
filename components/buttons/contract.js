@@ -1,9 +1,9 @@
-import React, {useState, useEffect} from 'react';
-import { Form, Button, Input, Message } from 'semantic-ui-react';
+import React from 'react';
 import factory from '../../ethereum/factory';
 import web3 from '../../ethereum/web3';
 import { userService } from '../../services';
 import { useSession } from 'next-auth/react';
+import links from '../helpers/links';
 
 
 export default function contract({isMobile=false}) {
@@ -40,25 +40,22 @@ export default function contract({isMobile=false}) {
     // this.setState({ loading: false });
   };
 
-//   TODO MVP: link to rinkeby smart contract
-
   const pointerEventsStyling = session ? 'auto' : 'none';
   const onClickFunction = session ? onSubmit : null;
+  const etherscanAddress = links.etherscan + links.factory;
 
   return (
     <div onClick={onClickFunction} style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-    <div style={{ 
+    <a href={etherscanAddress}><div style={{ 
       cursor: 'pointer',
-      fontWeight: '200',
-      color: '#FEFEFE',
+      color: '#1EC1F7',
       width: '12em',
-      transform: 'rotate(0.16deg)', 
       padding: '10px',
-      fontSize: '1.2em', textAlign: 'center', backgroundColor: '#1EC1F7', 
-      borderRadius: '48px', border: '1px solid #FEFEFE', boxSizing: 'border-box'}}
+      fontSize: '1.2em', textAlign: 'center', backgroundColor: '#F1F1F1', 
+      borderRadius: '48px', border: '1px solid #68D5F9', boxSizing: 'border-box'}}
     >
       View Contract
-    </div>
+    </div></a>
     </div>
   );
 };

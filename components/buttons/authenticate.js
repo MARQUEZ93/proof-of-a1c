@@ -1,22 +1,5 @@
-import Image from 'next/image';
-import Link from 'next/link';
 import { signIn, signOut } from "next-auth/react"
-import { useEffect, useState, useReducer, useCallback } from "react";
 import { useSession } from 'next-auth/react';
-import {
-  Button,
-  Container,
-  Divider,
-  Grid,
-  Header,
-  Icon,
-  List,
-  Menu,
-  Segment,
-  Sidebar,
-  Visibility,
-  BreadcrumbDivider,
-} from 'semantic-ui-react';
 
 
     export default function Authenticated({isMobile = false}) {

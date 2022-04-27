@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { Grid, Segment } from 'semantic-ui-react';
 import How from './how';
 
@@ -26,7 +25,7 @@ export default function howSegment({ isMobile=false }) {
               <Grid.Row style={{marginBottom: isMobile ? '2em': '0'}}>
                 <How isMobile={isMobile} button={'deploy'} description={howDescriptions.deploy} title={'3. Deploy your Smart Contract'}/>
               </Grid.Row>
-              <Grid.Row style={{marginBottom: isMobile ? '2em': '0'}}>
+              <Grid.Row>
                 <How isMobile={isMobile} button={'contract'} description={howDescriptions.explain} title={'4. Lower your A1C. Earn Ethereum'}/>
               </Grid.Row>
             </Grid>
