@@ -2,7 +2,7 @@ import Layout from '../components/layout';
 
 export default function Page () {
   return (
-    <Layout>
+    <Layout style={{backgroundColor: '#F1F1F1'}}>
     </Layout>
   )
 };

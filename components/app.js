@@ -54,7 +54,7 @@ class DesktopContainer extends Component {
   
                   <Link smooth={true} to="home"><Menu.Item header style={{cursor: 'pointer'}} position='left'>
                      <Image
-                        src="/SVG/logo.svg"
+                        src="/SVG/proof.svg"
                         alt="Proof of A1C"
                         width={400}
                         height={26.8}
@@ -114,7 +114,7 @@ class DesktopContainer extends Component {
   
                   <Link smooth={true} to="home"><Menu.Item header style={{cursor: 'pointer'}} position='left'>
                      <Image
-                        src="/SVG/logo.svg"
+                        src="/SVG/proof.svg"
                         alt="Proof of A1C"
                         width={800}
                         height={53.6}
@@ -166,7 +166,7 @@ const ResponsiveContainer = ({ children }) => (
 );
 
 const App = () => (
-  <ResponsiveContainer />
+  <ResponsiveContainer style={{backgroundColor: '#F1F1F1'}}/>
 );
 
 export default App;
