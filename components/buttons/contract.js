@@ -57,7 +57,7 @@ export default function contract({isMobile=false}) {
       fontSize: '1.2em', textAlign: 'center', backgroundColor: '#1EC1F7', 
       borderRadius: '48px', border: '1px solid #FEFEFE', boxSizing: 'border-box'}}
     >
-      Find your Contract
+      View Contract
     </div>
     </div>
   );

@@ -25,11 +25,11 @@ import {
         let url;
         if (typeof window !== 'undefined') {
             url = window.location.href;
-            if (url.toLowerCase().indexOf("#get-started") === -1){
-              url+='#get-started';
+            if (url.toLowerCase().indexOf("#try-it-out") === -1){
+              url+='#try-it-out';
             }
         } else {
-            url = process.env.NEXTAUTH_URL + "#get-started";
+            url = process.env.NEXTAUTH_URL + "#try-it-out";
         }
         // If no session exists, display access denied message
         if (typeof window !== 'undefined' && loading) return null;
@@ -49,7 +49,7 @@ import {
                       </div>
                       </div>
         )};
-    return ( <div onClick={() => signOut('dexcom', {callbackUrl: `${process.env.NEXTAUTH_URL}#get-started`})} style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+    return ( <div onClick={() => signOut('dexcom', {callbackUrl: `${process.env.NEXTAUTH_URL}#try-it-out`})} style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                         <div style={{ 
                           cursor: 'pointer',
                           fontWeight: '200',

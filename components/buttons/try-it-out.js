@@ -14,10 +14,10 @@ import {
     Visibility,
   } from 'semantic-ui-react';
 
-export default function getStarted() {
+export default function tryItOut() {
 
   return ( 
-                <Link to="get-started" smooth><div style={{ 
+                <Link to="try-it-out" smooth><div style={{ 
                   cursor: 'pointer',
                   fontWeight: '200',
                   color: '#FEFEFE',
@@ -27,7 +27,7 @@ export default function getStarted() {
                   fontSize: '1.2em', textAlign: 'center', backgroundColor: '#1EC1F7', 
                   borderRadius: '48px', border: '1px solid #FEFEFE', boxSizing: 'border-box'}}
                 >
-                  Get Started
+                  Try it out
                 </div></Link>
             ); 
 }

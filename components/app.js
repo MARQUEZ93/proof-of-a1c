@@ -11,7 +11,7 @@ import WhoSegment from './who/who-segment';
 import PropTypes from 'prop-types';
 
 import { Link } from 'react-scroll';
-import GetStarted from './buttons/get-started';
+import TryItOut from './buttons/try-it-out';
 import Image from 'next/image';
 
 import {
@@ -54,7 +54,7 @@ class DesktopContainer extends Component {
           >
               <Menu
                 fixed='top'
-                secondary={true}  
+                secondary
                 size='large'
                 style={{ paddingTop: '25px', paddingLeft: '-25px', width: '100%', 
                   backgroundColor: '#F1F1F1'}}
@@ -73,7 +73,7 @@ class DesktopContainer extends Component {
                   <Menu.Menu secondary position='right'>
                     <Link onSetActive={this.handleSetActive} spy smooth={true} to="home"><Menu.Item style={{color: '#262626', cursor: 'pointer', fontWeight: this.state.to === 'home' ? '900':'300'}}>Home</Menu.Item></Link>
                     <Link onSetActive={this.handleSetActive} spy smooth={true} to="why"><Menu.Item style={{color: '#262626', cursor: 'pointer', fontWeight: this.state.to === 'why' ? '900':'300'}}>Why</Menu.Item></Link>
-                    <Link onSetActive={this.handleSetActive} spy smooth={true} to="get-started"><Menu.Item style={{color: '#262626', cursor: 'pointer', fontWeight: this.state.to === 'get-started' ? '900':'300'}}>How</Menu.Item></Link>
+                    <Link onSetActive={this.handleSetActive} spy smooth={true} to="try-it-out"><Menu.Item className="neverWrapMenu" style={{color: '#262626', cursor: 'pointer', fontWeight: this.state.to === 'try-it-out' ? '900':'300'}}>Try it out</Menu.Item></Link>
                     <Link onSetActive={this.handleSetActive} spy smooth={true} to="contact"><Menu.Item style={{color: '#262626', cursor: 'pointer', fontWeight: this.state.to === 'contact' ? '900':'300'}}>Contact</Menu.Item></Link>
                   </Menu.Menu>
                 </Container>
@@ -115,7 +115,7 @@ class DesktopContainer extends Component {
         <Media at='mobile' style={{backgroundColor: '#F1F1F1'}}>
         <Menu 
         fixed='top'
-                secondary={true}  
+                secondary 
                 size='tiny' 
                 style={{ paddingTop: '25px', paddingLeft: '-25px', width: '100%', 
                   backgroundColor: '#F1F1F1'}}>
@@ -136,7 +136,7 @@ class DesktopContainer extends Component {
                     </Link>
                     <Link onSetActive={this.handleSetActive} spy smooth={true} to="why">
                       <Menu.Item style={{color: '#262626', cursor: 'pointer', fontWeight: this.state.to === 'why' ? '900':'300'}}>Why</Menu.Item></Link>
-                    <Link onSetActive={this.handleSetActive} spy smooth={true} to="get-started"><Menu.Item style={{color: '#262626', cursor: 'pointer', fontWeight: this.state.to === 'get-started' ? '900':'300'}}>How</Menu.Item></Link>
+                    <Link onSetActive={this.handleSetActive} spy smooth={true} to="try-it-out"><Menu.Item className="neverWrapMenu" style={{color: '#262626', cursor: 'pointer', fontWeight: this.state.to === 'try-it-out' ? '900':'300'}}>Try it out</Menu.Item></Link>
                     <Link onSetActive={this.handleSetActive} spy smooth={true} to="contact"><Menu.Item style={{color: '#262626', cursor: 'pointer', fontWeight: this.state.to === 'contact' ? '900':'300'}}>Contact</Menu.Item></Link>
                   </Menu.Menu>
                 </Container>
@@ -145,7 +145,7 @@ class DesktopContainer extends Component {
 
               <WhySegment isMobile={true} />
 
-              <HowSegment />
+              <HowSegment isMobile={true}/>
 
               <WhoSegment isMobile={true} />
 

@@ -14,7 +14,7 @@ import {
   Visibility,
   BreadcrumbDivider,
 } from 'semantic-ui-react';
-import GetStarted from './buttons/get-started';
+import TryItOut from './buttons/try-it-out';
 
 export default function homeSegment({isMobile=false}) {
     return (
@@ -34,7 +34,7 @@ export default function homeSegment({isMobile=false}) {
                 <p style={{ fontSize: '0.8em', textAlign: 'center'}}>
                   **Ethereum Rinkeby Test Network
                 </p>
-                <GetStarted style={{textAlign: 'center'}} />
+                <TryItOut style={{textAlign: 'center'}} />
               </Grid.Column>
               {/* { isMobile ? (<Grid.Column width={6} textAlign='center'>
                 <Image width="238" height="186" src='/PNG/lady.png' />

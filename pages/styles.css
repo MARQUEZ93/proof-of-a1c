@@ -21,4 +21,7 @@ Off White: FEFEFE */
 * {
   font-family: DM Sans !important;
 }
-
+/* do not wrap menu */
+.neverWrapMenu {
+  white-space: nowrap !important;
+}

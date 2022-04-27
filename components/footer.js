@@ -1,4 +1,5 @@
 import Link from "next/link";
+import links from './helpers/links';
 
 import {
   Button,
@@ -39,9 +40,9 @@ export default function Footer({isMobile = false}) {
                 </Header>
               </a>
               <List link horizontal>
-                <List.Item><a style={{padding: '0', color: '#FEFEFE', fontSize: isMobile ? '0.6em' : '0.7em'}} href="https://dromarquez.com">{articles}</a></List.Item>
-                <List.Item><a style={{padding: '0', color: '#FEFEFE', fontSize: isMobile ? '0.6em' : '0.7em'}} href="https://dromarquez.com/about">Alejandro Marquez</a></List.Item>
-                <List.Item><a style={{padding: '0', color: '#FEFEFE', fontSize: isMobile ? '0.6em' : '0.7em'}} href="https://dromarquez.com">Bryan Murren</a></List.Item>
+                <List.Item><a style={{padding: '0', color: '#FEFEFE', fontSize: isMobile ? '0.6em' : '0.7em'}} href={links.academic}>{articles}</a></List.Item>
+                <List.Item><a style={{padding: '0', color: '#FEFEFE', fontSize: isMobile ? '0.6em' : '0.7em'}} href={links.alejandro}>Alejandro Marquez</a></List.Item>
+                <List.Item><a style={{padding: '0', color: '#FEFEFE', fontSize: isMobile ? '0.6em' : '0.7em'}} href={links.bryan}>Bryan Murren</a></List.Item>
               </List>
             </Grid.Column>
           </Grid.Row>
