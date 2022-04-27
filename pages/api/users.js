@@ -33,22 +33,22 @@ export default async function handler (req, res) {
         res.status(401).json({ success: false });
       }
       break;
-    case 'GET':
-      try {
-        const session = await getSession({ req });
-        if (!session) {
-            res.status(402).json({ success: false });
-        }
-        let { address } = req.body; 
-        address = address.toLowerCase();
-        const user = await User.find({ address }).select('_id').exec();
-        res.status(200).json({ success: true, data: { 
-          contract: user.contract
-        }});
-      } catch (error) {
-        res.status(401).json({ success: false });
-      }
-    break;
+    // case 'GET':
+    //   try {
+    //     const session = await getSession({ req });
+    //     if (!session) {
+    //         res.status(402).json({ success: false });
+    //     }
+    //     let { address } = req.body; 
+    //     address = address.toLowerCase();
+    //     const user = await User.find({ address }).select('_id').exec();
+    //     res.status(200).json({ success: true, data: { 
+    //       contract: user.contract
+    //     }});
+    //   } catch (error) {
+    //     res.status(401).json({ success: false });
+    //   }
+    // break;
     default:
       res.status(400).json({ success: false });
       break;
