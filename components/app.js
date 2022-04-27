@@ -112,7 +112,7 @@ class DesktopContainer extends Component {
                <Container style={{ display: 'flex', flexDirection: 'row', 
                   alignItems: 'center'}}>
   
-                  <Link smooth={true} to="home"><Menu.Item header style={{cursor: 'pointer'}} position='left'>
+                  <Link smooth={true} to="home"><Menu.Item header style={{cursor: 'pointer', paddingRight: '1em'}} position='left'>
                      <Image
                         src="/SVG/proof.svg"
                         alt="Proof of A1C"
