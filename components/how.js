@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import "@fontsource/dm-sans";
 import {
   Container,
   Divider,
@@ -13,12 +12,10 @@ import {
   Visibility,
   BreadcrumbDivider,
 } from 'semantic-ui-react';
-import Deploy from './deploy';
-import Connect from './connect';
-import Authenticate from './authenticate';
-import Contract from './contract';
-
-
+import Deploy from './buttons/deploy';
+import Connect from './buttons/connect';
+import Authenticate from './buttons/authenticate';
+import Contract from './buttons/contract';
 
 
 export default function how({title, description, button, isMobile=false}) {

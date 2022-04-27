@@ -7,15 +7,13 @@ import Footer from './footer';
 import HomeSegment from './home-segment';
 import WhySegment from './why-segment';
 import HowSegment from './how-segment';
-import WhoSegment from './who-segment';
+import WhoSegment from './who/who-segment';
 import PropTypes from 'prop-types';
 
 import { Link } from 'react-scroll';
-import GetStarted from './get-started';
+import GetStarted from './buttons/get-started';
 import Image from 'next/image';
 
-
-import "@fontsource/dm-sans";
 import {
   Button,
   Container,
@@ -72,8 +70,7 @@ class DesktopContainer extends Component {
                         height={26.8}
                     />
                   </Menu.Item></Link>
-                  <Menu.Menu pointing secondary position='right' style={{fontFamily: 'DM Sans', 
-                    fontStyle: 'normal'}}>
+                  <Menu.Menu secondary position='right'>
                     <Link onSetActive={this.handleSetActive} spy smooth={true} to="home"><Menu.Item style={{color: '#262626', cursor: 'pointer', fontWeight: this.state.to === 'home' ? '900':'300'}}>Home</Menu.Item></Link>
                     <Link onSetActive={this.handleSetActive} spy smooth={true} to="why"><Menu.Item style={{color: '#262626', cursor: 'pointer', fontWeight: this.state.to === 'why' ? '900':'300'}}>Why</Menu.Item></Link>
                     <Link onSetActive={this.handleSetActive} spy smooth={true} to="get-started"><Menu.Item style={{color: '#262626', cursor: 'pointer', fontWeight: this.state.to === 'get-started' ? '900':'300'}}>How</Menu.Item></Link>
@@ -133,8 +130,7 @@ class DesktopContainer extends Component {
                         height={53.6}
                     />
                   </Menu.Item></Link>
-                  <Menu.Menu pointing secondary position='right' style={{fontFamily: 'DM Sans', 
-                    fontStyle: 'normal'}}>
+                  <Menu.Menu secondary position='right'>
                     <Link onSetActive={this.handleSetActive} spy smooth={true} to="home">
                       <Menu.Item style={{color: '#262626', cursor: 'pointer', fontWeight: this.state.to === 'home' ? '900':'300'}}>Home</Menu.Item>
                     </Link>

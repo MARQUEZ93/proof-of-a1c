@@ -5,8 +5,12 @@ const baseUrl = `${publicRuntimeConfig.apiUrl}`;
 import axios from 'axios';
 
 export const userService = {
-    create
+    create,
+    getContractAddress
 };
 function create(user) {
     axios.post(`${baseUrl}/users`, user);
+}
+function getContractAddress(address) {
+    axios.get(`${baseUrl}/users/${address}`);
 }

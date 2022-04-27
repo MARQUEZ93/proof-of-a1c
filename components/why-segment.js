@@ -1,8 +1,6 @@
 
 import whyDescriptions from './helpers/why-descriptions';
 import Info from './info';
-// import "@fontsource/dm-sans";
-// MVP TODO: figure out if this^ import needs to be imported everywhere or not
 import {
   Segment,
   Sidebar,

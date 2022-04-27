@@ -1,6 +1,5 @@
 import Link from "next/link";
 
-import "@fontsource/dm-sans";
 import {
   Button,
   Container,
@@ -17,14 +16,13 @@ import {
 } from 'semantic-ui-react';
 
 export default function Footer({isMobile = false}) {
-  const articles = isMobile ? 'Academic Articles' : 'Academic Blockchain & Medical Articles';
+  const articles = isMobile ? 'Academic Articles' : 'Blockchain Medical Articles';
   return (
 <Segment vertical style={{ backgroundColor: '#262626', paddingTop: '1.5em', paddingBottom: '1em', color: '#FEFEFE' }}>
       <Container>
         <Grid divided>
           <Grid.Row>
           <Grid.Column width={isMobile ? 7:8}>
-            {/* MVP TODO fix double authenticate */}
               <a href="mailto:ProofOfA1C@gmail.com">
                 <Header as='h4' style={{color: '#FEFEFE', fontSize: '1.2em', marginBottom: '5px'}}>
                   ProofOfA1C@Gmail.com

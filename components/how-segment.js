@@ -9,8 +9,7 @@ import howDescriptions from './helpers/how-descriptions';
 
 export default function howSegment({isMobile=false}) {
     return (
-      <div style={{backgroundColor: '#F1F1F1', fontFamily: 'DM Sans',
-          fontStyle: 'normal', paddingBottom: '3em', paddingTop: '5em', marginBottom: '3em' }} id="get-started">
+      <div style={{backgroundColor: '#F1F1F1', paddingBottom: '3em', paddingTop: '5em', marginBottom: '3em' }} id="get-started">
         <Segment style={{ width: '75%', margin: 'auto', padding: '0em', 
         backgroundColor: '#F1F1F1', borderTop: '2px solid #FEFEFE'}} vertical>
           <div style={{paddingTop: '3em'}}>

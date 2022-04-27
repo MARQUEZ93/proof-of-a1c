@@ -1,6 +1,5 @@
 
 import Image from 'next/image';
-import "@fontsource/dm-sans";
 import {
   Button,
   Container,
@@ -15,10 +14,7 @@ import {
   Visibility,
   BreadcrumbDivider,
 } from 'semantic-ui-react';
-import GetStarted from './get-started';
-
-
-import Who from './who';
+import GetStarted from './buttons/get-started';
 
 export default function homeSegment({isMobile=false}) {
     return (

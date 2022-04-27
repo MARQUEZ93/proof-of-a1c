@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import "@fontsource/dm-sans";
 import {
   Button,
   Container,
@@ -31,8 +30,7 @@ export default function info({image, question, header, description, lastHeaderWo
                         </Grid.Column>
     );
     return (
-        <Grid columns='equal' stackable style={{fontFamily: 'DM Sans',
-            fontStyle: 'normal', paddingTop: '5em'}}>
+        <Grid columns='equal' stackable style={{paddingTop: '5em'}}>
             <Grid.Row textAlign='center'>
                 {textRight ? ImageColumn : TextColumn}
                 {textRight ? TextColumn : ImageColumn}
