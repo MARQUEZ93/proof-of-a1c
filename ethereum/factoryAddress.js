@@ -1,3 +1,3 @@
 export default {
-    factoryAddress: "0x64ACDb08374e2986A3364eeAd89f7C8377b0D4E5"
+    factoryAddress: "0xb218baD2AA889A6a4b2fcCd0D930066196FDb680"
 };

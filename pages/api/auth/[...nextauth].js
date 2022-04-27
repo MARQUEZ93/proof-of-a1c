@@ -21,7 +21,6 @@ export default NextAuth({
         url: process.env.DEXCOM_API + process.env.DEXCOM_AUTH,
       },
       profile(profile) {
-        // TODO this needs to be cleaned up
         return {
           id: '1',
           name: 'Alejandro E. Marquez',

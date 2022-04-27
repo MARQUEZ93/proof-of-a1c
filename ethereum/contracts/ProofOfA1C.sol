@@ -16,8 +16,7 @@ contract ProofOfA1CFactory {
         api = url; 
     }
     function createProofOfA1C() public {
-        //TODO for final contract, uncomment
-        // require(!diabetics[msg.sender]);
+        require(!diabetics[msg.sender]);
         ProofOfA1C newProofOfA1C = new ProofOfA1C(payer, msg.sender, api);
         deployedContracts.push(address(newProofOfA1C));
         diabeticAddresses[msg.sender] = address(newProofOfA1C); 
