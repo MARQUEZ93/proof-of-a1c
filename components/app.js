@@ -122,12 +122,12 @@ class DesktopContainer extends Component {
                   </Menu.Item></Link>
                   <Menu.Menu secondary position='right'>
                     <Link onSetActive={this.handleSetActive} spy smooth={true} to="home">
-                      <Menu.Item style={{color: '#262626', cursor: 'pointer', fontWeight: this.state.to === 'home' ? '600':'300'}}>Home</Menu.Item>
+                      <Menu.Item style={{color: '#262626', cursor: 'pointer', fontWeight: '400'}}>Home</Menu.Item>
                     </Link>
                     <Link onSetActive={this.handleSetActive} spy smooth={true} to="why">
-                      <Menu.Item style={{color: '#262626', cursor: 'pointer', fontWeight: this.state.to === 'why' ? '600':'300'}}>Why</Menu.Item></Link>
-                    <Link onSetActive={this.handleSetActive} spy smooth={true} to="try-it-out"><Menu.Item className="neverWrapMenu" style={{color: '#262626', cursor: 'pointer', fontWeight: this.state.to === 'try-it-out' ? '600':'300'}}>Try it out</Menu.Item></Link>
-                    <Link onSetActive={this.handleSetActive} spy smooth={true} to="contact"><Menu.Item style={{color: '#262626', cursor: 'pointer', fontWeight: this.state.to === 'contact' ? '600':'300'}}>Contact</Menu.Item></Link>
+                      <Menu.Item style={{color: '#262626', cursor: 'pointer', fontWeight: '400'}}>Why</Menu.Item></Link>
+                    <Link onSetActive={this.handleSetActive} spy smooth={true} to="try-it-out"><Menu.Item className="neverWrapMenu" style={{color: '#262626', cursor: 'pointer', fontWeight: '400'}}>Try it out</Menu.Item></Link>
+                    <Link onSetActive={this.handleSetActive} spy smooth={true} to="contact"><Menu.Item style={{color: '#262626', cursor: 'pointer', fontWeight: '400'}}>Contact</Menu.Item></Link>
                   </Menu.Menu>
                 </Container>
               </Menu>
