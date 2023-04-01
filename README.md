@@ -9,7 +9,9 @@ Proof of A1C is a proof of concept Ethereum project. It was a personal project a
 The project requires users to have a MetaMask chrome extension. 
 
 https://www.npmjs.com/package/web3
+
 https://docs.metamask.io/guide/
+
 https://docs.chain.link/
 
 ## Dexcom API
