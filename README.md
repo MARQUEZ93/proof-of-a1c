@@ -1,10 +1,35 @@
 # Proof of A1C
-Record blood sugar. Reward healthy blood sugar
 
-# User
+Proof of A1C is a proof of concept Ethereum project. It was a personal project as I learned how to interact with Ethereum. It aimed to encourage healthy blood sugar averages via Ethereum payments!
 
-1) Must be a dexcom user w/ a username/password
-2) Connect their MetaMask wallet to the Rinkeby Test Network
-3) Deploy contract! User pays for their own gas fee(s)
+## Web3/Ethereum/ChainLink
 
-GrShield
+The project requires users to have a MetaMask chrome extension. 
+
+https://www.npmjs.com/package/web3
+https://docs.metamask.io/guide/
+https://docs.chain.link/
+
+## Dexcom API
+
+The project interfact with Dexcom 3rd Party API to query blood sugar averages. 
+https://developer.dexcom.com/home
+
+## Testing
+
+I used myself as the test user. I am Type 1 Diabetic, and have a Dexcom CGM. I placed my blood sugar on the Ethereum Test Network!
+
+## Design/UX
+
+My friend Bryan Murren provided mockups for the UI. 
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first
+to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
