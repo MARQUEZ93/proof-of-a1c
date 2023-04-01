@@ -16,7 +16,7 @@ https://docs.chain.link/
 
 ## Dexcom API
 
-The project interfact with Dexcom 3rd Party API to query blood sugar averages. 
+The project interacted with the Dexcom 3rd Party API to query blood sugar averages. 
 https://developer.dexcom.com/home
 
 ## Testing
