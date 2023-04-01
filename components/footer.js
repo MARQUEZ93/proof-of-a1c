@@ -21,7 +21,7 @@ export default function Footer({ isMobile = false }) {
                   ProofOfA1C@Gmail.com
                 </Header>
               </a>
-              <a href="https://github.com/MARQUEZ93/proof-of-a1c"><p style={{ fontSize: '1em'}}>
+              <a href="https://github.com/MARQUEZ93/proof-of-a1c"><p style={{ color: '#FEFEFE', fontSize: '.8em'}}>
               Github
             </p></a>
             </Grid.Column>
