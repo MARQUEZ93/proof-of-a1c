@@ -21,17 +21,15 @@ export default function Footer({ isMobile = false }) {
                   ProofOfA1C@Gmail.com
                 </Header>
               </a>
-              <p style={{ fontSize: '0.8em'}}>
-              All rights reserved.
-            </p>
+              <a href="https://github.com/MARQUEZ93/proof-of-a1c"><p style={{ fontSize: '1em'}}>
+              Github
+            </p></a>
             </Grid.Column>
             {isMobile ? null : 
               <Grid.Column width={isMobile ? 9:8}>
-                <a href="mailto:ProofOfA1C@gmail.com">
-                  <Header as='h4' style={{color: '#FEFEFE', fontSize: '1.2em', marginBottom: '5px'}}>
-                    Auxiliary Websites
-                  </Header>
-                </a>
+                <Header as='h4' style={{color: '#FEFEFE', fontSize: '1.2em', marginBottom: '5px'}}>
+                  Auxiliary Websites
+                </Header>
                 <List link horizontal>
                   <List.Item><a style={{padding: '0', color: '#FEFEFE', fontSize: isMobile ? '0.6em' : '0.7em'}} href={links.academic}>{articles}</a></List.Item>
                   <List.Item><a style={{padding: '0', color: '#FEFEFE', fontSize: isMobile ? '0.6em' : '0.7em'}} href={links.alejandro}>Alejandro Marquez</a></List.Item>
