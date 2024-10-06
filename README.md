@@ -1,6 +1,6 @@
 # Proof of A1C
 
-https://www.proofofa1c.com/
+https://proof-of-a1c.vercel.app/
 
 Proof of A1C is a proof of concept Ethereum project. It was a personal project as I learned how to interact with Ethereum. It aimed to encourage healthy blood sugar averages via Ethereum payments!
 
